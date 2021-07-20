@@ -56,6 +56,9 @@ else
 	"cake")
 		$COMPOSE run --rm cake app/Console/cake "$@"
 		;;
+	"rector")
+		$COMPOSE run --rm -e PHP_MEMORY_LIMIT=2G cake vendors/bin/rector "$@"
+		;;
 	*)
 		$COMPOSE ${COMMAND} $@
 		;;
