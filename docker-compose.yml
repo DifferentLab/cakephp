@@ -1,12 +1,9 @@
 version: '3.7'
 
-x-default-env:
-  &default-env
-
 services:
   cake:
     image: registry.shiftbase.io/php/cli:7.4.19-buster-r1-dev
-    environment: *default-env
+#    build: .
     command: echo "Done"
     entrypoint: ''
     environment:
@@ -14,3 +11,18 @@ services:
       - COMPOSER_MEMORY_LIMIT=-1
     volumes:
       - ${PROJECT_ROOT}:/code
+#    working_dir: /code
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - mysqldata:/var/lib/mysql
+    ports:
+      - "33080:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "cakephp_test"
+    command:
+      --sql-mode=NO_ENGINE_SUBSTITUTION
+volumes:
+  mysqldata:
+    driver: "local"

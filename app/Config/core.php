@@ -240,6 +240,8 @@
  */
 	Configure::write('Security.cipherSeed', '76859309657453542496749683645');
 
+    Configure::write('Security.useOpenSsl', true);
+
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).
  * Will append a query string parameter containing the time the file was modified. This is
@@ -278,7 +280,7 @@
  * Uncomment this line and correct your server timezone to fix
  * any date & time related errors.
  */
-	//date_default_timezone_set('UTC');
+	date_default_timezone_set('UTC');
 
 /**
  * `Config.timezone` is available in which you can set users' timezone string.

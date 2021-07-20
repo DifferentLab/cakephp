@@ -30,9 +30,6 @@ else
 	"composer")
 		$COMPOSE run cake composer "$@"
 		;;
-	"phinx")
-		$COMPOSE run --rm cake-migrations vendors/bin/phinx "$@"
-		;;
 	"phpcs")
 		# Code style checker (using .phpcs.xml.dist config)
 		$COMPOSE run --rm cake vendors/bin/phpcs -p --runtime-set ignore_warnings_on_exit 1 --basepath=/code "$@"
@@ -54,7 +51,10 @@ else
 		$COMPOSE run --rm -e PHP_MEMORY_LIMIT=2G -e PHP_OPCACHE_ENABLED=1 --entrypoint='' cake vendors/bin/phpstan --memory-limit=2G "$@"
 		;;
 	"test")
-		$COMPOSE run --rm ckae vendors/bin/phpunit "$@"
+		$COMPOSE run --rm -e PHP_MEMORY_LIMIT=2G -e PHP_OPCACHE_ENABLED=1 cake app/Console/cake test core AllTests
+		;;
+	"cake")
+		$COMPOSE run --rm cake app/Console/cake "$@"
 		;;
 	*)
 		$COMPOSE ${COMMAND} $@
