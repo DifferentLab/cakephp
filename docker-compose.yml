@@ -1,0 +1,16 @@
+version: '3.7'
+
+x-default-env:
+  &default-env
+
+services:
+  cake:
+    image: registry.shiftbase.io/php/cli:7.4.19-buster-r1-dev
+    environment: *default-env
+    command: echo "Done"
+    entrypoint: ''
+    environment:
+      - PHP_MAX_EXECUTION_TIME=0
+      - COMPOSER_MEMORY_LIMIT=-1
+    volumes:
+      - ${PROJECT_ROOT}:/code
