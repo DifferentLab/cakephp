@@ -344,10 +344,12 @@ class AuthEventTestListener {
 
 }
 
-
 /**
  * AuthComponentTest class
  *
+ * @property AuthTestController $Controller
+ * @property TestAuthComponent  $Auth
+ * @property AuthUser           $AuthUser
  * @package       Cake.Test.Case.Controller.Component
  */
 class AuthComponentTest extends CakeTestCase {

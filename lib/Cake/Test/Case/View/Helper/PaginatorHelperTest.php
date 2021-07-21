@@ -29,6 +29,8 @@ if (!defined('FULL_BASE_URL')) {
 /**
  * PaginatorHelperTest class
  *
+ * @property View            $View
+ * @property PaginatorHelper $Paginator
  * @package       Cake.Test.Case.View.Helper
  */
 class PaginatorHelperTest extends CakeTestCase {

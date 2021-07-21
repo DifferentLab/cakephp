@@ -89,6 +89,8 @@ class AppleComponent extends Component {
 /**
  * OrangeComponent class
  *
+ * @property Controller           $Controller
+ * @property BananaComponent      $Banana
  * @package       Cake.Test.Case.Controller
  */
 class OrangeComponent extends Component {
@@ -197,6 +199,7 @@ class SomethingWithEmailComponent extends Component {
 /**
  * ComponentTest class
  *
+ * @property array $_pluginPaths
  * @package       Cake.Test.Case.Controller
  */
 class ComponentTest extends CakeTestCase {

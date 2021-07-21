@@ -23,6 +23,8 @@ class_exists('AclComponent');
 /**
  * Test case for the PhpAcl implementation
  *
+ * @property PhpAcl       $PhpAcl
+ * @property AclComponent $Acl
  * @package       Cake.Test.Case.Controller.Component.Acl
  */
 class PhpAclTest extends CakeTestCase {

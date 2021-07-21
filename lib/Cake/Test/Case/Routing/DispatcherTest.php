@@ -534,6 +534,13 @@ class TestFilterDispatcher extends DispatcherFilter {
 /**
  * DispatcherTest class
  *
+ * @property array             $_get
+ * @property array             $_post
+ * @property array             $_files
+ * @property array             $_server
+ * @property array|int[]|mixed $_app
+ * @property array|int[]|mixed $_cache
+ * @property array|int[]|mixed $_debug
  * @package       Cake.Test.Case.Routing
  */
 class DispatcherTest extends CakeTestCase {

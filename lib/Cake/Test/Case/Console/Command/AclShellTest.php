@@ -26,6 +26,7 @@ App::uses('ComponentCollection', 'Controller');
 /**
  * AclShellTest class
  *
+ * @property AclShell|object $Task
  * @package       Cake.Test.Case.Console.Command
  */
 class AclShellTest extends CakeTestCase {

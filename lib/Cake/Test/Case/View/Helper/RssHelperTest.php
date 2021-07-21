@@ -24,6 +24,8 @@ App::uses('File', 'Utility');
 /**
  * RssHelperTest class
  *
+ * @property View      $View
+ * @property RssHelper $Rss
  * @package       Cake.Test.Case.View.Helper
  */
 class RssHelperTest extends CakeTestCase {

@@ -30,6 +30,11 @@ App::uses('File', 'Utility');
 /**
  * PluginTaskPlugin class
  *
+ * @property object|PluginTask    $Task
+ * @property int                  $_testPath
+ * @property array                $_paths
+ * @property ConsoleOutput $out
+ * @property ConsoleInput $in
  * @package       Cake.Test.Case.Console.Command.Task
  */
 class PluginTaskTest extends CakeTestCase {

@@ -23,6 +23,8 @@ App::uses('PrototypeEngineHelper', 'View/Helper');
 /**
  * PrototypeEngineHelperTest
  *
+ * @property object|View           $View
+ * @property PrototypeEngineHelper $Proto
  * @package       Cake.Test.Case.View.Helper
  */
 class PrototypeEngineHelperTest extends CakeTestCase {

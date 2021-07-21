@@ -21,6 +21,7 @@ App::uses('ConsoleErrorHandler', 'Console');
 /**
  * ConsoleErrorHandler Test case.
  *
+ * @property ConsoleErrorHandler|object $Error
  * @package       Cake.Test.Case.Console
  */
 class ConsoleErrorHandlerTest extends CakeTestCase {
@@ -28,7 +29,6 @@ class ConsoleErrorHandlerTest extends CakeTestCase {
 /**
  * setup, create mocks
  *
- * @return Mock object
  */
 	public function setUp() {
 		parent::setUp();

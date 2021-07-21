@@ -110,7 +110,7 @@ class DebuggerTest extends CakeTestCase {
 
 		$result = Debugger::output(false);
 		$this->assertEquals('', $result);
-		$out .= '';
+		$out = '';
 		$result = Debugger::output(true);
 
 		$this->assertEquals('Notice', $result[0]['error']);
@@ -119,7 +119,7 @@ class DebuggerTest extends CakeTestCase {
 
 		ob_start();
 		Debugger::output('txt');
-		$other .= '';
+		$other = '';
 		$result = ob_get_clean();
 
 		$this->assertRegExp('/Undefined variable:\s+other/', $result);
@@ -128,7 +128,7 @@ class DebuggerTest extends CakeTestCase {
 
 		ob_start();
 		Debugger::output('html');
-		$wrong .= '';
+		$wrong = '';
 		$result = ob_get_clean();
 		$this->assertRegExp('/<pre class="cake-error">.+<\/pre>/', $result);
 		$this->assertRegExp('/<b>Notice<\/b>/', $result);
@@ -136,7 +136,7 @@ class DebuggerTest extends CakeTestCase {
 
 		ob_start();
 		Debugger::output('js');
-		$buzz .= '';
+		$buzz = '';
 		$result = explode('</a>', ob_get_clean());
 		$this->assertTags($result[0], array(
 			'pre' => array('class' => 'cake-error'),
@@ -198,7 +198,7 @@ class DebuggerTest extends CakeTestCase {
 		Debugger::output('xml');
 
 		ob_start();
-		$foo .= '';
+		$foo = '';
 		$result = ob_get_clean();
 
 		$data = array(
@@ -257,7 +257,7 @@ class DebuggerTest extends CakeTestCase {
 		Debugger::outputAs('xml');
 
 		ob_start();
-		$foo .= '';
+		$foo = '';
 		$result = ob_get_clean();
 
 		$data = array(
@@ -284,7 +284,7 @@ class DebuggerTest extends CakeTestCase {
 		Debugger::outputAs('callback');
 
 		ob_start();
-		$foo .= '';
+		$foo = '';
 		$result = ob_get_clean();
 		$this->assertContains('Notice: I eated an error', $result);
 		$this->assertContains('DebuggerTest.php', $result);
@@ -293,7 +293,7 @@ class DebuggerTest extends CakeTestCase {
 /**
  * Test method for testing addFormat with callbacks.
  *
- * @return void
+ * @return string
  */
 	public function customFormat($error, $strings) {
 		return $error['error'] . ': I eated an error ' . $error['file'];

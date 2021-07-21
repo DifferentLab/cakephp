@@ -83,6 +83,10 @@ class SchemaShellTestSchema extends CakeSchema {
 /**
  * SchemaShellTest class
  *
+ * @property object|SchemaShell $Shell
+ * @property File               $file
+ * @property DboSource $db
+ * @property  Dispatcher $Dispatcher
  * @package       Cake.Test.Case.Console.Command
  */
 class SchemaShellTest extends CakeTestCase {
@@ -467,7 +471,7 @@ class SchemaShellTest extends CakeTestCase {
 		$sources = $db->listSources();
 		$this->assertTrue(in_array($db->config['prefix'] . 'i18n', $sources));
 
-		$schema = new i18nSchema();
+		$schema = new I18nSchema();
 		$db->execute($db->dropSchema($schema));
 	}
 

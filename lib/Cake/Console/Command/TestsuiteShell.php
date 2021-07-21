@@ -91,7 +91,8 @@ class TestsuiteShell extends TestShell {
 		$args = $this->_parseArgs();
 
 		if (empty($args['case'])) {
-			return $this->available();
+			$this->available();
+			return;
 		}
 
 		$this->_run($args, $this->_runnerOptions());

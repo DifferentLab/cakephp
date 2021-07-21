@@ -52,7 +52,7 @@ class ControllerTask extends BakeTask {
 /**
  * Execution method always used for tasks
  *
- * @return void
+ * @return mixed|void
  */
 	public function execute() {
 		parent::execute();
@@ -65,7 +65,8 @@ class ControllerTask extends BakeTask {
 				$this->connection = 'default';
 			}
 			if (strtolower($this->args[0]) === 'all') {
-				return $this->all();
+				$this->all();
+				return;
 			}
 
 			$controller = $this->_controllerName($this->args[0]);
@@ -136,7 +137,7 @@ class ControllerTask extends BakeTask {
 /**
  * Interactive
  *
- * @return void
+ * @return mixed
  */
 	protected function _interactive() {
 		$this->interactive = true;
@@ -298,7 +299,7 @@ class ControllerTask extends BakeTask {
 		App::uses($modelImport, $plugin . 'Model');
 		if (!class_exists($modelImport)) {
 			$this->err(__d('cake_console', 'You must have a model for this class to build basic methods. Please try again.'));
-			return $this->_stop();
+			$this->_stop();
 		}
 
 		$modelObj = ClassRegistry::init($currentModelName);
@@ -455,7 +456,7 @@ class ControllerTask extends BakeTask {
 			$enteredController = $this->in(__d('cake_console', "Enter a number from the list above,\ntype in the name of another controller, or 'q' to exit"), null, 'q');
 			if ($enteredController === 'q') {
 				$this->out(__d('cake_console', 'Exit'));
-				return $this->_stop();
+				$this->_stop();
 			}
 
 			if (!$enteredController || (int)$enteredController > count($controllers)) {

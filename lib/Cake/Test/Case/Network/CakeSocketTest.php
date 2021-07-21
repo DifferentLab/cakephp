@@ -21,6 +21,7 @@ App::uses('CakeSocket', 'Network');
 /**
  * SocketTest class
  *
+ * @property CakeSocket $Socket
  * @package       Cake.Test.Case.Network
  */
 class CakeSocketTest extends CakeTestCase {

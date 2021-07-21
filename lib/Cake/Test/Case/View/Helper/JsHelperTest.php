@@ -114,6 +114,8 @@ class OptionEngineHelper extends JsBaseEngineHelper {
 /**
  * JsHelper TestCase.
  *
+ * @property object|View $View
+ * @property JsHelper    $Js
  * @package       Cake.Test.Case.View.Helper
  */
 class JsHelperTest extends CakeTestCase {
@@ -740,6 +742,8 @@ class JsHelperTest extends CakeTestCase {
 /**
  * JsBaseEngine Class Test case
  *
+ * @property View $View
+ * @property OptionEngineHelper $JsEngine
  * @package       Cake.Test.Case.View.Helper
  */
 class JsBaseEngineTest extends CakeTestCase {

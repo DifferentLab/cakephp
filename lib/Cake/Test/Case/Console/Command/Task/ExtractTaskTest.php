@@ -28,6 +28,10 @@ App::uses('ExtractTask', 'Console/Command/Task');
 /**
  * ExtractTaskTest class
  *
+ * @property ExtractTask         $Task
+ * @property string              $path
+ * @property ConsoleOutput       $out
+ * @property ConsoleInput        $in
  * @package       Cake.Test.Case.Console.Command.Task
  */
 class ExtractTaskTest extends CakeTestCase {

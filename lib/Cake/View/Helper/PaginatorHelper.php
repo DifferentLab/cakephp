@@ -527,8 +527,15 @@ class PaginatorHelper extends AppHelper {
 			return '';
 		}
 
+		$url = $options['url'];
+		$step = $options['step'];
+		$escape = $options['escape'];
+		$model = $options['model'];
+		$tag = $options['tag'];
+		$class = $options['class'];
+		$disabledTag = $options['disabledTag'];
+
 		foreach (array_keys($_defaults) as $key) {
-			${$key} = $options[$key];
 			unset($options[$key]);
 		}
 

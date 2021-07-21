@@ -21,6 +21,8 @@ App::uses('CakeEvent', 'Event');
 
 /**
  * A generic object class
+ * @property  GenericObjectCollection $_Collection
+ * @property  array $settings
  */
 class GenericObject {
 
@@ -127,6 +129,12 @@ class GenericObjectCollection extends ObjectCollection {
 
 }
 
+/**
+ * @property GenericObjectCollection   $Objects
+ * @property FirstGenericObject|object $FirstGenericObject
+ * @property SecondGenericObject|object $SecondGenericObject
+ * @property ThirdGenericObject|object $ThirdGenericObject
+ */
 class ObjectCollectionTest extends CakeTestCase {
 
 /**

@@ -56,6 +56,9 @@ class TestCakeRequest extends CakeRequest {
 
 /**
  * CakeRequestTest
+ *
+ * @property array|int[]|mixed $_app
+ * @property mixed             $_case
  */
 class CakeRequestTest extends CakeTestCase {
 

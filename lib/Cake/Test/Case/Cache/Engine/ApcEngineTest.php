@@ -21,6 +21,7 @@ App::uses('Cache', 'Cache');
 /**
  * ApcEngineTest class
  *
+ * @property array|int[]|mixed $_cacheDisable
  * @package       Cake.Test.Case.Cache.Engine
  */
 class ApcEngineTest extends CakeTestCase {

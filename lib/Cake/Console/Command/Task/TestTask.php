@@ -197,7 +197,7 @@ class TestTask extends BakeTask {
 		$keys[] = 'q';
 		$selection = $this->in(__d('cake_console', 'Enter the type of object to bake a test for or (q)uit'), $keys, 'q');
 		if ($selection === 'q') {
-			return $this->_stop();
+			$this->_stop();
 		}
 		$types = array_keys($this->classTypes);
 		return $types[$selection - 1];

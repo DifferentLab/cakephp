@@ -43,6 +43,7 @@ class CakeNumberMock {
 /**
  * NumberHelperTest class
  *
+ * @property View $View
  * @package       Cake.Test.Case.View.Helper
  */
 class NumberHelperTest extends CakeTestCase {

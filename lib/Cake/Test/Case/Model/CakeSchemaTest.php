@@ -431,6 +431,8 @@ class SchemaPrefixAuthUser extends CakeTestModel {
 /**
  * CakeSchemaTest
  *
+ * @property TestAppSchema $Schema
+ * @property DboSource $db
  * @package       Cake.Test.Case.Model
  */
 class CakeSchemaTest extends CakeTestCase {
@@ -787,6 +789,7 @@ class CakeSchemaTest extends CakeTestCase {
 		$this->assertEquals($write, $file);
 
 		require_once TMP . 'tests' . DS . 'schema.php';
+		/** @phpstan-ignore-next-line */
 		$OtherSchema = new MyOtherAppSchema();
 		$this->assertEquals($this->Schema->tables, $OtherSchema->tables);
 	}

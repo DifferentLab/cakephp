@@ -53,6 +53,7 @@ if (!$imported) {
 /**
  * ControllerTaskTest class
  *
+ * @property ControllerTask|object $Task
  * @package       Cake.Test.Case.Console.Command.Task
  */
 class ControllerTaskTest extends CakeTestCase {

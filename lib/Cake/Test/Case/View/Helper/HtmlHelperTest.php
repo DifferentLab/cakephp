@@ -113,6 +113,7 @@ class Html5TestHelper extends TestHtmlHelper {
 /**
  * HtmlHelperTest class
  *
+ * @property View $View
  * @package       Cake.Test.Case.View.Helper
  */
 class HtmlHelperTest extends CakeTestCase {

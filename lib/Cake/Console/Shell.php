@@ -264,7 +264,7 @@ class Shell extends CakeObject {
  */
 	protected function _loadModels() {
 		if (is_array($this->uses)) {
-			list(, $this->modelClass) = pluginSplit(current($this->uses));
+			[, $this->modelClass] = pluginSplit(current($this->uses));
 			foreach ($this->uses as $modelClass) {
 				$this->loadModel($modelClass);
 			}
@@ -281,7 +281,7 @@ class Shell extends CakeObject {
 	public function __isset($name) {
 		if (is_array($this->uses)) {
 			foreach ($this->uses as $modelClass) {
-				list(, $class) = pluginSplit($modelClass);
+				[, $class] = pluginSplit($modelClass);
 				if ($name === $class) {
 					return $this->loadModel($modelClass);
 				}
@@ -307,7 +307,7 @@ class Shell extends CakeObject {
 			$this->uses[] = $modelClass;
 		}
 
-		list($plugin, $modelClass) = pluginSplit($modelClass, true);
+		[$plugin, $modelClass] = pluginSplit($modelClass, true);
 		if (!isset($this->modelClass)) {
 			$this->modelClass = $modelClass;
 		}
@@ -415,7 +415,7 @@ class Shell extends CakeObject {
  * @param string $command The command name to run on this shell. If this argument is empty,
  *   and the shell has a `main()` method, that will be called instead.
  * @param array $argv Array of arguments to run the shell with. This array should be missing the shell name.
- * @return int|bool
+ * @return int|bool|void
  * @link https://book.cakephp.org/2.0/en/console-and-shells.html#Shell::runCommand
  */
 	public function runCommand($command, $argv) {
@@ -429,7 +429,7 @@ class Shell extends CakeObject {
 
 		$this->OptionParser = $this->getOptionParser();
 		try {
-			list($this->params, $this->args) = $this->OptionParser->parse($argv, $command);
+			[$this->params, $this->args] = $this->OptionParser->parse($argv, $command);
 		} catch (ConsoleException $e) {
 			$this->err(__d('cake_console', '<error>Error:</error> %s', $e->getMessage()));
 			$this->out($this->OptionParser->help($command));
@@ -459,7 +459,12 @@ class Shell extends CakeObject {
 			return $this->{$command}();
 		}
 		if ($isMain) {
-			return $this->main();
+		    if(!method_exists($this, 'main')) {
+		        throw new InvalidArgumentException('trying to run undefined main function');
+            }
+
+		    $this->main();
+			return;
 		}
 		$this->out($this->OptionParser->help($command));
 		return false;
@@ -805,7 +810,7 @@ class Shell extends CakeObject {
 		if (isset($this->_helpers[$name])) {
 			return $this->_helpers[$name];
 		}
-		list($plugin, $helperClassName) = pluginSplit($name, true);
+		[$plugin, $helperClassName] = pluginSplit($name, true);
 		$helperClassNameShellHelper = Inflector::camelize($helperClassName) . "ShellHelper";
 		App::uses($helperClassNameShellHelper, $plugin . "Console/Helper");
 		if (!class_exists($helperClassNameShellHelper)) {

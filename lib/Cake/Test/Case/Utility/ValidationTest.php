@@ -110,6 +110,8 @@ class ValidationStub extends Validation {
 /**
  * Test Case for Validation Class
  *
+ * @property array|int[]|mixed $_appEncoding
+ * @property array             $_appLocale
  * @package       Cake.Test.Case.Utility
  */
 class ValidationTest extends CakeTestCase {

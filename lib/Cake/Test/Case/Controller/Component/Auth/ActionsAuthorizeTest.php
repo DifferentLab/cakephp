@@ -25,6 +25,10 @@ App::uses('CakeResponse', 'Network');
 /**
  * ActionsAuthorizeTest
  *
+ * @property Controller|object          $controller
+ * @property AclComponent|object        $Acl
+ * @property ComponentCollection|object $Collection
+ * @property ActionsAuthorize           $auth
  * @package       Cake.Test.Case.Controller.Component.Auth
  */
 class ActionsAuthorizeTest extends CakeTestCase {

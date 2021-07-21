@@ -219,6 +219,10 @@ class FixturePrefixTest extends Model {
 /**
  * Test case for CakeTestFixture
  *
+ * @property DboSource|object $criticDb
+ * @property DataSource       $db
+ * @property array            $_backupConfig
+ * @property mixed            $insertMulti
  * @package       Cake.Test.Case.TestSuite
  */
 class CakeTestFixtureTest extends CakeTestCase {

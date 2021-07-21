@@ -203,9 +203,8 @@ class ModelReadTest extends BaseModelTest {
 		$isStrictGroupBy = $isOnlyFullGroupBy ||
 			$this->db instanceof Postgres ||
 			$this->db instanceof Sqlite ||
-			$this->db instanceof Oracle ||
 			$this->db instanceof Sqlserver;
-		$message = 'Postgres, Oracle, SQLite, SQL Server and MySQL in ONLY_FULL_GROUP_BY ' .
+		$message = 'Postgres, SQLite, SQL Server and MySQL in ONLY_FULL_GROUP_BY ' .
 			'mode have strict GROUP BY and are incompatible with this test.';
 		$this->skipIf($isStrictGroupBy, $message);
 	}

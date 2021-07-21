@@ -175,6 +175,7 @@ class TestTaskCommentsController extends Controller {
 /**
  * TestTaskTest class
  *
+ * @property TestTask $Task
  * @package       Cake.Test.Case.Console.Command.Task
  */
 class TestTaskTest extends CakeTestCase {

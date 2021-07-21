@@ -26,12 +26,18 @@ require_once dirname(dirname(dirname(__FILE__))) . DS . 'models.php';
 /**
  * DboMysqlTest class
  *
+ * @property MysqlTestModel    $model
+ * @property array|int[]|mixed $_debug
+ * @property DataSource        $db
+ * @property Article2|Model    $Model
+ * @property mixed             $startTime
+ * @property Featured2         $Featured2
  * @package       Cake.Test.Case.Model.Datasource.Database
  */
 class MysqlTest extends CakeTestCase {
 
 /**
- * autoFixtures property
+ * autoFixtures propertyExtractTaskTest::
  *
  * @var bool
  */

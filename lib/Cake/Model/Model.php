@@ -705,8 +705,12 @@ class Model extends CakeObject implements CakeEventListener {
 	public function __construct($id = false, $table = null, $ds = null) {
 		parent::__construct();
 
+
 		if (is_array($id)) {
-			extract(array_merge(
+            //tell phpstan about extracted params
+            $name = $alias = $plugin = null;
+
+            extract(array_merge(
 				array(
 					'id' => $this->id, 'table' => $this->useTable, 'ds' => $this->useDbConfig,
 					'name' => $this->name, 'alias' => $this->alias, 'plugin' => $this->plugin

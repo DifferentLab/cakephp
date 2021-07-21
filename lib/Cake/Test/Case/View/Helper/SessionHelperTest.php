@@ -23,6 +23,8 @@ App::uses('SessionHelper', 'View/Helper');
 /**
  * SessionHelperTest class
  *
+ * @property View          $View
+ * @property SessionHelper $Session
  * @package       Cake.Test.Case.View.Helper
  */
 class SessionHelperTest extends CakeTestCase {

@@ -21,6 +21,7 @@ App::uses('CakeTime', 'Utility');
 /**
  * CakeTimeTest class
  *
+ * @property CakeTime $Time
  * @package       Cake.Test.Case.View.Helper
  */
 class CakeTimeTest extends CakeTestCase {

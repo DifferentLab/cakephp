@@ -42,6 +42,7 @@ class TestCompletionStringOutput extends ConsoleOutput {
 /**
  * CompletionShellTest
  *
+ * @property CompletionShell|object $Shell
  * @package       Cake.Test.Case.Console.Command
  */
 class CompletionShellTest extends CakeTestCase {

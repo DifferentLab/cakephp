@@ -27,6 +27,7 @@ App::uses('TemplateTask', 'Console/Command/Task');
 /**
  * TemplateTaskTest class
  *
+ * @property object|TemplateTask $Task
  * @package       Cake.Test.Case.Console.Command.Task
  */
 class TemplateTaskTest extends CakeTestCase {

@@ -258,7 +258,7 @@ class TestCakeObject extends CakeObject {
  * @return void
  */
 	public function set($properties = array()) {
-		return parent::_set($properties);
+		parent::_set($properties);
 	}
 
 }
@@ -277,6 +277,7 @@ class ObjectTestModel extends CakeTestModel {
 /**
  * CakeObject Test class
  *
+ * @property TestCakeObject $object
  * @package       Cake.Test.Case.Core
  */
 class ObjectTest extends CakeTestCase {

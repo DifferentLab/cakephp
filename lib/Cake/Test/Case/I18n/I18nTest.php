@@ -2063,7 +2063,6 @@ class I18nTest extends CakeTestCase {
 /**
  * Singular method
  *
- * @return void
  */
 	protected function _domainCategorySingular($domain = 'test_plugin', $category = 3) {
 		$singular = __dc($domain, 'Plural Rule 1', $category);
@@ -2073,7 +2072,6 @@ class I18nTest extends CakeTestCase {
 /**
  * Plural method
  *
- * @return void
  */
 	protected function _domainCategoryPlural($domain = 'test_plugin', $category = 3) {
 		$plurals = array();
@@ -2086,7 +2084,6 @@ class I18nTest extends CakeTestCase {
 /**
  * Singular method
  *
- * @return void
  */
 	protected function _domainSingular($domain = 'test_plugin') {
 		$singular = __d($domain, 'Plural Rule 1');
@@ -2096,7 +2093,6 @@ class I18nTest extends CakeTestCase {
 /**
  * Plural method
  *
- * @return void
  */
 	protected function _domainPlural($domain = 'test_plugin') {
 		$plurals = array();
@@ -2109,7 +2105,6 @@ class I18nTest extends CakeTestCase {
 /**
  * category method
  *
- * @return void
  */
 	protected function _category($category = I18n::LC_MONETARY) {
 		$singular = __c('Plural Rule 1', $category);
@@ -2119,7 +2114,6 @@ class I18nTest extends CakeTestCase {
 /**
  * Singular method
  *
- * @return void
  */
 	protected function _singular() {
 		$singular = __('Plural Rule 1');
@@ -2130,7 +2124,6 @@ class I18nTest extends CakeTestCase {
  * Plural method
  *
  * @param int $upTo For numbers upto (default to 25)
- * @return void
  */
 	protected function _plural($upTo = 25) {
 		$plurals = array();
@@ -2143,7 +2136,6 @@ class I18nTest extends CakeTestCase {
 /**
  * singularFromCore method
  *
- * @return void
  */
 	protected function _singularFromCore() {
 		$singular = __('Plural Rule 1 (from core)');
@@ -2154,7 +2146,6 @@ class I18nTest extends CakeTestCase {
  * pluralFromCore method
  *
  * @param int $upTo For numbers upto (default to 25)
- * @return void
  */
 	protected function _pluralFromCore($upTo = 25) {
 		$plurals = array();

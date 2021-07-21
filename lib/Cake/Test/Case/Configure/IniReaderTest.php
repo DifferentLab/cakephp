@@ -21,6 +21,7 @@ App::uses('IniReader', 'Configure');
 /**
  * IniReaderTest
  *
+ * @property string $path
  * @package       Cake.Test.Case.Configure
  */
 class IniReaderTest extends CakeTestCase {

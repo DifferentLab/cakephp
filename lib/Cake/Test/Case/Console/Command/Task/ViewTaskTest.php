@@ -166,6 +166,7 @@ class ViewTaskArticlesController extends Controller {
 /**
  * ViewTaskTest class
  *
+ * @property object|ViewTask $Task
  * @package       Cake.Test.Case.Console.Command.Task
  */
 class ViewTaskTest extends CakeTestCase {

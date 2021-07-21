@@ -22,6 +22,7 @@ App::uses('ClassRegistry', 'Utility');
 /**
  * A factory class to manage the life cycle of test fixtures
  *
+ * @property array $_processed
  * @package       Cake.TestSuite.Fixture
  */
 class CakeFixtureManager {

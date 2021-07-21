@@ -25,6 +25,7 @@ App::uses('CakeText', 'Utility');
  *
  * Xml output is useful for integration with other tools like IDE's or other build tools.
  *
+ * @property ConsoleOptionParser $_parser
  * @package       Cake.Console
  * @since  CakePHP(tm) v 2.0
  */

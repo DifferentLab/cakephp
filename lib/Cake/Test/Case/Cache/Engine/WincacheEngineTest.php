@@ -21,6 +21,7 @@ App::uses('Cache', 'Cache');
 /**
  * WincacheEngineTest class
  *
+ * @property array|int[]|mixed $_cacheDisable
  * @package       Cake.Test.Case.Cache.Engine
  */
 class WincacheEngineTest extends CakeTestCase {

@@ -234,6 +234,8 @@ class SqlserverTestResultIterator extends ArrayIterator {
 /**
  * SqlserverTest class
  *
+ * @property DataSource         $Dbo
+ * @property SqlserverTestModel $model
  * @package       Cake.Test.Case.Model.Datasource.Database
  */
 class SqlserverTest extends CakeTestCase {

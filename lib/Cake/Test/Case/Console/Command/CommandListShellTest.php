@@ -40,6 +40,7 @@ class TestStringOutput extends ConsoleOutput {
 /**
  * CommandListShellTest
  *
+ * @property CommandListShell|object $Shell
  * @package       Cake.Test.Case.Console.Command
  */
 class CommandListShellTest extends CakeTestCase {

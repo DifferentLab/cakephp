@@ -520,7 +520,8 @@ abstract class CakeTestCase extends PHPUnit_Framework_TestCase {
  *
  * @param array $assertions Assertions to run.
  * @param string $string The HTML string to check.
- * @return void
+ *
+ * @return false|string
  */
 	protected function _assertAttributes($assertions, $string) {
 		$asserts = $assertions['attrs'];

@@ -51,4 +51,4 @@ if (!$found) {
 
 unset($paths, $path, $found, $dispatcher);
 
-return ShellDispatcher::run($argv);
+ShellDispatcher::run($argv);

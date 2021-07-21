@@ -538,7 +538,7 @@ class CakeRouteTest extends CakeTestCase {
 		$this->assertEquals('view', $result['action']);
 		$this->assertEquals('1', $result['id']);
 
-		$route = new Cakeroute(
+		$route = new CakeRoute(
 			'/admin/:controller',
 			array('prefix' => 'admin', 'admin' => 1, 'action' => 'index')
 		);
@@ -557,7 +557,7 @@ class CakeRouteTest extends CakeTestCase {
  * @return void
  */
 	public function testParseUrlDecodeElements() {
-		$route = new Cakeroute(
+		$route = new CakeRoute(
 			'/:controller/:slug',
 			array('action' => 'view')
 		);
@@ -579,7 +579,7 @@ class CakeRouteTest extends CakeTestCase {
  * @return void
  */
 	public function testParseWithPassDefaults() {
-		$route = new Cakeroute('/:controller', array('action' => 'display', 'home'));
+		$route = new CakeRoute('/:controller', array('action' => 'display', 'home'));
 		$result = $route->parse('/posts');
 		$expected = array(
 			'controller' => 'posts',

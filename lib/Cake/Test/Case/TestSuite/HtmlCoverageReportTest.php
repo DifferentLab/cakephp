@@ -24,6 +24,7 @@ App::uses('CakeBaseReporter', 'TestSuite/Reporter');
 /**
  * HtmlCoverageReportTest
  *
+ * @property HtmlCoverageReport $Coverage
  * @package       Cake.Test.Case.TestSuite
  */
 class HtmlCoverageReportTest extends CakeTestCase {

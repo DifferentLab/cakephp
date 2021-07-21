@@ -109,6 +109,7 @@ class ControllerTestCaseTestController extends AppController {
 /**
  * ControllerTestCaseTest
  *
+ * @property ControllerTestCase|PHPUnit_Framework_MockObject_MockObject $Case
  * @package       Cake.Test.Case.TestSuite
  */
 class ControllerTestCaseTest extends CakeTestCase {

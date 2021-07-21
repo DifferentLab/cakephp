@@ -47,6 +47,8 @@ class CakeTextMock {
 /**
  * TextHelperTest class
  *
+ * @property View       $View
+ * @property TextHelper $Text
  * @package       Cake.Test.Case.View.Helper
  */
 class TextHelperTest extends CakeTestCase {

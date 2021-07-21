@@ -28,6 +28,7 @@ App::uses('Hash', 'Utility');
  * Implements ArrayAccess to easily modify rules as usually done with `Model::$validate`
  * definition array
  *
+ * @property array $validationErrors
  * @package       Cake.Model
  * @link          https://book.cakephp.org/2.0/en/data-validation.html
  */

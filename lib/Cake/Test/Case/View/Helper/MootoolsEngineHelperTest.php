@@ -23,6 +23,8 @@ App::uses('MootoolsEngineHelper', 'View/Helper');
 /**
  * MootoolsEngineHelperTest
  *
+ * @property object|View          $View
+ * @property MootoolsEngineHelper $Moo
  * @package       Cake.Test.Case.View.Helper
  */
 class MootoolsEngineHelperTest extends CakeTestCase {

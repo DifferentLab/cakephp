@@ -44,14 +44,12 @@ class AuthBlueberryUser extends CakeTestModel {
  */
 class BlueberryComponent extends Component {
 
-/**
- * testName property
- *
- * @return void
- */
-	public $testName = null;
+    /**
+     * @var mixed|string
+     */
+    private $testName = null;
 
-/**
+    /**
  * initialize method
  *
  * @return void
@@ -175,7 +173,6 @@ class ExceptionRendererTest extends CakeTestCase {
 /**
  * Mocks out the response on the ExceptionRenderer object so headers aren't modified.
  *
- * @return void
  */
 	protected function _mockResponse($error) {
 		$error->controller->response = $this->getMock('CakeResponse', array('_sendHeader'));

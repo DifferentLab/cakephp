@@ -24,6 +24,12 @@ require_once dirname(dirname(__FILE__)) . DS . 'models.php';
 /**
  * ContainableTest class
  *
+ * @property AppModel                        $User
+ * @property AppModel                        $Article
+ * @property AppModel                        $Tag
+ * @property AppModel|null $JoinA
+ * @property AppModel|null $JoinB
+ * @property AppModel|null $JoinC
  * @package       Cake.Test.Case.Model.Behavior
  */
 class ContainableBehaviorTest extends CakeTestCase {
@@ -3732,7 +3738,6 @@ class ContainableBehaviorTest extends CakeTestCase {
  *
  * @param Model $Model
  * @param array $contain
- * @return void
  */
 	protected function _containments($Model, $contain = array()) {
 		if (!is_array($Model)) {

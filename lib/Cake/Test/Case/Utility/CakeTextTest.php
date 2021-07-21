@@ -26,7 +26,9 @@ App::uses('CakeText', 'Utility');
  */
 class CakeTextTest extends CakeTestCase {
 
-/**
+    private CakeText $Text;
+
+    /**
  * Setup object under test
  *
  * @return void

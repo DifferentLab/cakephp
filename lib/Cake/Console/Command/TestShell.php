@@ -262,7 +262,8 @@ class TestShell extends Shell {
 		$args = $this->_parseArgs();
 
 		if (empty($args['case'])) {
-			return $this->available();
+			$this->available();
+            return;
 		}
 
 		$this->_run($args, $this->_runnerOptions());
@@ -306,7 +307,8 @@ class TestShell extends Shell {
 
 		if (empty($testCases)) {
 			$this->out(__d('cake_console', "No test cases available \n\n"));
-			return $this->out($this->OptionParser->help());
+			$this->out($this->OptionParser->help());
+			return;
 		}
 
 		$this->out($title);

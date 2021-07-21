@@ -24,6 +24,7 @@ App::uses('View', 'View');
  * DboSource
  *
  * Creates DBO-descendant objects from a given db connection configuration
+ * @property array $columns
  *
  * @package       Cake.Model.Datasource
  */
@@ -1419,7 +1420,8 @@ class DboSource extends DataSource {
 			}
 
 			// Merge
-			return $this->_mergeHasMany($resultSet, $assocResultSet, $association, $Model);
+			$this->_mergeHasMany($resultSet, $assocResultSet, $association, $Model);
+			return;
 
 		} elseif ($type === 'hasAndBelongsToMany') {
 			// 'hasAndBelongsToMany' associations.

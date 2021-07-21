@@ -23,6 +23,7 @@ class_exists('CakeSession');
 /**
  * CacheSessionTest
  *
+ * @property CacheSession $storage
  * @package       Cake.Test.Case.Model.Datasource.Session
  */
 class CacheSessionTest extends CakeTestCase {

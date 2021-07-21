@@ -140,6 +140,8 @@ class ExtendTransport {
 /**
  * CakeEmailTest class
  *
+ * @property bool          $_configFileExists
+ * @property TestCakeEmail $CakeEmail
  * @package       Cake.Test.Case.Network.Email
  */
 class CakeEmailTest extends CakeTestCase {

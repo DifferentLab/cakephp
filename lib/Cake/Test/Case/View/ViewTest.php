@@ -298,6 +298,12 @@ class TestViewEventListener implements CakeEventListener {
 /**
  * ViewTest class
  *
+ * @property Controller           $Controller
+ * @property ViewPostsController  $PostsController
+ * @property View                 $View
+ * @property Controller           $ThemeController
+ * @property ThemePostsController $ThemePostsController
+ * @property View                 $ThemeView
  * @package       Cake.Test.Case.View
  */
 class ViewTest extends CakeTestCase {

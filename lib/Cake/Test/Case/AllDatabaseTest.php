@@ -28,7 +28,6 @@ class AllDatabaseTest extends PHPUnit_Framework_TestSuite {
 /**
  * suite method, defines tests for this suite.
  *
- * @return void
  */
 	public static function suite() {
 		$suite = new PHPUnit_Framework_TestSuite('Datasources, Schema and DbAcl tests');

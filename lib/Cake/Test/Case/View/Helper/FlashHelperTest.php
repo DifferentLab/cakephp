@@ -25,6 +25,8 @@ App::uses('CakePlugin', 'Core');
 /**
  * FlashHelperTest class
  *
+ * @property View        $View
+ * @property FlashHelper $Flash
  * @package		Cake.Test.Case.View.Helper
  */
 class FlashHelperTest extends CakeTestCase {

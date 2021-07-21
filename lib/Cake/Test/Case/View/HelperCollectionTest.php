@@ -29,6 +29,8 @@ class HtmlAliasHelper extends HtmlHelper {
 /**
  * HelperCollectionTest
  *
+ * @property object|View      $View
+ * @property HelperCollection $Helpers
  * @package       Cake.Test.Case.View
  */
 class HelperCollectionTest extends CakeTestCase {

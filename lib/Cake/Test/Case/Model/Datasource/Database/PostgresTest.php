@@ -173,6 +173,8 @@ class PostgresClientTestModel extends Model {
 /**
  * PostgresTest class
  *
+ * @property PostgresTestModel $model
+ * @property DataSource $db
  * @package       Cake.Test.Case.Model.Datasource.Database
  */
 class PostgresTest extends CakeTestCase {

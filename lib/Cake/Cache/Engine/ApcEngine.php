@@ -204,7 +204,8 @@ class ApcEngine extends CacheEngine {
  */
 	public function clearGroup($group) {
 		$func = $this->_apcExtension . '_inc';
-		$func($this->settings['prefix'] . $group, 1, $success);
+        $success = false;
+        $func($this->settings['prefix'] . $group, 1, $success);
 		return $success;
 	}
 

@@ -80,6 +80,7 @@ class TestHttpResponse extends HttpResponse {
 /**
  * HttpResponseTest class
  *
+ * @property TestHttpResponse $HttpResponse
  * @package       Cake.Test.Case.Network.Http
  */
 class HttpResponseTest extends CakeTestCase {

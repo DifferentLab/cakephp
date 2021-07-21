@@ -59,6 +59,7 @@ class ConstructorPost extends Model {
 /**
  * CakeTestCaseTest
  *
+ * @property CakeHtmlReporter|object $Reporter
  * @package       Cake.Test.Case.TestSuite
  */
 class CakeTestCaseTest extends CakeTestCase {

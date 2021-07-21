@@ -21,6 +21,7 @@ require_once dirname(dirname(__FILE__)) . DS . 'models.php';
 /**
  * TranslateBehaviorTest class
  *
+ * @property DboSource $db
  * @package       Cake.Test.Case.Model.Behavior
  */
 class TranslateBehaviorTest extends CakeTestCase {

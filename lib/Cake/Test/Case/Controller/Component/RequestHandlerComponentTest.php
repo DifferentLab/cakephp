@@ -83,6 +83,7 @@ class CustomJsonView extends JsonView {
 /**
  * RequestHandlerComponentTest class
  *
+ * @property array $_extensions
  * @package       Cake.Test.Case.Controller.Component
  */
 class RequestHandlerComponentTest extends CakeTestCase {

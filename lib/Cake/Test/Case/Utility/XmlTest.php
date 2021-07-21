@@ -75,6 +75,7 @@ class XmlUser extends CakeTestModel {
 /**
  * XmlTest class
  *
+ * @property array|int[]|mixed $_appEncoding
  * @package       Cake.Test.Case.Utility
  */
 class XmlTest extends CakeTestCase {

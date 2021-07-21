@@ -24,6 +24,8 @@ App::uses('DboSource', 'Model/Datasource');
  * A Dbo layer for MS SQL Server 2005 and higher. Requires the
  * `pdo_sqlsrv` extension to be enabled.
  *
+ * @property mixed $_results
+ * @property mixed $error
  * @link http://www.php.net/manual/en/ref.pdo-sqlsrv.php
  *
  * @package       Cake.Model.Datasource.Database
@@ -810,11 +812,7 @@ class Sqlserver extends DboSource {
 			}
 			return true;
 		} catch (PDOException $e) {
-			if (isset($query->queryString)) {
-				$e->queryString = $query->queryString;
-			} else {
-				$e->queryString = $sql;
-			}
+    		$e->queryString = $sql;
 			throw $e;
 		}
 	}

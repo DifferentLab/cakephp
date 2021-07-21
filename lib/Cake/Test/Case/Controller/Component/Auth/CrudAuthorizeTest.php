@@ -25,6 +25,9 @@ App::uses('CakeResponse', 'Network');
 /**
  * CrudAuthorizeTest
  *
+ * @property AclComponent|object        $Acl
+ * @property ComponentCollection|object $Components
+ * @property CrudAuthorize              $auth
  * @package       Cake.Test.Case.Controller.Component.Auth
  */
 class CrudAuthorizeTest extends CakeTestCase {

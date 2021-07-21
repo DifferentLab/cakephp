@@ -31,6 +31,10 @@ if (!class_exists('UsersController')) {
 	}
 }
 
+/**
+ * @property BakeShell|object $Shell
+ * @property  Dispatcher $Dispatcher
+ */
 class BakeShellTest extends CakeTestCase {
 
 /**

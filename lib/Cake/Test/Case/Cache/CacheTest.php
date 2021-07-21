@@ -21,6 +21,8 @@ App::uses('Cache', 'Cache');
 /**
  * CacheTest class
  *
+ * @property array|int[]|mixed $_cacheDisable
+ * @property array|false       $_defaultCacheConfig
  * @package       Cake.Test.Case.Cache
  */
 class CacheTest extends CakeTestCase {

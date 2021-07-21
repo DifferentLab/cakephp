@@ -25,6 +25,7 @@ App::uses('ApiShell', 'Console/Command');
 /**
  * ApiShellTest class
  *
+ * @property ApiShell|object $Shell
  * @package       Cake.Test.Case.Console.Command
  */
 class ApiShellTest extends CakeTestCase {

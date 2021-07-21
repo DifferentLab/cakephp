@@ -192,6 +192,8 @@ class TestHelper extends Helper {
 /**
  * HelperTest class
  *
+ * @property View   $View
+ * @property Helper $Helper
  * @package       Cake.Test.Case.View
  */
 class HelperTest extends CakeTestCase {

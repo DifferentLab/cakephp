@@ -22,6 +22,7 @@ App::uses('CakeNumber', 'Utility');
 /**
  * CakeNumberTest class
  *
+ * @property CakeNumber $Number
  * @package       Cake.Test.Case.Utility
  */
 class CakeNumberTest extends CakeTestCase {

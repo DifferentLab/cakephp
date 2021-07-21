@@ -96,7 +96,7 @@ class ErrorHandlerTest extends CakeTestCase {
 		Debugger::getInstance()->output('html');
 
 		ob_start();
-		$wrong .= '';
+		$wrong = '';
 		$result = ob_get_clean();
 
 		$this->assertRegExp('/<pre class="cake-error">/', $result);
@@ -167,7 +167,7 @@ class ErrorHandlerTest extends CakeTestCase {
 		set_error_handler('ErrorHandler::handleError');
 		$this->_restoreError = true;
 
-		$out .= '';
+		$out = '';
 
 		$result = file(LOGS . 'debug.log');
 		$this->assertEquals(1, count($result));
@@ -195,7 +195,7 @@ class ErrorHandlerTest extends CakeTestCase {
 		set_error_handler('ErrorHandler::handleError');
 		$this->_restoreError = true;
 
-		$out .= '';
+		$out = '';
 
 		$result = file(LOGS . 'debug.log');
 		$this->assertRegExp(

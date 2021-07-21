@@ -87,7 +87,8 @@ class BakeShell extends AppShell {
 		if (!config('database')) {
 			$this->out(__d('cake_console', 'Your database configuration was not found. Take a moment to create one.'));
 			$this->args = null;
-			return $this->DbConfig->execute();
+			$this->DbConfig->execute();
+			return;
 		}
 		$this->out(__d('cake_console', 'Interactive Bake Shell'));
 		$this->hr();
@@ -124,7 +125,8 @@ class BakeShell extends AppShell {
 				$this->Test->execute();
 				break;
 			case 'Q':
-				return $this->_stop();
+                $this->_stop();
+				break;
 			default:
 				$this->out(__d('cake_console', 'You have made an invalid selection. Please choose a type of class to Bake by entering D, M, V, F, T, or C.'));
 		}
@@ -199,7 +201,8 @@ class BakeShell extends AppShell {
 		} else {
 			$this->error(__d('cake_console', 'Bake All could not continue without a valid model'));
 		}
-		return $this->_stop();
+
+		$this->_stop();
 	}
 
 /**

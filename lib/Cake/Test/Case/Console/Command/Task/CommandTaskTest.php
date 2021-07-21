@@ -19,6 +19,7 @@ App::uses('CommandTask', 'Console/Command/Task');
 /**
  * CommandTaskTest class
  *
+ * @property CommandTask|object $CommandTask
  * @package   Cake.Test.Case.Console.Command.Task
  */
 class CommandTaskTest extends CakeTestCase {

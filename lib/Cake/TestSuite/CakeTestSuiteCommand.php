@@ -30,6 +30,7 @@ App::uses('CakeTestModel', 'TestSuite/Fixture');
 /**
  * Class to customize loading of test suites from CLI
  *
+ * @property array $_params
  * @package       Cake.TestSuite
  */
 class CakeTestSuiteCommand extends PHPUnit_TextUI_Command {
@@ -77,7 +78,6 @@ class CakeTestSuiteCommand extends PHPUnit_TextUI_Command {
 		}
 
 		if ($this->arguments['listGroups']) {
-			PHPUnit_TextUI_TestRunner::printVersionString();
 
 			print "Available test group(s):\n";
 

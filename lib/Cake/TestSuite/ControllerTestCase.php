@@ -27,6 +27,7 @@ App::uses('CakeEvent', 'Event');
 /**
  * ControllerTestDispatcher class
  *
+ * @property CakeResponse $response
  * @package       Cake.TestSuite
  */
 class ControllerTestDispatcher extends Dispatcher {
@@ -69,18 +70,6 @@ class ControllerTestDispatcher extends Dispatcher {
 			}
 		}
 		return $this->testController;
-	}
-
-/**
- * Loads routes and resets if the test case dictates it should
- *
- * @return void
- */
-	protected function _loadRoutes() {
-		parent::_loadRoutes();
-		if (!$this->loadRoutes) {
-			Router::reload();
-		}
 	}
 
 }

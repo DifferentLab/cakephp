@@ -28,7 +28,6 @@ class AllHelpersTest extends PHPUnit_Framework_TestSuite {
 /**
  * suite declares tests to run
  *
- * @return void
  */
 	public static function suite() {
 		$suite = new CakeTestSuite('All Helper tests');

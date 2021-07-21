@@ -97,7 +97,8 @@ class ModelTask extends BakeTask {
 				$this->connection = 'default';
 			}
 			if (strtolower($this->args[0]) === 'all') {
-				return $this->all();
+				$this->all();
+				return;
 			}
 			$model = $this->_modelName($this->args[0]);
 			$this->listAll($this->connection);
@@ -967,7 +968,7 @@ class ModelTask extends BakeTask {
 		}
 		if (empty($tables)) {
 			$this->err(__d('cake_console', 'Your database does not have any tables.'));
-			return $this->_stop();
+			$this->_stop();
 		}
 		sort($tables);
 		return $tables;
@@ -990,7 +991,7 @@ class ModelTask extends BakeTask {
 
 			if ($enteredModel === 'q') {
 				$this->out(__d('cake_console', 'Exit'));
-				return $this->_stop();
+				$this->_stop();
 			}
 
 			if (!$enteredModel || (int)$enteredModel > count($this->_modelNames)) {

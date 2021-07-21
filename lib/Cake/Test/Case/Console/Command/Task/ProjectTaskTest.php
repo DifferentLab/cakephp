@@ -29,6 +29,7 @@ App::uses('File', 'Utility');
 /**
  * ProjectTask Test class
  *
+ * @property object|ProjectTask $Task
  * @package       Cake.Test.Case.Console.Command.Task
  */
 class ProjectTaskTest extends CakeTestCase {

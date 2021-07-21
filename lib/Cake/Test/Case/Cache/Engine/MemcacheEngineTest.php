@@ -45,6 +45,7 @@ class TestMemcacheEngine extends MemcacheEngine {
 /**
  * MemcacheEngineTest class
  *
+ * @property array|int[]|mixed $_cacheDisable
  * @package       Cake.Test.Case.Cache.Engine
  */
 class MemcacheEngineTest extends CakeTestCase {

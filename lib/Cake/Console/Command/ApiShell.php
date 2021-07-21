@@ -98,7 +98,8 @@ class ApiShell extends AppShell {
 			if (isset($this->params['method'])) {
 				if (!isset($parsed[$this->params['method']])) {
 					$this->err(__d('cake_console', '%s::%s() could not be found', $class, $this->params['method']));
-					return $this->_stop();
+					$this->_stop();
+					return;
 				}
 				$method = $parsed[$this->params['method']];
 				$this->out($class . '::' . $method['method'] . $method['parameters']);
@@ -117,7 +118,8 @@ class ApiShell extends AppShell {
 				while ($number = strtolower($this->in(__d('cake_console', 'Select a number to see the more information about a specific method. q to quit. l to list.'), null, 'q'))) {
 					if ($number === 'q') {
 						$this->out(__d('cake_console', 'Done'));
-						return $this->_stop();
+						$this->_stop();
+						return;
 					}
 
 					if ($number === 'l') {

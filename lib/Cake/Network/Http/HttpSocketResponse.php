@@ -173,6 +173,10 @@ class HttpSocketResponse implements ArrayAccess {
 		$this->body = $decoded['body'];
 
 		if (!empty($decoded['header'])) {
+		    if(!method_exists($this, '_buildHeader')) {
+		        throw new RuntimeException('expected _buildheader method to be present');
+            }
+
 			$this->headers = $this->_parseHeader($this->_buildHeader($this->headers) . $this->_buildHeader($decoded['header']));
 		}
 

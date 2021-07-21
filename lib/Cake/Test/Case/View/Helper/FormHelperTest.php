@@ -502,7 +502,13 @@ class TestMail extends CakeTestModel {
  * FormHelperTest class
  *
  * @package       Cake.Test.Case.View.Helper
- * @property FormHelper $Form
+ * @property FormHelper            $Form
+ * @property ContactTestController $Controller
+ * @property View                  $View
+ * @property string                $oldSalt
+ * @property string[]              $dateRegex
+ * @property UserForm              $UserForm
+ * @property ValidateUser          $ValidateUser
  */
 class FormHelperTest extends CakeTestCase {
 

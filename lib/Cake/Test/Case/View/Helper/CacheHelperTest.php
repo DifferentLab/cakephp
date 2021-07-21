@@ -54,6 +54,8 @@ class CacheTestController extends Controller {
 /**
  * CacheHelperTest class
  *
+ * @property CacheTestController $Controller
+ * @property CacheHelper         $Cache
  * @package       Cake.Test.Case.View.Helper
  */
 class CacheHelperTest extends CakeTestCase {

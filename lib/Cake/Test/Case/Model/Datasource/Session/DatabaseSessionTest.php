@@ -35,6 +35,8 @@ class SessionTestModel extends Model {
 /**
  * Database session test.
  *
+ * @property DatabaseSession $storage
+ * @property DboSource $db
  * @package       Cake.Test.Case.Model.Datasource.Session
  */
 class DatabaseSessionTest extends CakeTestCase {

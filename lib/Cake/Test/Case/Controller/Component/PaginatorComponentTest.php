@@ -283,6 +283,11 @@ class PaginatorCustomPost extends CakeTestModel {
 
 }
 
+/**
+ * @property CakeRequest        $request
+ * @property Controller         $Controller
+ * @property PaginatorComponent $Paginator
+ */
 class PaginatorComponentTest extends CakeTestCase {
 
 /**

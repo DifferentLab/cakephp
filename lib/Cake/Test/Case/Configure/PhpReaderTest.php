@@ -21,6 +21,7 @@ App::uses('PhpReader', 'Configure');
 /**
  * PhpReaderTest
  *
+ * @property string $path
  * @package       Cake.Test.Case.Configure
  */
 class PhpReaderTest extends CakeTestCase {

@@ -44,6 +44,7 @@ class DbAclNodeTestBase extends AclNode {
 /**
  * Aro Test Wrapper
  *
+ * @property bool|DbPermissionTest|mixed|string|null $Permission
  * @package       Cake.Test.Case.Model
  */
 class DbAroTest extends DbAclNodeTestBase {
@@ -176,6 +177,8 @@ class DbAroUserTest extends CakeTestModel {
 /**
  * TestDbAcl class
  *
+ * @property DbAroTest $Aro
+ * @property DbAcoTest $Aco
  * @package       Cake.Test.Case.Model
  */
 class TestDbAcl extends DbAcl {

@@ -67,6 +67,8 @@ class ScaffoldViewMockController extends Controller {
 /**
  * ScaffoldViewTest class
  *
+ * @property CakeRequest                $request
+ * @property ScaffoldViewMockController $Controller
  * @package       Cake.Test.Case.Controller
  */
 class ScaffoldViewTest extends CakeTestCase {

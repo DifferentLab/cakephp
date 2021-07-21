@@ -28,6 +28,7 @@ class DbConfigAliasedTask extends Shell {
 /**
  * TaskCollectionTest
  *
+ * @property TaskCollection $Tasks
  * @package       Cake.Test.Case.Console
  */
 class TaskCollectionTest extends CakeTestCase {

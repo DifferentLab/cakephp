@@ -30,7 +30,7 @@ class FileTest extends CakeTestCase {
 /**
  * File property
  *
- * @var mixed
+ * @var File
  */
 	public $File = null;
 
@@ -588,12 +588,13 @@ class FileTest extends CakeTestCase {
 		$this->assertEquals($expected, $file->mime());
 	}
 
-/**
- * getTmpFile method
- *
- * @param bool $paintSkip
- * @return void
- */
+    /**
+     * getTmpFile method
+     *
+     * @param bool $paintSkip
+     *
+     * @return false|string
+     */
 	protected function _getTmpFile($paintSkip = true) {
 		$tmpFile = TMP . 'tests' . DS . 'cakephp.file.test.tmp';
 		if (is_writable(dirname($tmpFile)) && (!file_exists($tmpFile) || is_writable($tmpFile))) {

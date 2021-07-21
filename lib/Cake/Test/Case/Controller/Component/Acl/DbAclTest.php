@@ -48,6 +48,7 @@ class AclNodeTwoTestBase extends AclNode {
 /**
  * AroTwoTest class
  *
+ * @property bool|mixed|PermissionTwoTest|string|null $Permission
  * @package       Cake.Test.Case.Controller.Component.Acl
  */
 class AroTwoTest extends AclNodeTwoTestBase {
@@ -149,6 +150,9 @@ class PermissionTwoTest extends Permission {
 /**
  * DbAclTwoTest class
  *
+ * @property bool|mixed|PermissionTwoTest|string|null $Permission
+ * @property AroTwoTest                               $Aro
+ * @property AcoTwoTest                               $Aco
  * @package       Cake.Test.Case.Controller.Component.Acl
  */
 class DbAclTwoTest extends DbAcl {
@@ -172,6 +176,7 @@ class DbAclTwoTest extends DbAcl {
 /**
  * Test case for AclComponent using the DbAcl implementation.
  *
+ * @property AclComponent $Acl
  * @package       Cake.Test.Case.Controller.Component.Acl
  */
 class DbAclTest extends CakeTestCase {

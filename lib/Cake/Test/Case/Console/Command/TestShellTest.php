@@ -39,6 +39,7 @@ class TestTestShell extends TestShell {
 /**
  * TestShellTest
  *
+ * @property object|TestTestShell $Shell
  * @package       Cake.Test.Case.Console.Command
  */
 class TestShellTest extends CakeTestCase {

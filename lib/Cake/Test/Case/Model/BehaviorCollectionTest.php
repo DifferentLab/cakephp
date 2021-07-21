@@ -240,7 +240,7 @@ class TestBehavior extends ModelBehavior {
 	public function afterDelete(Model $model) {
 		$settings = $this->settings[$model->alias];
 		if (!isset($settings['afterDelete']) || $settings['afterDelete'] === 'off') {
-			return parent::afterDelete($model);
+			parent::afterDelete($model);
 		}
 		switch ($settings['afterDelete']) {
 			case 'on':
@@ -258,7 +258,7 @@ class TestBehavior extends ModelBehavior {
 	public function onError(Model $model, $error) {
 		$settings = $this->settings[$model->alias];
 		if (!isset($settings['onError']) || $settings['onError'] === 'off') {
-			return parent::onError($model, $error);
+			parent::onError($model, $error);
 		}
 		echo "onError trigger success";
 	}
@@ -458,6 +458,7 @@ class Orangutan extends Monkey {
 /**
  * BehaviorCollection class
  *
+ * @property  DboSource $db
  * @package       Cake.Test.Case.Model
  */
 class BehaviorCollectionTest extends CakeTestCase {

@@ -36,12 +36,7 @@ class CakeTextReporter extends CakeBaseReporter {
 		}
 	}
 
-/**
- * Paints a pass
- *
- * @return void
- */
-	public function paintPass() {
+    public function paintPass(PHPUnit_Framework_Test $test, $time = null) {
 		echo '.';
 	}
 
@@ -52,7 +47,7 @@ class CakeTextReporter extends CakeBaseReporter {
  *   the context of the other tests.
  * @return void
  */
-	public function paintFail($message) {
+    public function paintFail($message, $test = null) {
 		$context = $message->getTrace();
 		$realContext = $context[3];
 		$context = $context[2];
@@ -108,7 +103,7 @@ class CakeTextReporter extends CakeBaseReporter {
  * @param Exception $exception Exception to describe.
  * @return void
  */
-	public function paintException($exception) {
+	public function paintException($exception, $test = null) {
 		$message = 'Unexpected exception of type [' . get_class($exception) .
 			'] with message [' . $exception->getMessage() .
 			'] in [' . $exception->getFile() .
@@ -122,7 +117,7 @@ class CakeTextReporter extends CakeBaseReporter {
  * @param string $message Text of skip condition.
  * @return void
  */
-	public function paintSkip($message) {
+	public function paintSkip($message, $test) {
 		printf("Skip: %s\n", $message->getMessage());
 	}
 

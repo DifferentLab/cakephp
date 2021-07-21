@@ -94,6 +94,9 @@ class TestTheme2View extends ThemeView {
 /**
  * ThemeViewTest class
  *
+ * @property Controller            $Controller
+ * @property ThemePosts2Controller $PostsController
+ * @property ThemeView             $ThemeView
  * @package       Cake.Test.Case.View
  */
 class ThemeViewTest extends CakeTestCase {

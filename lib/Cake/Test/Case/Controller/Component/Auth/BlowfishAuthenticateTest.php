@@ -28,6 +28,9 @@ require_once CAKE . 'Test' . DS . 'Case' . DS . 'Model' . DS . 'models.php';
 /**
  * Test case for BlowfishAuthentication
  *
+ * @property ComponentCollection|object $Collection
+ * @property BlowfishAuthenticate       $auth
+ * @property CakeResponse|object        $response
  * @package	Cake.Test.Case.Controller.Component.Auth
  */
 class BlowfishAuthenticateTest extends CakeTestCase {

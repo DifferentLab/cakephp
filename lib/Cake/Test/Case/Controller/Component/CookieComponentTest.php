@@ -53,6 +53,7 @@ class CookieComponentTestController extends Controller {
 /**
  * CookieComponentTest class
  *
+ * @property CookieComponent $Cookie
  * @package       Cake.Test.Case.Controller.Component
  */
 class CookieComponentTest extends CakeTestCase {

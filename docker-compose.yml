@@ -4,11 +4,15 @@ services:
   cake:
     image: registry.shiftbase.io/php/cli:7.4.19-buster-r1-dev
 #    build: .
-    command: echo "Done"
+    command:
+      - /bin/bash
+      - -c
+      - 'while :; do echo "Napping for an hour" ;sleep  3600 ;done'
     entrypoint: ''
     environment:
       - PHP_MAX_EXECUTION_TIME=0
       - COMPOSER_MEMORY_LIMIT=-1
+      - PHP_MEMORY_LIMIT=2G
     volumes:
       - ${PROJECT_ROOT}:/code
 #    working_dir: /code

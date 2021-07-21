@@ -20,6 +20,7 @@ App::uses('AppShell', 'Console/Command');
 /**
  * Shell for I18N management.
  *
+ * @property Shell $DbConfig
  * @package       Cake.Console.Command
  */
 class I18nShell extends AppShell {
@@ -41,7 +42,7 @@ class I18nShell extends AppShell {
 /**
  * Override startup of the Shell
  *
- * @return mixed
+ * @return void
  */
 	public function startup() {
 		$this->_welcome();
@@ -52,7 +53,7 @@ class I18nShell extends AppShell {
 		if ($this->command && !in_array($this->command, array('help'))) {
 			if (!config('database')) {
 				$this->out(__d('cake_console', 'Your database configuration was not found. Take a moment to create one.'));
-				return $this->DbConfig->execute();
+				$this->DbConfig->execute();
 			}
 		}
 	}
@@ -82,7 +83,8 @@ class I18nShell extends AppShell {
 				$this->out($this->OptionParser->help());
 				break;
 			case 'q':
-				return $this->_stop();
+				$this->_stop();
+				return;
 			default:
 				$this->out(__d('cake_console', 'You have made an invalid selection. Please choose a command to execute by entering E, I, H, or Q.'));
 		}

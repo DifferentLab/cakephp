@@ -48,6 +48,7 @@ class CakeTimeMock {
 /**
  * TimeHelperTest class
  *
+ * @property View $View
  * @package       Cake.Test.Case.View.Helper
  */
 class TimeHelperTest extends CakeTestCase {

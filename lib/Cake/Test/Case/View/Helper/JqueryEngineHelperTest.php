@@ -23,6 +23,8 @@ App::uses('View', 'View');
 /**
  * JqueryEngineHelperTest
  *
+ * @property object|View        $View
+ * @property JqueryEngineHelper $Jquery
  * @package       Cake.Test.Case.View.Helper
  */
 class JqueryEngineHelperTest extends CakeTestCase {

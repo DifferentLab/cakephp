@@ -19,7 +19,6 @@ if (!class_exists('PHPUnit_TextUI_TestRunner')) {
 	require_once 'PHPUnit/TextUI/TestRunner.php';
 }
 if (class_exists('SebastianBergmann\CodeCoverage\CodeCoverage')) {
-	class_alias('SebastianBergmann\CodeCoverage\CodeCoverage', 'PHP_CodeCoverage');
 	class_alias('SebastianBergmann\CodeCoverage\Report\Text', 'PHP_CodeCoverage_Report_Text');
 	class_alias('SebastianBergmann\CodeCoverage\Report\PHP', 'PHP_CodeCoverage_Report_PHP');
 	class_alias('SebastianBergmann\CodeCoverage\Report\Clover', 'PHP_CodeCoverage_Report_Clover');
@@ -27,11 +26,14 @@ if (class_exists('SebastianBergmann\CodeCoverage\CodeCoverage')) {
 	class_alias('SebastianBergmann\CodeCoverage\Exception', 'PHP_CodeCoverage_Exception');
 }
 
+use SebastianBergmann\CodeCoverage\CodeCoverage as PHP_CodeCoverage;
+
 App::uses('CakeFixtureManager', 'TestSuite/Fixture');
 
 /**
  * A custom test runner for CakePHP's use of PHPUnit.
  *
+ * @property array $_params
  * @package       Cake.TestSuite
  */
 class CakeTestRunner extends PHPUnit_TextUI_TestRunner {

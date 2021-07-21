@@ -2,12 +2,17 @@
 
 use Rector\Core\Configuration\Option;
 use Rector\PHPUnit\Set\PHPUnitSetList;
+use Rector\Set\ValueObject\SetList;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     // paths to refactor; solid alternative to CLI arguments
-    $parameters = $containerConfigurator->parameters();
-    $parameters->set(Option::PATHS, [__DIR__ . '/app', __DIR__ . '/lib']);
+//    $parameters = $containerConfigurator->parameters();
+//    $parameters->set(Option::PATHS, [__DIR__ . '/app', __DIR__ . '/lib']);
 
-    $containerConfigurator->import(PHPUnitSetList::PHPUNIT_40);
+//    $parameters->set(Option::PATHS, [__DIR__ . '/lib/Cake/Test', __DIR__ . '/lib/Cake/TestSuite']);
+    $containerConfigurator->import(PHPUnitSetList::PHPUNIT_60);
+
+//    $containerConfigurator->import(SetList::PHP_80);
+
 };

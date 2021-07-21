@@ -108,11 +108,80 @@ class CakeBaseReporter extends PHPUnit_TextUI_ResultPrinter {
 	public function paintTestMenu() {
 	}
 
-/**
- * Get the baseUrl if one is available.
- *
- * @return string The base URL for the request.
- */
+    /**
+     * Paints the end of the test with a summary of
+     * the passes and failures.
+     *
+     * @param PHPUnit_Framework_TestResult $result Result object
+     * @return void
+     */
+	public function paintFooter($result) {
+
+    }
+
+    /**
+     * Paints a PHP exception.
+     *
+     * @param Exception $exception Exception to describe.
+     * @return void
+     */
+    public function paintException($exception, $test = null)
+    {
+    }
+
+    /**
+     * Paints the test failure with a breadcrumbs
+     * trail of the nesting test suites below the
+     * top level test.
+     *
+     * @param PHPUnit_Framework_AssertionFailedError $message Failure object displayed in
+     *   the context of the other tests.
+     * @param mixed $test The test case to paint a failure for.
+     * @return void
+     */
+    public function paintFail($message, $test)
+    {
+    }
+
+    /**
+     * Prints the message for skipping tests.
+     *
+     * @param string $message Text of skip condition.
+     * @param PHPUnit_Framework_TestCase $test the test method skipped
+     * @return void
+     */
+    public function paintSkip($message, $test)
+    {
+    }
+
+    /**
+     * Paints the top of the web page setting the
+     * title to the name of the starting test.
+     *
+     * @return void
+     */
+    public function paintHeader()
+    {
+    }
+
+    /**
+     * Paints the test pass with a breadcrumbs
+     * trail of the nesting test suites below the
+     * top level test.
+     *
+     * @param PHPUnit_Framework_Test $test Test method that just passed
+     * @param float $time time spent to run the test method
+     * @return void
+     */
+    public function paintPass(PHPUnit_Framework_Test $test, $time = null)
+    {
+    }
+
+    /**
+     * Get the baseUrl if one is available.
+     *
+     * @return string The base URL for the request.
+     */
 	public function baseUrl() {
 		if (!empty($_SERVER['PHP_SELF'])) {
 			return $_SERVER['PHP_SELF'];
@@ -196,7 +265,7 @@ class CakeBaseReporter extends PHPUnit_TextUI_ResultPrinter {
  */
 	public function startTestSuite(PHPUnit_Framework_TestSuite $suite) {
 		if (!$this->_headerSent) {
-			echo $this->paintHeader();
+			$this->paintHeader();
 		}
 		echo __d('cake_dev', 'Running  %s', $suite->getName()) . "\n";
 	}

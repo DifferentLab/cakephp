@@ -23,6 +23,7 @@ App::uses('CakeResponse', 'Network');
 /**
  * MediaViewTest class
  *
+ * @property MediaView $MediaView
  * @package       Cake.Test.Case.View
  */
 class MediaViewTest extends CakeTestCase {

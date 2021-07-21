@@ -25,6 +25,9 @@ require_once CAKE . 'Test' . DS . 'Case' . DS . 'Model' . DS . 'models.php';
 /**
  * Test case for BasicAuthentication
  *
+ * @property ComponentCollection|object $Collection
+ * @property BasicAuthenticate          $auth
+ * @property CakeResponse|object        $response
  * @package       Cake.Test.Case.Controller.Component.Auth
  */
 class BasicAuthenticateTest extends CakeTestCase {

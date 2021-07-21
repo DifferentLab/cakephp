@@ -63,7 +63,7 @@ class DboTestSource extends DboSource {
 	}
 
 	public function mergeAssociation(&$data, &$merge, $association, $type, $selfJoin = false) {
-		return parent::_mergeAssociation($data, $merge, $association, $type, $selfJoin);
+		parent::_mergeAssociation($data, $merge, $association, $type, $selfJoin);
 	}
 
 	public function setConfig($config = array()) {
@@ -96,7 +96,7 @@ class DboSecondTestSource extends DboSource {
 	}
 
 	public function mergeAssociation(&$data, &$merge, $association, $type, $selfJoin = false) {
-		return parent::_mergeAssociation($data, $merge, $association, $type, $selfJoin);
+		parent::_mergeAssociation($data, $merge, $association, $type, $selfJoin);
 	}
 
 	public function setConfig($config = array()) {
@@ -158,6 +158,9 @@ class DboFourthTestSource extends DboSource {
 /**
  * DboSourceTest class
  *
+ * @property DboTestSource $testDb
+ * @property TestModel     $Model
+ * @property DataSource $db
  * @package       Cake.Test.Case.Model.Datasource
  */
 class DboSourceTest extends CakeTestCase {

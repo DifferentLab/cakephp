@@ -22,6 +22,7 @@ class_exists('AclComponent');
 /**
  * Test Case for AclComponent
  *
+ * @property AclComponent $Acl
  * @package       Cake.Test.Case.Controller.Component
  */
 class AclComponentTest extends CakeTestCase {

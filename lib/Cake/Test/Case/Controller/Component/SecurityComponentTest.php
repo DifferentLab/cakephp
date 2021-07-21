@@ -136,6 +136,7 @@ class BrokenCallbackController extends Controller {
 /**
  * SecurityComponentTest class
  *
+ * @property SecurityComponent $Security
  * @package       Cake.Test.Case.Controller.Component
  */
 class SecurityComponentTest extends CakeTestCase {

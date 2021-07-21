@@ -17,6 +17,10 @@ App::uses("ConsoleOutputStub", "TestSuite/Stub");
 /*
  * ConsoleOutputStub test
  */
+
+/**
+ * @property ConsoleOutputStub $stub
+ */
 class ConsoleOutputStubTest extends CakeTestCase {
 
 /**

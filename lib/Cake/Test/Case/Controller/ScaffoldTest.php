@@ -110,6 +110,7 @@ class ScaffoldMockControllerWithError extends Controller {
 /**
  * TestScaffoldMock class
  *
+ * @property CakeRequest $_params
  * @package       Cake.Test.Case.Controller
  */
 class TestScaffoldMock extends Scaffold {

@@ -25,6 +25,7 @@ App::uses('DbConfigTask', 'Console/Command/Task');
 /**
  * DbConfigTest class
  *
+ * @property DbConfigTask|object $Task
  * @package       Cake.Test.Case.Console.Command.Task
  */
 class DbConfigTaskTest extends CakeTestCase {

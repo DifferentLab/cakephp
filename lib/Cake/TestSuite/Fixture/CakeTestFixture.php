@@ -20,6 +20,7 @@ App::uses('CakeSchema', 'Model');
  * CakeTestFixture is responsible for building and destroying tables to be used
  * during testing.
  *
+ * @property CakeSchema $Schema
  * @package       Cake.TestSuite.Fixture
  */
 class CakeTestFixture {

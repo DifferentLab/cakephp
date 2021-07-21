@@ -77,7 +77,7 @@ class ShellTestShell extends Shell {
 	//@codingStandardsIgnoreEnd
 
 	public function mergeVars($properties, $class, $normalize = true) {
-		return $this->_mergeVars($properties, $class, $normalize);
+		$this->_mergeVars($properties, $class, $normalize);
 	}
 
 	public function useLogger($enable = true) {
@@ -118,6 +118,7 @@ class TestBananaTask extends Shell {
 /**
  * ShellTest class
  *
+ * @property ShellTestShell $Shell
  * @package       Cake.Test.Case.Console.Command
  */
 class ShellTest extends CakeTestCase {
@@ -174,7 +175,7 @@ class ShellTest extends CakeTestCase {
 		$this->Shell->mergeVars(array('tasks'), 'TestMergeShell');
 		$this->Shell->mergeVars(array('uses'), 'TestMergeShell', false);
 
-		$expected = array('DbConfig' => null, 'Fixture' => null, 'DbConfig' => array('one', 'two'));
+		$expected = array('Fixture' => null, 'DbConfig' => array('one', 'two'));
 		$this->assertEquals($expected, $this->Shell->tasks);
 
 		$expected = array('Fixture' => null, 'DbConfig' => array('one', 'two'));

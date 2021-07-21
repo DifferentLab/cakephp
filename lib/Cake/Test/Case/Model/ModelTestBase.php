@@ -24,6 +24,8 @@ require_once dirname(__FILE__) . DS . 'models.php';
 /**
  * ModelBaseTest
  *
+ * @property array|int[]|mixed $debug
+ * @property DboSource $db
  * @package       Cake.Test.Case.Model
  */
 abstract class BaseModelTest extends CakeTestCase {

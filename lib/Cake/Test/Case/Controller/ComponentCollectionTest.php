@@ -29,7 +29,9 @@ class CookieAliasComponent extends CookieComponent {
 
 class ComponentCollectionTest extends CakeTestCase {
 
-/**
+    private ?ComponentCollection $Components = null;
+
+    /**
  * setUp
  *
  * @return void

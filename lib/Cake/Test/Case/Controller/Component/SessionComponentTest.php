@@ -72,6 +72,7 @@ class OrangeSessionTestController extends Controller {
 /**
  * SessionComponentTest class
  *
+ * @property ComponentCollection $ComponentCollection
  * @package       Cake.Test.Case.Controller.Component
  */
 class SessionComponentTest extends CakeTestCase {
