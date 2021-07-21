@@ -335,6 +335,7 @@ class ViewTask extends BakeTask {
 		if (strtolower($looksGood) === 'y') {
 			$this->bake($action, ' ');
 			$this->_stop();
+            return;
 		}
 		$this->out(__d('cake_console', 'Bake Aborted.'));
 	}

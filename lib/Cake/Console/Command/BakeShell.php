@@ -126,7 +126,7 @@ class BakeShell extends AppShell {
 				break;
 			case 'Q':
                 $this->_stop();
-				break;
+                return;
 			default:
 				$this->out(__d('cake_console', 'You have made an invalid selection. Please choose a type of class to Bake by entering D, M, V, F, T, or C.'));
 		}

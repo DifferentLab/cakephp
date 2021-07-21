@@ -799,6 +799,7 @@ class Controller extends CakeObject implements CakeEventListener {
 		if ($exit) {
 			$this->response->send();
 			$this->_stop();
+            return;
 		}
 
 		return $this->response;

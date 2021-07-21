@@ -129,6 +129,7 @@ class ExtractTask extends AppShell {
 			if (strtoupper($response) === 'Q') {
 				$this->err(__d('cake_console', 'Extract Aborted'));
 				$this->_stop();
+				return;
 			} elseif (strtoupper($response) === 'D' && count($this->_paths)) {
 				$this->out();
 				return;
@@ -206,6 +207,7 @@ class ExtractTask extends AppShell {
 				if (strtoupper($response) === 'Q') {
 					$this->err(__d('cake_console', 'Extract Aborted'));
 					$this->_stop();
+                    return;
 				} elseif ($this->_isPathUsable($response)) {
 					$this->_output = $response . DS;
 					break;
@@ -232,6 +234,7 @@ class ExtractTask extends AppShell {
 		if (!$this->_isPathUsable($this->_output)) {
 			$this->err(__d('cake_console', 'The output directory %s was not found or writable.', $this->_output));
 			$this->_stop();
+            return;
 		}
 
 		$this->_extract();

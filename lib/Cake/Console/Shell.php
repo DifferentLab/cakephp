@@ -459,12 +459,7 @@ class Shell extends CakeObject {
 			return $this->{$command}();
 		}
 		if ($isMain) {
-		    if(!method_exists($this, 'main')) {
-		        throw new InvalidArgumentException('trying to run undefined main function');
-            }
-
-		    $this->main();
-			return;
+			return $this->main();
 		}
 		$this->out($this->OptionParser->help($command));
 		return false;

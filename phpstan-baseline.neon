@@ -1,0 +1,27 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to sprintf contains 0 placeholders, 2 values given\\.$#"
+			count: 5
+			path: lib/Cake/Test/Case/BasicsTest.php
+
+		-
+			message: "#^Result of function stackTrace \\(void\\) is used\\.$#"
+			count: 2
+			path: lib/Cake/Test/Case/BasicsTest.php
+
+		-
+			message: "#^Call to an undefined method ProjectTaskTest\\:\\:markTestAsSkipped\\(\\)\\.$#"
+			count: 1
+			path: lib/Cake/Test/Case/Console/Command/Task/ProjectTaskTest.php
+
+		-
+			message: "#^Access to private property \\$output of parent class PHPUnit_Framework_TestCase\\.$#"
+			count: 43
+			path: lib/Cake/Test/Case/Console/ConsoleOutputTest.php
+
+		-
+			message: "#^Call to an undefined method ViewTest\\:\\:assertPathEquals\\(\\)\\.$#"
+			count: 1
+			path: lib/Cake/Test/Case/View/ViewTest.php
+

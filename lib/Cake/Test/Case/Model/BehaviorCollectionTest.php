@@ -241,6 +241,7 @@ class TestBehavior extends ModelBehavior {
 		$settings = $this->settings[$model->alias];
 		if (!isset($settings['afterDelete']) || $settings['afterDelete'] === 'off') {
 			parent::afterDelete($model);
+			return;
 		}
 		switch ($settings['afterDelete']) {
 			case 'on':
@@ -259,6 +260,7 @@ class TestBehavior extends ModelBehavior {
 		$settings = $this->settings[$model->alias];
 		if (!isset($settings['onError']) || $settings['onError'] === 'off') {
 			parent::onError($model, $error);
+			return;
 		}
 		echo "onError trigger success";
 	}

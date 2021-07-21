@@ -300,6 +300,7 @@ class ControllerTask extends BakeTask {
 		if (!class_exists($modelImport)) {
 			$this->err(__d('cake_console', 'You must have a model for this class to build basic methods. Please try again.'));
 			$this->_stop();
+			return;
 		}
 
 		$modelObj = ClassRegistry::init($currentModelName);
@@ -457,6 +458,7 @@ class ControllerTask extends BakeTask {
 			if ($enteredController === 'q') {
 				$this->out(__d('cake_console', 'Exit'));
 				$this->_stop();
+				return;
 			}
 
 			if (!$enteredController || (int)$enteredController > count($controllers)) {

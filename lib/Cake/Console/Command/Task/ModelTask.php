@@ -969,6 +969,7 @@ class ModelTask extends BakeTask {
 		if (empty($tables)) {
 			$this->err(__d('cake_console', 'Your database does not have any tables.'));
 			$this->_stop();
+            return;
 		}
 		sort($tables);
 		return $tables;
@@ -992,6 +993,7 @@ class ModelTask extends BakeTask {
 			if ($enteredModel === 'q') {
 				$this->out(__d('cake_console', 'Exit'));
 				$this->_stop();
+                return;
 			}
 
 			if (!$enteredModel || (int)$enteredModel > count($this->_modelNames)) {

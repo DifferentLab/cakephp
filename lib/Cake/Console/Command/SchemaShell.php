@@ -211,6 +211,7 @@ class SchemaShell extends AppShell {
 		if (!$Schema) {
 			$this->err(__d('cake_console', 'Schema could not be loaded'));
 			$this->_stop();
+            return;
 		}
 		if (!empty($this->params['write'])) {
 			if ($this->params['write'] == 1) {
@@ -235,9 +236,11 @@ class SchemaShell extends AppShell {
 			if ($File->write($contents)) {
 				$this->out(__d('cake_console', 'SQL dump file created in %s', $File->pwd()));
 				$this->_stop();
+                return;
 			}
 			$this->err(__d('cake_console', 'SQL dump could not be created'));
 			$this->_stop();
+            return;
 		}
 		$this->out($contents);
 		return $contents;
@@ -299,6 +302,7 @@ class SchemaShell extends AppShell {
 			$this->err(__d('cake_console', '- file: %s', $this->Schema->path . DS . $this->Schema->file));
 			$this->err(__d('cake_console', '- name: %s', $this->Schema->name));
 			$this->_stop(2);
+            return;
 		}
 		$table = null;
 		if (isset($this->args[1])) {
@@ -332,6 +336,7 @@ class SchemaShell extends AppShell {
 		if (empty($drop) || empty($create)) {
 			$this->out(__d('cake_console', 'Schema is up to date.'));
 			$this->_stop();
+            return;
 		}
 
 		$this->out("\n" . __d('cake_console', 'The following table(s) will be dropped.'));
@@ -396,6 +401,7 @@ class SchemaShell extends AppShell {
 		if (empty($contents)) {
 			$this->out(__d('cake_console', 'Schema is up to date.'));
 			$this->_stop();
+            return;
 		}
 
 		$this->out("\n" . __d('cake_console', 'The following statements will run.'));

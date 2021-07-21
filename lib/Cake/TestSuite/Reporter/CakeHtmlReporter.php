@@ -160,17 +160,17 @@ class CakeHtmlReporter extends CakeBaseReporter {
 		echo '<div style="padding:0 0 5px;">';
 		echo '<p><strong>Time:</strong> ' . $result->time() . ' seconds</p>';
 		echo '<p><strong>Peak memory:</strong> ' . number_format(memory_get_peak_usage()) . ' bytes</p>';
-		$this->_paintLinks();
+		echo $this->_paintLinks();
 		echo '</div>';
 		if (isset($this->params['codeCoverage']) && $this->params['codeCoverage']) {
 			$coverage = $result->getCodeCoverage();
 			if (method_exists($coverage, 'getSummary')) {
 				$report = $coverage->getSummary();
-				$this->paintCoverage($report);
+				echo $this->paintCoverage($report);
 			}
 			if (method_exists($coverage, 'getData')) {
 				$report = $coverage->getData();
-				$this->paintCoverage($report);
+				echo $this->paintCoverage($report);
 			}
 		}
 		$this->paintDocumentEnd();
@@ -327,7 +327,7 @@ class CakeHtmlReporter extends CakeBaseReporter {
  * @param mixed $test The test that failed.
  * @return void
  */
-	public function paintException($message, $test = null) {
+	public function paintException($message, $test) {
 		ob_start();
 		$trace = $this->_getStackTrace($message);
 		$testName = get_class($test) . '(' . $test->getName() . ')';

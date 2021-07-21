@@ -417,6 +417,7 @@ class ProjectTask extends AppShell {
 					'Configure::write(\'Routing.prefixes\', array(\'admin\'))',
 					'/app/Config/core.php'));
 				$this->_stop();
+                return;
 			}
 			return $admin . '_';
 		}
