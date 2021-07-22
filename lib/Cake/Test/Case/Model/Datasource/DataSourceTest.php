@@ -1,5 +1,5 @@
 <?php
-/**
+/**HttpResponse.php
  * DataSourceTest file
  *
  * CakePHP(tm) Tests <https://book.cakephp.org/2.0/en/development/testing.html>

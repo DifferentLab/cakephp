@@ -15,14 +15,14 @@
  * @since         CakePHP(tm) v 1.2.0.4206
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-App::uses('HttpResponse', 'Network/Http');
+App::uses('HttpSocketResponse', 'Network/Http');
 
 /**
  * TestHttpResponse class
  *
  * @package       Cake.Test.Case.Network.Http
  */
-class TestHttpResponse extends HttpResponse {
+class TestHttpResponse extends HttpSocketResponse {
 
 /**
  * Convenience method for testing protected method

@@ -172,9 +172,9 @@ class HttpSocketResponse implements ArrayAccess {
 		$decoded = $this->_decodeBody($this->body, $transferEncoding);
 		$this->body = $decoded['body'];
 
-		if (!empty($decoded['header'])) {
-			$this->headers = $this->_parseHeader($this->_buildHeader($this->headers) . $this->_buildHeader($decoded['header']));
-		}
+//		if (!empty($decoded['header'])) {
+//			$this->headers = $this->_parseHeader($this->_buildHeader($this->headers) . $this->_buildHeader($decoded['header']));
+//		}
 
 		if (!empty($this->headers)) {
 			$this->cookies = $this->parseCookies($this->headers);
@@ -281,7 +281,7 @@ class HttpSocketResponse implements ArrayAccess {
 
 			// Multi-line header
 			if ($first === ' ' || $first === "\t") {
-				$value .= preg_replace("/\s+/", ' ', $line);
+				$value = preg_replace("/\s+/", ' ', $line);
 				$continuation = true;
 			} elseif (strpos($line, ':') !== false) {
 				list($field, $value) = explode(':', $line, 2);

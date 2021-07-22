@@ -17,7 +17,7 @@
  */
 
 App::uses('HttpSocket', 'Network/Http');
-App::uses('HttpResponse', 'Network/Http');
+App::uses('HttpSocketResponse', 'Network/Http');
 
 /**
  * TestAuthentication class

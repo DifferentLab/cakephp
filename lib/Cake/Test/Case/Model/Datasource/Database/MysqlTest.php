@@ -27,7 +27,6 @@ require_once dirname(dirname(dirname(__FILE__))) . DS . 'models.php';
  * DboMysqlTest class
  *
  * @property MysqlTestModel    $model
- * @property array|int[]|mixed $_debug
  * @property DataSource        $db
  * @property Article2|Model    $Model
  * @property mixed             $startTime
@@ -43,6 +42,7 @@ class MysqlTest extends CakeTestCase {
  */
 	public $autoFixtures = false;
 
+    public $_debug = 1;
 /**
  * fixtures property
  *
@@ -2889,16 +2889,16 @@ SQL;
 /**
  * testDropSchemaNoSchema method
  *
- * @expectedException PHPUnit_Framework_Error
+ * @expectedException PHPUnit\Framework\Error\Error
  * @return void
- * @throws PHPUnit_Framework_Error
+ * @throws PHPUnit\Framework\Error\Error
  */
 	public function testDropSchemaNoSchema() {
 		try {
 			$this->Dbo->dropSchema(null);
 			$this->fail('No exception');
 		} catch (TypeError $e) {
-			throw new PHPUnit_Framework_Error('Raised an error', 100, __FILE__, __LINE__);
+			throw new PHPUnit\Framework\Error\Error('Raised an error', 100, __FILE__, __LINE__);
 		}
 	}
 
@@ -3238,7 +3238,7 @@ SQL;
 /**
  * testBuildColumnBadType method
  *
- * @expectedException PHPUnit_Framework_Error
+ * @expectedException PHPUnit\Framework\Error\Error
  * @return void
  */
 	public function testBuildColumnBadType() {

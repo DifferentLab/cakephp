@@ -2,8 +2,8 @@ version: '3.7'
 
 services:
   cake:
-    image: registry.shiftbase.io/php/cli:7.4.19-buster-r1-dev
-#    build: .
+#    image: registry.shiftbase.io/php/cli:7.4.19-buster-r1-dev
+    build: .
     command:
       - /bin/bash
       - -c
@@ -15,7 +15,7 @@ services:
       - PHP_MEMORY_LIMIT=2G
     volumes:
       - ${PROJECT_ROOT}:/code
-#    working_dir: /code
+    working_dir: /code
   mysql:
     image: mysql:5.7
     volumes:

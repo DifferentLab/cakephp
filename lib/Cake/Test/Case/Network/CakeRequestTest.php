@@ -2485,7 +2485,7 @@ XML;
 			$this->assertEquals(array('Allow' => 'POST, DELETE'), $e->responseHeader());
 		}
 
-		$this->setExpectedException('MethodNotAllowedException');
+		$this->expectException(MethodNotAllowedException::class);
 		$request->allowMethod('POST');
 	}
 

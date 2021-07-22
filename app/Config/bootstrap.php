@@ -110,4 +110,7 @@ CakeLog::config('error', array(
 	'file' => 'error',
 ));
 
+;
+
 require ROOT . DS . 'vendors/autoload.php';
+

@@ -71,21 +71,22 @@ class CacheTest extends CakeTestCase {
 	}
 
 /**
- * testConfigInvalidEngine method
- *
- * @expectedException CacheException
- * @return void
- */
+	 * testConfigInvalidEngine method
+	 *
+	 * @return void
+	 */
 	public function testConfigInvalidEngine() {
+		$this->expectException('CacheException');
 		$settings = array('engine' => 'Imaginary');
 		Cache::config('imaginary', $settings);
 	}
 
 /**
- * Check that no fatal errors are issued doing normal things when Cache.disable is true.
- *
- * @return void
- */
+	 * Check that no fatal errors are issued doing normal things when Cache.disable is true.
+	 *
+	 * @return void
+	 * @doesNotPerformAssertions
+	 */
 	public function testNonFatalErrorsWithCachedisable() {
 		Configure::write('Cache.disable', true);
 		Cache::config('test', array('engine' => 'File', 'path' => TMP, 'prefix' => 'error_test_'));
@@ -126,14 +127,14 @@ class CacheTest extends CakeTestCase {
 	}
 
 /**
- * testInvalidConfig method
- *
- * Test that the cache class doesn't cause fatal errors with a partial path
- *
- * @expectedException PHPUnit_Framework_Error_Warning
- * @return void
- */
+	 * testInvalidConfig method
+	 *
+	 * Test that the cache class doesn't cause fatal errors with a partial path
+	 *
+	 * @return void
+	 */
 	public function testInvalidConfig() {
+		$this->expectException(\PHPUnit\Framework\Error\Warning::class);
 		// In debug mode it would auto create the folder.
 		$debug = Configure::read('debug');
 		Configure::write('debug', 0);
@@ -164,12 +165,12 @@ class CacheTest extends CakeTestCase {
 	}
 
 /**
- * test that trying to configure classes that don't extend CacheEngine fail.
- *
- * @expectedException CacheException
- * @return void
- */
+	 * test that trying to configure classes that don't extend CacheEngine fail.
+	 *
+	 * @return void
+	 */
 	public function testAttemptingToConfigureANonCacheEngineClass() {
+		$this->expectException('CacheException');
 		$this->getMock('StdClass', array(), array(), 'RubbishEngine');
 		Cache::config('Garbage', array(
 			'engine' => 'Rubbish'
@@ -308,12 +309,12 @@ class CacheTest extends CakeTestCase {
 	}
 
 /**
- * testGroupConfigsThrowsException method
- *
- * @expectedException CacheException
- * @return void
- */
+	 * testGroupConfigsThrowsException method
+	 *
+	 * @return void
+	 */
 	public function testGroupConfigsThrowsException() {
+		$this->expectException('CacheException');
 		Cache::groupConfigs('bogus');
 	}
 
@@ -412,7 +413,7 @@ class CacheTest extends CakeTestCase {
 		try {
 			Cache::write('fail', 'value', 'test_trigger');
 			$this->fail('No exception thrown');
-		} catch (PHPUnit_Framework_Error $e) {
+		} catch (\PHPUnit\Framework\Error\Error $e) {
 			$this->assertTrue(true);
 		}
 		Cache::drop('test_trigger');

@@ -156,7 +156,7 @@ class ContainableBehaviorTest extends CakeTestCase {
 /**
  * testInvalidContainments method
  *
- * @expectedException PHPUnit_Framework_Error
+ * @expectedException PHPUnit\Framework\Error\Error
  * @return void
  */
 	public function testInvalidContainments() {
@@ -247,7 +247,7 @@ class ContainableBehaviorTest extends CakeTestCase {
 /**
  * testBeforeFindWithNonExistingBinding method
  *
- * @expectedException PHPUnit_Framework_Error
+ * @expectedException PHPUnit\Framework\Error\Error
  * @return void
  */
 	public function testBeforeFindWithNonExistingBinding() {

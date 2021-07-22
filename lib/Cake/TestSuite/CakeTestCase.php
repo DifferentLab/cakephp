@@ -16,6 +16,8 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
+use PHPUnit\Framework\MockObject\MockObject;
+
 App::uses('CakeFixtureManager', 'TestSuite/Fixture');
 App::uses('CakeTestFixture', 'TestSuite/Fixture');
 
@@ -24,7 +26,7 @@ App::uses('CakeTestFixture', 'TestSuite/Fixture');
  *
  * @package       Cake.TestSuite
  */
-abstract class CakeTestCase extends PHPUnit_Framework_TestCase {
+abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
 
 /**
  * The class responsible for managing the creation, loading and removing of fixtures
@@ -71,11 +73,11 @@ abstract class CakeTestCase extends PHPUnit_Framework_TestCase {
  * If no TestResult object is passed a new one will be created.
  * This method is run for each test method in this class
  *
- * @param PHPUnit_Framework_TestResult $result The test result object
- * @return PHPUnit_Framework_TestResult
+ * @param PHPUnit\Framework\TestResult $result The test result object
+ * @return PHPUnit\Framework\TestResult
  * @throws InvalidArgumentException
  */
-	public function run(PHPUnit_Framework_TestResult $result = null) {
+	public function run(PHPUnit\Framework\TestResult $result = null) {
 		$level = ob_get_level();
 
 		if (!empty($this->fixtureManager)) {
@@ -493,7 +495,7 @@ abstract class CakeTestCase extends PHPUnit_Framework_TestCase {
 				continue;
 			}
 
-			list($description, $expressions, $itemNum) = $assertion;
+			[$description, $expressions, $itemNum] = $assertion;
 			foreach ((array)$expressions as $expression) {
 				if (preg_match(sprintf('/^%s/s', $expression), $string, $match)) {
 					$matches = true;
@@ -647,19 +649,7 @@ abstract class CakeTestCase extends PHPUnit_Framework_TestCase {
 		if (!$expected) {
 			$expected = 'Exception';
 		}
-		$this->setExpectedException($expected, $message);
-	}
-
-/**
- * Compatibility wrapper function for setExpectedException
- *
- * @param mixed $name The name of the expected Exception.
- * @param string $message the text to display if the assertion is not correct
- * @deprecated 3.0.0 This is a compatibility wrapper for 1.x. It will be removed in 3.0.
- * @return void
- */
-	public function expectException($name = 'Exception', $message = null) {
-        $this->setExpectedException($name, $message);
+		$this->expectException($expected, $message);
 	}
 
 /**
@@ -740,7 +730,7 @@ abstract class CakeTestCase extends PHPUnit_Framework_TestCase {
  *   to disable the call to the original class' clone constructor.
  * @param bool $callAutoload The seventh (optional) parameter can be used to
  *   disable __autoload() during the generation of the test double class.
- * @return object
+ * @return MockObject
  * @deprecated Use `getMockBuilder()` or `createMock()` in new unit tests.
  * @see https://phpunit.de/manual/current/en/test-doubles.html
  */
@@ -817,12 +807,6 @@ abstract class CakeTestCase extends PHPUnit_Framework_TestCase {
 		$callOriginalMethods = false,
 		$proxyTarget = null
 	) {
-		$phpUnitVersion = PHPUnit_Runner_Version::id();
-		if (version_compare($phpUnitVersion, '5.7.0', '<')) {
-			return parent::getMock($originalClassName, $methods, $arguments,
-					$mockClassName, $callOriginalConstructor, $callOriginalClone,
-					$callAutoload, $cloneArguments, $callOriginalMethods, $proxyTarget);
-		}
 		if ($cloneArguments) {
 			throw new InvalidArgumentException('$cloneArguments parameter is not supported');
 		}
@@ -856,7 +840,7 @@ abstract class CakeTestCase extends PHPUnit_Framework_TestCase {
 		$defaults = ClassRegistry::config('Model');
 		unset($defaults['ds']);
 
-		list($plugin, $name) = pluginSplit($model, true);
+		[$plugin, $name] = pluginSplit($model, true);
 		App::uses($name, $plugin . 'Model');
 
 		$config = array_merge($defaults, (array)$config, array('name' => $name));

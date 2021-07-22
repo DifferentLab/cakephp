@@ -214,7 +214,7 @@ class CakeEmailTest extends CakeTestCase {
 		$this->assertSame($expected, $this->CakeEmail->from());
 		$this->assertSame($this->CakeEmail, $result);
 
-		$this->setExpectedException('SocketException');
+		$this->expectException('SocketException');
 		$this->CakeEmail->from(array('cake@cakephp.org' => 'CakePHP', 'fail@cakephp.org' => 'From can only be one address'));
 	}
 
@@ -882,7 +882,7 @@ class CakeEmailTest extends CakeTestCase {
 		);
 		$this->assertSame($expected, $this->CakeEmail->attachments());
 
-		$this->setExpectedException('SocketException');
+		$this->expectException('SocketException');
 		$this->CakeEmail->attachments(array(array('nofile' => CAKE . 'basics.php', 'mimetype' => 'text/plain')));
 	}
 
@@ -899,7 +899,7 @@ class CakeEmailTest extends CakeTestCase {
 		$result = $this->CakeEmail->transportClass();
 		$this->assertInstanceOf('DebugTransport', $result);
 
-		$this->setExpectedException('SocketException');
+		$this->expectException('SocketException');
 		$this->CakeEmail->transport('Invalid');
 		$this->CakeEmail->transportClass();
 	}
@@ -910,7 +910,7 @@ class CakeEmailTest extends CakeTestCase {
  * @return void
  */
 	public function testExtendTransport() {
-		$this->setExpectedException('SocketException');
+		$this->expectException('SocketException');
 		$this->CakeEmail->transport('Extend');
 		$this->CakeEmail->transportClass();
 	}
@@ -1071,7 +1071,7 @@ class CakeEmailTest extends CakeTestCase {
 		$this->CakeEmail->to('cake@cakephp.org');
 		$this->CakeEmail->subject('My title');
 		$this->CakeEmail->config(array('empty'));
-		$this->setExpectedException('SocketException');
+		$this->expectException('SocketException');
 		$this->CakeEmail->send("Forgot to set From");
 	}
 
@@ -1085,7 +1085,7 @@ class CakeEmailTest extends CakeTestCase {
 		$this->CakeEmail->from('cake@cakephp.org');
 		$this->CakeEmail->subject('My title');
 		$this->CakeEmail->config(array('empty'));
-		$this->setExpectedException('SocketException');
+		$this->expectException('SocketException');
 		$this->CakeEmail->send("Forgot to set To");
 	}
 
@@ -1727,7 +1727,7 @@ class CakeEmailTest extends CakeTestCase {
 		$this->assertContains('Here is your value: 12345', $result['message']);
 		$this->assertContains('This email was sent using the TestPlugin.', $result['message']);
 
-		$this->setExpectedException('MissingViewException');
+		$this->expectException('MissingViewException');
 		$this->CakeEmail->template('test_plugin_tpl', 'plug_default')->send();
 	}
 
@@ -2098,7 +2098,7 @@ class CakeEmailTest extends CakeTestCase {
 		$result = $this->CakeEmail->emailFormat();
 		$this->assertEquals('html', $result);
 
-		$this->setExpectedException('SocketException');
+		$this->expectException('SocketException');
 		$this->CakeEmail->emailFormat('invalid');
 	}
 
