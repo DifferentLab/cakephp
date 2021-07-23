@@ -103,7 +103,7 @@ class DataSourceTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->Source = $this->getMock(
 			'TestSource',
@@ -128,7 +128,7 @@ class DataSourceTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		unset($this->Model, $this->Source);
 		ConnectionManager::drop($this->sourceName);

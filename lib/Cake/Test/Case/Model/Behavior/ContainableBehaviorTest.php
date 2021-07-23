@@ -51,7 +51,7 @@ class ContainableBehaviorTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->User = ClassRegistry::init('User');
 		$this->Article = ClassRegistry::init('Article');
@@ -77,7 +77,7 @@ class ContainableBehaviorTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		unset($this->Article);
 		unset($this->User);
 		unset($this->Tag);

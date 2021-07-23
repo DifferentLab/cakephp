@@ -42,7 +42,7 @@ class BlowfishAuthenticateTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->Collection = $this->getMock('ComponentCollection');
 		$this->auth = new BlowfishAuthenticate($this->Collection, array(

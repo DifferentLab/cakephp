@@ -106,7 +106,7 @@ class SchemaShellTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		$out = $this->getMock('ConsoleOutput', array(), array(), '', false);
@@ -123,7 +123,7 @@ class SchemaShellTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		if (!empty($this->file) && $this->file instanceof File) {
 			$this->file->delete();

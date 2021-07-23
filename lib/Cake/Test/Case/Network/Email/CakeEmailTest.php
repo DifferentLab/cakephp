@@ -151,7 +151,7 @@ class CakeEmailTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->_configFileExists = true;
@@ -173,7 +173,7 @@ class CakeEmailTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		App::build();
 

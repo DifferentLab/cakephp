@@ -135,7 +135,7 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		if (empty($this->_configure)) {
@@ -154,7 +154,7 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		App::build($this->_pathRestore, App::RESET);
 		if (class_exists('ClassRegistry', false)) {
@@ -187,7 +187,7 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
  *
  * @return void
  */
-	protected function assertPreConditions() {
+	protected function assertPreConditions(): void {
 		parent::assertPreConditions();
 		$this->startTest($this->getName());
 	}
@@ -197,7 +197,7 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
  *
  * @return void
  */
-	protected function assertPostConditions() {
+	protected function assertPostConditions(): void {
 		parent::assertPostConditions();
 		$this->endTest($this->getName());
 	}
@@ -326,7 +326,7 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
 	public function assertTextContains($needle, $haystack, $message = '', $ignoreCase = false) {
 		$needle = str_replace(array("\r\n", "\r"), "\n", $needle);
 		$haystack = str_replace(array("\r\n", "\r"), "\n", $haystack);
-		return $this->assertContains($needle, $haystack, $message, $ignoreCase);
+		return $this->assertStringContainsString($needle, $haystack, $message, $ignoreCase);
 	}
 
 /**
@@ -342,7 +342,7 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
 	public function assertTextNotContains($needle, $haystack, $message = '', $ignoreCase = false) {
 		$needle = str_replace(array("\r\n", "\r"), "\n", $needle);
 		$haystack = str_replace(array("\r\n", "\r"), "\n", $haystack);
-		return $this->assertNotContains($needle, $haystack, $message, $ignoreCase);
+		return $this->assertStringNotContainsString($needle, $haystack, $message, $ignoreCase);
 	}
 
 /**

@@ -38,7 +38,7 @@ class TaskCollectionTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$shell = $this->getMock('Shell', array(), array(), '', false);
 		$dispatcher = $this->getMock('ShellDispatcher', array(), array(), '', false);
@@ -50,7 +50,7 @@ class TaskCollectionTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		unset($this->Tasks);
 		parent::tearDown();
 	}
@@ -83,12 +83,12 @@ class TaskCollectionTest extends CakeTestCase {
 	}
 
 /**
- * test missingtask exception
- *
- * @expectedException MissingTaskException
- * @return void
- */
+	 * test missingtask exception
+	 *
+	 * @return void
+	 */
 	public function testLoadMissingTask() {
+		$this->expectException('MissingTaskException');
 		$this->Tasks->load('ThisTaskShouldAlwaysBeMissing');
 	}
 

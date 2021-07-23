@@ -107,7 +107,7 @@ class RequestHandlerComponentTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->_init();
 	}
@@ -131,7 +131,7 @@ class RequestHandlerComponentTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		unset($this->RequestHandler, $this->Controller);
 		if (!headers_sent()) {

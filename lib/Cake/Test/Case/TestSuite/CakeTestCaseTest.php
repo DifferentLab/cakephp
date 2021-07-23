@@ -76,7 +76,7 @@ class CakeTestCaseTest extends CakeTestCase {
  *
  * @return void
  */
-	public static function setUpBeforeClass() {
+	public static function setupBeforeClass(): void {
 		require_once CAKE . 'Test' . DS . 'Fixture' . DS . 'AssertTagsTestCase.php';
 		require_once CAKE . 'Test' . DS . 'Fixture' . DS . 'FixturizedTestCase.php';
 	}
@@ -86,7 +86,7 @@ class CakeTestCaseTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->Reporter = $this->getMock('CakeHtmlReporter');
 	}
@@ -96,7 +96,7 @@ class CakeTestCaseTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		unset($this->Result);
 		unset($this->Reporter);

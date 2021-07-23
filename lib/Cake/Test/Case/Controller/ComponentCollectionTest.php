@@ -36,7 +36,7 @@ class ComponentCollectionTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->Components = new ComponentCollection();
 	}
@@ -46,7 +46,7 @@ class ComponentCollectionTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		unset($this->Components);
 	}
@@ -115,12 +115,12 @@ class ComponentCollectionTest extends CakeTestCase {
 	}
 
 /**
- * test missingcomponent exception
- *
- * @expectedException MissingComponentException
- * @return void
- */
+	 * test missingcomponent exception
+	 *
+	 * @return void
+	 */
 	public function testLoadMissingComponent() {
+		$this->expectException('MissingComponentException');
 		$this->Components->load('ThisComponentShouldAlwaysBeMissing');
 	}
 

@@ -36,7 +36,7 @@ class ControllerAuthorizeTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->controller = $this->getMock('Controller', array('isAuthorized'), array(), '', false);
 		$this->components = $this->getMock('ComponentCollection');
@@ -48,13 +48,13 @@ class ControllerAuthorizeTest extends CakeTestCase {
 	}
 
 /**
- * testControllerTypeError
- *
- * @expectedException PHPUnit\Framework\Error\Error
- * @return void
- * @throws PHPUnit\Framework\Error\Error
- */
+	 * testControllerTypeError
+	 *
+	 * @return void
+	 * @throws PHPUnit\Framework\Error\Error
+	 */
 	public function testControllerTypeError() {
+		$this->expectException(\PHPUnit\Framework\Error\Error::class);
 		try {
 			$this->auth->controller(new StdClass());
 			$this->fail('No exception thrown');
@@ -64,12 +64,12 @@ class ControllerAuthorizeTest extends CakeTestCase {
 	}
 
 /**
- * testControllerErrorOnMissingMethod
- *
- * @expectedException CakeException
- * @return void
- */
+	 * testControllerErrorOnMissingMethod
+	 *
+	 * @return void
+	 */
 	public function testControllerErrorOnMissingMethod() {
+		$this->expectException('CakeException');
 		$this->auth->controller(new Controller());
 	}
 

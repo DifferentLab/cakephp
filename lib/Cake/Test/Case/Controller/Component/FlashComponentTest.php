@@ -35,7 +35,7 @@ class FlashComponentTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->Components = new ComponentCollection();
 		$this->Flash = new FlashComponent($this->Components);
@@ -46,7 +46,7 @@ class FlashComponentTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		CakeSession::destroy();
 	}

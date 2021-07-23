@@ -29,7 +29,7 @@ class CommandTaskTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		App::build(array(
 			'Plugin' => array(
@@ -56,7 +56,7 @@ class CommandTaskTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		unset($this->CommandTask);
 		CakePlugin::unload();
