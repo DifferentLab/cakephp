@@ -34,22 +34,10 @@ class CakeTestLoader extends PHPUnit\Runner\StandardTestSuiteLoader {
  * @param string $params Additional parameters
  * @return ReflectionClass
  */
-	public function load($filePath, $params = '') {
-		$file = $this->_resolveTestFile($filePath, $params);
-		return parent::load('', $file);
-	}
-
-/**
- * Convert path fragments used by CakePHP's test runner to absolute paths that can be fed to PHPUnit.
- *
- * @param string $filePath The file path to load.
- * @param string $params Additional parameters.
- * @return string Converted path fragments.
- */
-	protected function _resolveTestFile($filePath, $params) {
-		$basePath = $this->_basePath($params) . DS . $filePath;
-		$ending = 'Test.php';
-		return (strpos($basePath, $ending) === (strlen($basePath) - strlen($ending))) ? $basePath : $basePath . $ending;
+	public function load(string $suiteClassName, string $suiteClassFile = ''): ReflectionClass
+    {
+//		$file = $this->_resolveTestFile($suiteClassName, $suiteClassFile);
+		return parent::load('', $suiteClassFile);
 	}
 
 /**

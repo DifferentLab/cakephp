@@ -1,6 +1,11 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Call to an undefined method Shell\\:\\:main\\(\\)\\.$#"
+			count: 1
+			path: lib/Cake/Console/Shell.php
+
+		-
 			message: "#^Call to sprintf contains 0 placeholders, 2 values given\\.$#"
 			count: 5
 			path: lib/Cake/Test/Case/BasicsTest.php
@@ -16,12 +21,87 @@ parameters:
 			path: lib/Cake/Test/Case/Console/Command/Task/ProjectTaskTest.php
 
 		-
-			message: "#^Access to private property \\$output of parent class PHPUnit_Framework_TestCase\\.$#"
-			count: 43
-			path: lib/Cake/Test/Case/Console/ConsoleOutputTest.php
+			message: "#^Undefined variable\\: \\$out$#"
+			count: 2
+			path: lib/Cake/Test/Case/Error/ErrorHandlerTest.php
+
+		-
+			message: "#^Undefined variable\\: \\$wrong$#"
+			count: 1
+			path: lib/Cake/Test/Case/Error/ErrorHandlerTest.php
+
+		-
+			message: "#^Undefined variable\\: \\$buzz$#"
+			count: 1
+			path: lib/Cake/Test/Case/Utility/DebuggerTest.php
+
+		-
+			message: "#^Undefined variable\\: \\$foo$#"
+			count: 3
+			path: lib/Cake/Test/Case/Utility/DebuggerTest.php
+
+		-
+			message: "#^Undefined variable\\: \\$other$#"
+			count: 1
+			path: lib/Cake/Test/Case/Utility/DebuggerTest.php
+
+		-
+			message: "#^Undefined variable\\: \\$out$#"
+			count: 1
+			path: lib/Cake/Test/Case/Utility/DebuggerTest.php
+
+		-
+			message: "#^Undefined variable\\: \\$wrong$#"
+			count: 1
+			path: lib/Cake/Test/Case/Utility/DebuggerTest.php
 
 		-
 			message: "#^Call to an undefined method ViewTest\\:\\:assertPathEquals\\(\\)\\.$#"
 			count: 1
 			path: lib/Cake/Test/Case/View/ViewTest.php
+
+		-
+			message: "#^Call to an undefined method CakeBaseReporter\\:\\:paintException\\(\\)\\.$#"
+			count: 1
+			path: lib/Cake/TestSuite/Reporter/CakeBaseReporter.php
+
+		-
+			message: "#^Call to an undefined method CakeBaseReporter\\:\\:paintFail\\(\\)\\.$#"
+			count: 1
+			path: lib/Cake/TestSuite/Reporter/CakeBaseReporter.php
+
+		-
+			message: "#^Call to an undefined method CakeBaseReporter\\:\\:paintFooter\\(\\)\\.$#"
+			count: 2
+			path: lib/Cake/TestSuite/Reporter/CakeBaseReporter.php
+
+		-
+			message: "#^Call to an undefined method CakeBaseReporter\\:\\:paintHeader\\(\\)\\.$#"
+			count: 1
+			path: lib/Cake/TestSuite/Reporter/CakeBaseReporter.php
+
+		-
+			message: "#^Call to an undefined method CakeBaseReporter\\:\\:paintPass\\(\\)\\.$#"
+			count: 1
+			path: lib/Cake/TestSuite/Reporter/CakeBaseReporter.php
+
+		-
+			message: "#^Call to an undefined method CakeBaseReporter\\:\\:paintSkip\\(\\)\\.$#"
+			count: 2
+			path: lib/Cake/TestSuite/Reporter/CakeBaseReporter.php
+
+		-
+			message: "#^Result of method CakeHtmlReporter\\:\\:_paintLinks\\(\\) \\(void\\) is used\\.$#"
+			count: 1
+			path: lib/Cake/TestSuite/Reporter/CakeHtmlReporter.php
+
+		-
+			message: "#^Result of method CakeHtmlReporter\\:\\:paintCoverage\\(\\) \\(void\\) is used\\.$#"
+			count: 2
+			path: lib/Cake/TestSuite/Reporter/CakeHtmlReporter.php
+
+		-
+			message: "#^Result of method CakeTextReporter\\:\\:paintCoverage\\(\\) \\(void\\) is used\\.$#"
+			count: 1
+			path: lib/Cake/TestSuite/Reporter/CakeTextReporter.php
 

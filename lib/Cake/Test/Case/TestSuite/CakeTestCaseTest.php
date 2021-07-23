@@ -429,7 +429,7 @@ class CakeTestCaseTest extends CakeTestCase {
 		$Post = $this->getMockForModel('Post', array('save'));
 
 		$this->assertNull($Post->save(array()));
-		$this->assertInternalType('array', $Post->find('all'));
+		$this->assertIsArray($Post->find('all'));
 	}
 
 /**

@@ -12,8 +12,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
 //    $parameters->set(Option::PATHS, [__DIR__ . '/lib/Cake/Test', __DIR__ . '/lib/Cake/TestSuite']);
     $parameters->set(Option::PHPSTAN_FOR_RECTOR_PATH, getcwd() . '/phpstan.neon');
-    $containerConfigurator->import(PHPUnitSetList::PHPUNIT_60);
-
+    $containerConfigurator->import(PHPUnitSetList::PHPUNIT_70);
+    $containerConfigurator->import(PHPUnitSetList::PHPUNIT_75);
 //    $containerConfigurator->import(SetList::PHP_80);
 
 };

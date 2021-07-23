@@ -400,7 +400,7 @@ class CakeHtmlReporter extends CakeBaseReporter {
  * @param PHPUnit\Framework\TestSuite $suite The test suite to start.
  * @return void
  */
-	public function startTestSuite(PHPUnit\Framework\TestSuite $suite) {
+	public function startTestSuite(PHPUnit\Framework\TestSuite $suite): void {
 		if (!$this->_headerSent) {
 			$this->paintHeader();
 		}

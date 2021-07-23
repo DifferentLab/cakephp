@@ -23,6 +23,7 @@ if (class_exists('SebastianBergmann\CodeCoverage\CodeCoverage')) {
 	class_alias('SebastianBergmann\CodeCoverage\Exception', 'PHP_CodeCoverage_Exception');
 }
 
+use PHPUnit\Framework\TestResult;
 use SebastianBergmann\CodeCoverage\CodeCoverage as PHP_CodeCoverage;
 
 App::uses('CakeFixtureManager', 'TestSuite/Fixture');
@@ -83,7 +84,7 @@ class CakeTestRunner extends PHPUnit\TextUI\TestRunner {
  *
  * @return PHPUnit\Framework\TestResult
  */
-	protected function createTestResult() {
+	protected function createTestResult(): TestResult {
 		$result = new PHPUnit\Framework\TestResult;
 		if (!empty($this->_params['codeCoverage'])) {
 			if (method_exists($result, 'collectCodeCoverageInformation')) {

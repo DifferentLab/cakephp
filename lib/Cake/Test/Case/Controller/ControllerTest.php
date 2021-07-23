@@ -286,7 +286,7 @@ class TestController extends ControllerTestAppController {
  */
 class TestComponent extends CakeObject {
 
-    private $viewclass;
+    public $viewclass;
 
     /**
  * beforeRedirect method

@@ -77,7 +77,7 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
  * @return PHPUnit\Framework\TestResult
  * @throws InvalidArgumentException
  */
-	public function run(PHPUnit\Framework\TestResult $result = null) {
+	public function run(PHPUnit\Framework\TestResult $result = null): \PHPUnit\Framework\TestResult {
 		$level = ob_get_level();
 
 		if (!empty($this->fixtureManager)) {
