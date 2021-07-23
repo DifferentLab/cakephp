@@ -75,7 +75,7 @@ class CakeBaseReporter extends ResultPrinter {
  * @return mixed
  */
 	public function testCaseList() {
-		$testList = CakeTestLoader::generateTestList($this->params);
+		$testList = CakeTestList::generateTestList($this->params);
 		return $testList;
 	}
 

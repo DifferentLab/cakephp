@@ -345,7 +345,7 @@ class PhpAclTest extends CakeTestCase {
 			),
 		);
 
-		$this->expectError('PHPUnit\Framework\Error\Error', 'cycle detected' /* ... */);
+		$this->expectError();
 		$this->PhpAcl->build($config);
 	}
 

@@ -17,8 +17,9 @@
  */
 
 use PHPUnit\TextUI\Command;
+use PHPUnit\TextUI\TestRunner;
 
-App::uses('CakeTestRunner', 'TestSuite');
+App::uses('CakeTestHook', 'TestSuite');
 App::uses('CakeTestLoader', 'TestSuite');
 App::uses('CakeTestSuite', 'TestSuite');
 App::uses('CakeTestCase', 'TestSuite');
@@ -112,12 +113,12 @@ class CakeTestSuiteCommand extends Command {
 		} else {
 		    $testFile = $this->_resolveTestFile($this->arguments['test'], $this->arguments['testFile']);
 			$suite = $runner->getTest(
-				$this->arguments['test'],
+				'', //$this->arguments['test'],
                 $testFile
 			);
 		}
 
-		if ($this->arguments['listGroups']) {
+        if ($this->arguments['listGroups']) {
 
 			print "Available test group(s):\n";
 
@@ -137,8 +138,10 @@ class CakeTestSuiteCommand extends Command {
 		unset($this->arguments['test']);
 		unset($this->arguments['testFile']);
 
-		try {
-			$result = $runner->doRun($suite, $this->arguments, false);
+        $runner->addExtension(new CakeTestHook($suite, $this->arguments['fixtureManager'] ?? ''));
+
+        try {
+			$result = $runner->doRun($suite, $this->arguments, [],false);
 		} catch (PHPUnit\Framework\Exception $e) {
 			print $e->getMessage() . "\n";
 		}
@@ -163,10 +166,10 @@ class CakeTestSuiteCommand extends Command {
  * Create a runner for the command.
  *
  * @param mixed $loader The loader to be used for the test run.
- * @return CakeTestRunner
+ * @return TestRunner
  */
-	public function getRunner($loader) {
-		return new CakeTestRunner($loader, $this->_params);
+	public function getRunner($loader): TestRunner {
+	    return new TestRunner($loader);
 	}
 
 /**
@@ -183,7 +186,6 @@ class CakeTestSuiteCommand extends Command {
  * Handles output flag used to change printing on webrunner.
  *
  * @param string $reporter The reporter class to use.
- * @return void
  */
 	public function handleReporter($reporter) {
 		$object = null;

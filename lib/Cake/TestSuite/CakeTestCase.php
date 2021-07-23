@@ -230,12 +230,11 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
  * @param string $expected The expected value.
  * @param string $result The actual value.
  * @param string $message The message to use for failure.
- * @return bool
  */
 	public function assertTextNotEquals($expected, $result, $message = '') {
 		$expected = str_replace(array("\r\n", "\r"), "\n", $expected);
 		$result = str_replace(array("\r\n", "\r"), "\n", $result);
-		return $this->assertNotEquals($expected, $result, $message);
+		$this->assertNotEquals($expected, $result, $message);
 	}
 
 /**
@@ -245,12 +244,11 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
  * @param string $expected The expected value.
  * @param string $result The actual value.
  * @param string $message message The message to use for failure.
- * @return bool
  */
 	public function assertTextEquals($expected, $result, $message = '') {
 		$expected = str_replace(array("\r\n", "\r"), "\n", $expected);
 		$result = str_replace(array("\r\n", "\r"), "\n", $result);
-		return $this->assertEquals($expected, $result, $message);
+		$this->assertEquals($expected, $result, $message);
 	}
 
 /**
@@ -260,12 +258,11 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
  * @param string $prefix The prefix to check for.
  * @param string $string The string to search in.
  * @param string $message The message to use for failure.
- * @return bool
  */
 	public function assertTextStartsWith($prefix, $string, $message = '') {
 		$prefix = str_replace(array("\r\n", "\r"), "\n", $prefix);
 		$string = str_replace(array("\r\n", "\r"), "\n", $string);
-		return $this->assertStringStartsWith($prefix, $string, $message);
+		$this->assertStringStartsWith($prefix, $string, $message);
 	}
 
 /**
@@ -275,12 +272,11 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
  * @param string $prefix The prefix to not find.
  * @param string $string The string to search.
  * @param string $message The message to use for failure.
- * @return bool
  */
 	public function assertTextStartsNotWith($prefix, $string, $message = '') {
 		$prefix = str_replace(array("\r\n", "\r"), "\n", $prefix);
 		$string = str_replace(array("\r\n", "\r"), "\n", $string);
-		return $this->assertStringStartsNotWith($prefix, $string, $message);
+		$this->assertStringStartsNotWith($prefix, $string, $message);
 	}
 
 /**
@@ -290,12 +286,11 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
  * @param string $suffix The suffix to find.
  * @param string $string The string to search.
  * @param string $message The message to use for failure.
- * @return bool
  */
 	public function assertTextEndsWith($suffix, $string, $message = '') {
 		$suffix = str_replace(array("\r\n", "\r"), "\n", $suffix);
 		$string = str_replace(array("\r\n", "\r"), "\n", $string);
-		return $this->assertStringEndsWith($suffix, $string, $message);
+		$this->assertStringEndsWith($suffix, $string, $message);
 	}
 
 /**
@@ -305,12 +300,11 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
  * @param string $suffix The suffix to not find.
  * @param string $string The string to search.
  * @param string $message The message to use for failure.
- * @return bool
  */
 	public function assertTextEndsNotWith($suffix, $string, $message = '') {
 		$suffix = str_replace(array("\r\n", "\r"), "\n", $suffix);
 		$string = str_replace(array("\r\n", "\r"), "\n", $string);
-		return $this->assertStringEndsNotWith($suffix, $string, $message);
+		$this->assertStringEndsNotWith($suffix, $string, $message);
 	}
 
 /**
@@ -321,12 +315,11 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
  * @param string $haystack The string to search through.
  * @param string $message The message to display on failure.
  * @param bool $ignoreCase Whether or not the search should be case-sensitive.
- * @return bool
  */
 	public function assertTextContains($needle, $haystack, $message = '', $ignoreCase = false) {
 		$needle = str_replace(array("\r\n", "\r"), "\n", $needle);
 		$haystack = str_replace(array("\r\n", "\r"), "\n", $haystack);
-		return $this->assertStringContainsString($needle, $haystack, $message, $ignoreCase);
+		$this->assertStringContainsString($needle, $haystack, $message, $ignoreCase);
 	}
 
 /**
@@ -337,12 +330,11 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
  * @param string $haystack The string to search through.
  * @param string $message The message to display on failure.
  * @param bool $ignoreCase Whether or not the search should be case-sensitive.
- * @return bool
  */
 	public function assertTextNotContains($needle, $haystack, $message = '', $ignoreCase = false) {
 		$needle = str_replace(array("\r\n", "\r"), "\n", $needle);
 		$haystack = str_replace(array("\r\n", "\r"), "\n", $haystack);
-		return $this->assertStringNotContainsString($needle, $haystack, $message, $ignoreCase);
+		$this->assertStringNotContainsString($needle, $haystack, $message, $ignoreCase);
 	}
 
 /**
@@ -385,7 +377,6 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
  * @param string $string An HTML/XHTML/XML string
  * @param array $expected An array, see above
  * @param string $fullDebug Whether or not more verbose output should be used.
- * @return bool
  */
 	public function assertTags($string, $expected, $fullDebug = false) {
 		$regex = array();
@@ -514,7 +505,6 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
 		}
 
 		$this->assertTrue(true, '%s');
-		return true;
 	}
 
 /**
@@ -560,7 +550,7 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
  * @return void
  */
 	protected static function assertEqual($result, $expected, $message = '') {
-		return static::assertEquals($expected, $result, $message);
+		static::assertEquals($expected, $result, $message);
 	}
 
 /**
@@ -573,7 +563,7 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
  * @return void
  */
 	protected static function assertNotEqual($result, $expected, $message = '') {
-		return static::assertNotEquals($expected, $result, $message);
+		static::assertNotEquals($expected, $result, $message);
 	}
 
 /**
@@ -586,7 +576,7 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
  * @return void
  */
 	protected static function assertPattern($pattern, $string, $message = '') {
-		return static::assertRegExp($pattern, $string, $message);
+		static::assertRegExp($pattern, $string, $message);
 	}
 
 /**
@@ -599,7 +589,7 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
  * @return void
  */
 	protected static function assertIdentical($actual, $expected, $message = '') {
-		return static::assertSame($expected, $actual, $message);
+		static::assertSame($expected, $actual, $message);
 	}
 
 /**
@@ -612,7 +602,7 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
  * @return void
  */
 	protected static function assertNotIdentical($actual, $expected, $message = '') {
-		return static::assertNotSame($expected, $actual, $message);
+		static::assertNotSame($expected, $actual, $message);
 	}
 
 /**
@@ -625,7 +615,7 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
  * @return void
  */
 	protected static function assertNoPattern($pattern, $string, $message = '') {
-		return static::assertNotRegExp($pattern, $string, $message);
+		static::assertNotRegExp($pattern, $string, $message);
 	}
 
 /**
@@ -638,21 +628,6 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
 	}
 
 /**
- * Compatibility wrapper function for setExpectedException
- *
- * @param mixed $expected the name of the Exception or error
- * @param string $message the text to display if the assertion is not correct
- * @deprecated 3.0.0 This is a compatibility wrapper for 1.x. It will be removed in 3.0
- * @return void
- */
-	protected function expectError($expected = false, $message = '') {
-		if (!$expected) {
-			$expected = 'Exception';
-		}
-		$this->expectException($expected, $message);
-	}
-
-/**
  * Compatibility wrapper function for assertSame
  *
  * @param mixed $first
@@ -662,7 +637,7 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
  * @return void
  */
 	protected static function assertReference(&$first, &$second, $message = '') {
-		return static::assertSame($first, $second, $message);
+		static::assertSame($first, $second, $message);
 	}
 
 /**
@@ -675,7 +650,7 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
  * @return void
  */
 	protected static function assertIsA($object, $type, $message = '') {
-		return static::assertInstanceOf($type, $object, $message);
+		static::assertInstanceOf($type, $object, $message);
 	}
 
 /**
@@ -690,7 +665,7 @@ abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
 	protected static function assertWithinMargin($result, $expected, $margin, $message = '') {
 		$upper = $result + $margin;
 		$lower = $result - $margin;
-		return static::assertTrue((($expected <= $upper) && ($expected >= $lower)), $message);
+		static::assertTrue((($expected <= $upper) && ($expected >= $lower)), $message);
 	}
 
 /**

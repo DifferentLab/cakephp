@@ -274,7 +274,7 @@ class CakeTestSuiteDispatcher {
 
 		try {
 			static::time();
-			$command = new CakeTestSuiteCommand('CakeTestLoader', $commandArgs);
+			$command = new CakeTestSuiteCommand(PHPUnit\Runner\StandardTestSuiteLoader::class, $commandArgs);
 			$command->run($options);
 		} catch (MissingConnectionException $exception) {
 			ob_end_clean();

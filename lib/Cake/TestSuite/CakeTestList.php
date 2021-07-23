@@ -25,20 +25,7 @@
  *
  * @package Cake.TestSuite
  */
-class CakeTestLoader extends PHPUnit\Runner\StandardTestSuiteLoader {
-
-/**
- * Load a file and find the first test case / suite in that file.
- *
- * @param string $filePath The file path to load
- * @param string $params Additional parameters
- * @return ReflectionClass
- */
-	public function load(string $suiteClassName, string $suiteClassFile = ''): ReflectionClass
-    {
-//		$file = $this->_resolveTestFile($suiteClassName, $suiteClassFile);
-		return parent::load('', $suiteClassFile);
-	}
+class CakeTestList {
 
 /**
  * Generates the base path to a set of tests based on the parameters.

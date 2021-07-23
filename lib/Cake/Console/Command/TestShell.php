@@ -20,7 +20,7 @@
 App::uses('Shell', 'Console');
 App::uses('CakeTestSuiteDispatcher', 'TestSuite');
 App::uses('CakeTestSuiteCommand', 'TestSuite');
-App::uses('CakeTestLoader', 'TestSuite');
+App::uses('CakeTestList', 'TestSuite');
 
 /**
  * Provides a CakePHP wrapper around PHPUnit.
@@ -280,7 +280,7 @@ class TestShell extends Shell {
 		restore_error_handler();
 		restore_error_handler();
 
-		$testCli = new CakeTestSuiteCommand('CakeTestLoader', $runnerArgs);
+		$testCli = new CakeTestSuiteCommand(PHPUnit\Runner\StandardTestSuiteLoader::class, $runnerArgs);
 		$testCli->run($options);
 	}
 
@@ -291,7 +291,7 @@ class TestShell extends Shell {
  */
 	public function available() {
 		$params = $this->_parseArgs();
-		$testCases = CakeTestLoader::generateTestList($params);
+		$testCases = CakeTestList::generateTestList($params);
 		$app = isset($params['app']) ? $params['app'] : null;
 		$plugin = isset($params['plugin']) ? $params['plugin'] : null;
 
