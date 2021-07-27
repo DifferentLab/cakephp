@@ -402,13 +402,13 @@ class ViewTest extends CakeTestCase {
 	}
 
 /**
- * Test that plugin files with absolute file paths are scoped
- * to the plugin and do now allow any file path.
- *
- * @expectedException MissingViewException
- * @return void
- */
+	 * Test that plugin files with absolute file paths are scoped
+	 * to the plugin and do now allow any file path.
+	 *
+	 * @return void
+	 */
 	public function testPluginGetTemplateAbsoluteFail() {
+		$this->expectException(\MissingViewException::class);
 		$this->Controller->viewPath = 'Pages';
 		$this->Controller->action = 'display';
 		$this->Controller->params['pass'] = array('home');
@@ -618,12 +618,12 @@ class ViewTest extends CakeTestCase {
 	}
 
 /**
- * Test for missing views
- *
- * @expectedException MissingViewException
- * @return void
- */
+	 * Test for missing views
+	 *
+	 * @return void
+	 */
 	public function testMissingView() {
+		$this->expectException(\MissingViewException::class);
 		$this->Controller->plugin = null;
 		$this->Controller->name = 'Pages';
 		$this->Controller->viewPath = 'Pages';
@@ -635,12 +635,12 @@ class ViewTest extends CakeTestCase {
 	}
 
 /**
- * Test for missing theme views
- *
- * @expectedException MissingViewException
- * @return void
- */
+	 * Test for missing theme views
+	 *
+	 * @return void
+	 */
 	public function testMissingThemeView() {
+		$this->expectException(\MissingViewException::class);
 		$this->ThemeController->plugin = null;
 		$this->ThemeController->name = 'Pages';
 		$this->ThemeController->viewPath = 'Pages';
@@ -654,12 +654,12 @@ class ViewTest extends CakeTestCase {
 	}
 
 /**
- * Test for missing layouts
- *
- * @expectedException MissingLayoutException
- * @return void
- */
+	 * Test for missing layouts
+	 *
+	 * @return void
+	 */
 	public function testMissingLayout() {
+		$this->expectException(\MissingLayoutException::class);
 		$this->Controller->plugin = null;
 		$this->Controller->name = 'Posts';
 		$this->Controller->viewPath = 'Posts';
@@ -670,12 +670,12 @@ class ViewTest extends CakeTestCase {
 	}
 
 /**
- * Test for missing theme layouts
- *
- * @expectedException MissingLayoutException
- * @return void
- */
+	 * Test for missing theme layouts
+	 *
+	 * @return void
+	 */
 	public function testMissingThemeLayout() {
+		$this->expectException(\MissingLayoutException::class);
 		$this->ThemeController->plugin = null;
 		$this->ThemeController->name = 'Posts';
 		$this->ThemeController->viewPath = 'posts';
@@ -771,32 +771,32 @@ class ViewTest extends CakeTestCase {
 	}
 
 /**
- * Test elementInexistent method
- *
- * @expectedException PHPUnit\Framework\Error\Notice
- * @return void
- */
+	 * Test elementInexistent method
+	 *
+	 * @return void
+	 */
 	public function testElementInexistent() {
+		$this->expectException(\PHPUnit\Framework\Error\Notice::class);
 		$this->View->element('non_existent_element');
 	}
 
 /**
- * Test elementInexistent2 method
- *
- * @expectedException PHPUnit\Framework\Error\Notice
- * @return void
- */
+	 * Test elementInexistent2 method
+	 *
+	 * @return void
+	 */
 	public function testElementInexistent2() {
+		$this->expectException(\PHPUnit\Framework\Error\Notice::class);
 		$this->View->element('TestPlugin.plugin_element', array(), array('plugin' => 'test_plugin'));
 	}
 
 /**
- * Test elementInexistent3 method
- *
- * @expectedException PHPUnit\Framework\Error\Notice
- * @return void
- */
+	 * Test elementInexistent3 method
+	 *
+	 * @return void
+	 */
 	public function testElementInexistent3() {
+		$this->expectException(\PHPUnit\Framework\Error\Notice::class);
 		$this->View->element('test_plugin.plugin_element');
 	}
 
@@ -1338,12 +1338,12 @@ class ViewTest extends CakeTestCase {
 	}
 
 /**
- * testBadExt method
- *
- * @expectedException MissingViewException
- * @return void
- */
+	 * testBadExt method
+	 *
+	 * @return void
+	 */
 	public function testBadExt() {
+		$this->expectException(\MissingViewException::class);
 		$this->PostsController->action = 'something';
 		$this->PostsController->ext = '.whatever';
 
@@ -1364,12 +1364,12 @@ class ViewTest extends CakeTestCase {
 	}
 
 /**
- * testAltBadExt method
- *
- * @expectedException MissingViewException
- * @return void
- */
+	 * testAltBadExt method
+	 *
+	 * @return void
+	 */
 	public function testAltBadExt() {
+		$this->expectException(\MissingViewException::class);
 		$View = new TestView($this->PostsController);
 		$View->render('alt_ext');
 	}
@@ -1674,7 +1674,7 @@ class ViewTest extends CakeTestCase {
 			$this->fail('No exception');
 		} catch (CakeException $e) {
 			ob_end_clean();
-			$this->assertContains('The "no_close" block was left open', $e->getMessage());
+			$this->assertStringContainsString('The "no_close" block was left open', $e->getMessage());
 		}
 	}
 

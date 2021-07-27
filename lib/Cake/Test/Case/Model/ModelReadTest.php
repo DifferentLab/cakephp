@@ -514,12 +514,12 @@ class ModelReadTest extends BaseModelTest {
 	}
 
 /**
- * testParameterMismatch method
- *
- * @expectedException PDOException
- * @return void
- */
+	 * testParameterMismatch method
+	 *
+	 * @return void
+	 */
 	public function testParameterMismatch() {
+		$this->expectException(\PDOException::class);
 		$this->skipIf($this->db instanceof Sqlite, 'Sqlite does not accept real prepared statements, no way to check this');
 		$this->loadFixtures('Article', 'User', 'Tag', 'ArticlesTag');
 		$Article = new Article();
@@ -533,12 +533,12 @@ class ModelReadTest extends BaseModelTest {
 	}
 
 /**
- * testVeryStrangeUseCase method
- *
- * @expectedException PDOException
- * @return void
- */
+	 * testVeryStrangeUseCase method
+	 *
+	 * @return void
+	 */
 	public function testVeryStrangeUseCase() {
+		$this->expectException(\PDOException::class);
 		$this->loadFixtures('Article', 'User', 'Tag', 'ArticlesTag');
 		$Article = new Article();
 
@@ -5409,12 +5409,12 @@ class ModelReadTest extends BaseModelTest {
 	}
 
 /**
- * testCallbackSourceChangeUnknownDatasource method
- *
- * @expectedException MissingDatasourceConfigException
- * @return void
- */
+	 * testCallbackSourceChangeUnknownDatasource method
+	 *
+	 * @return void
+	 */
 	public function testCallbackSourceChangeUnknownDatasource() {
+		$this->expectException(\MissingDatasourceConfigException::class);
 		$this->loadFixtures('Post', 'Author');
 		$TestModel = new Post();
 		$this->assertFalse($TestModel->find('all', array('connection' => 'foo')));

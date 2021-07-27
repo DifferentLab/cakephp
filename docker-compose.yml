@@ -2,8 +2,10 @@ version: '3.7'
 
 services:
   php8:
-    image: registry.shiftbase.io/php/cli:8.0.6-buster-r1
-    #    build: .
+#    image: registry.shiftbase.io/php/cli:8.0.6-buster-r1
+    build:
+      context: .
+      dockerfile: Dockerfile-php8
     command:
       - /bin/bash
       - -c
@@ -15,10 +17,12 @@ services:
       - PHP_MEMORY_LIMIT=2G
     volumes:
       - .:/code
-#    working_dir: /code
+    working_dir: /code
   php7:
-    image: registry.shiftbase.io/php/cli:7.4.19-buster-r1-dev
-    #    build: .
+#    image: registry.shiftbase.io/php/cli:7.4.19-buster-r1-dev
+    build:
+      context: .
+      dockerfile: Dockerfile-php7
     command:
       - /bin/bash
       - -c
@@ -30,7 +34,7 @@ services:
       - PHP_MEMORY_LIMIT=2G
     volumes:
       - .:/code
-#    working_dir: /code
+    working_dir: /code
   mysql:
     image: mysql:5.7
     ports:

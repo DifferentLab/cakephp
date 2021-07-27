@@ -966,7 +966,7 @@ TEXT;
 		$this->Shell->log_something();
 		$this->assertTrue(file_exists(LOGS . 'error.log'));
 		$contents = file_get_contents(LOGS . 'error.log');
-		$this->assertContains($this->Shell->testMessage, $contents);
+		$this->assertStringContainsString($this->Shell->testMessage, $contents);
 
 		CakeLog::enable('stdout');
 		CakeLog::enable('stderr');
@@ -1013,12 +1013,12 @@ TEXT;
 	}
 
 /**
- * Test getting an invalid helper
- *
- * @expectedException RunTimeException
- * @return void
- */
+	 * Test getting an invalid helper
+	 *
+	 * @return void
+	 */
 	public function testGetInvalidHelper() {
+		$this->expectException(\RunTimeException::class);
 		$this->Shell->helper("tomato");
 	}
 

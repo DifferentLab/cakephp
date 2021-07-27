@@ -633,7 +633,7 @@ TEXT;
  */
 	public function testExportVarRecursion() {
 		$output = Debugger::exportVar($GLOBALS);
-		$this->assertContains("'GLOBALS' => [recursion]", $output);
+		$this->assertStringContainsString("'GLOBALS' => [recursion]", $output);
 	}
 
 /**

@@ -393,8 +393,8 @@ class CakeTestCaseTest extends CakeTestCase {
  */
 	public function testAssertTextContains() {
 		$stringDirty = "some\nstring\r\nwith\rdifferent\nline endings!";
-		$this->assertContains("different", $stringDirty);
-		$this->assertNotContains("different\rline", $stringDirty);
+		$this->assertStringContainsString("different", $stringDirty);
+		$this->assertStringNotContainsString("different\rline", $stringDirty);
 		$this->assertTextContains("different\rline", $stringDirty);
 	}
 
@@ -519,13 +519,13 @@ class CakeTestCaseTest extends CakeTestCase {
 	}
 
 /**
- * testGetMockForModelDoesNotExist
- *
- * @expectedException MissingModelException
- * @expectedExceptionMessage Model IDoNotExist could not be found
- * @return void
- */
+	 * testGetMockForModelDoesNotExist
+	 *
+	 * @return void
+	 */
 	public function testGetMockForModelDoesNotExist() {
+		$this->expectException(\MissingModelException::class);
+		$this->expectExceptionMessage('Model IDoNotExist could not be found');
 		$this->getMockForModel('IDoNotExist');
 	}
 }

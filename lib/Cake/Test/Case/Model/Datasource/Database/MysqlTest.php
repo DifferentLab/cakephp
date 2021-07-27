@@ -172,7 +172,7 @@ class MysqlTest extends CakeTestCase {
 		$this->assertEquals('1234567.11', $result);
 
 		$result = $this->db->value(123456.45464748, 'float');
-		$this->assertContains('123456.454647', $result);
+		$this->assertStringContainsString('123456.454647', $result);
 
 		$result = $this->db->value(0.987654321, 'float');
 		$this->assertEquals('0.987654321', (string)$result);
@@ -558,10 +558,10 @@ class MysqlTest extends CakeTestCase {
 				'group2' => array('type' => 'integer', 'null' => true)
 		)));
 		$result = $this->Dbo->createSchema($schemaA);
-		$this->assertContains('`id` int(11) DEFAULT 0 NOT NULL,', $result);
-		$this->assertContains('`name` varchar(50) NOT NULL,', $result);
-		$this->assertContains('`group1` int(11) DEFAULT NULL', $result);
-		$this->assertContains('`group2` int(11) DEFAULT NULL', $result);
+		$this->assertStringContainsString('`id` int(11) DEFAULT 0 NOT NULL,', $result);
+		$this->assertStringContainsString('`name` varchar(50) NOT NULL,', $result);
+		$this->assertStringContainsString('`group1` int(11) DEFAULT NULL', $result);
+		$this->assertStringContainsString('`group2` int(11) DEFAULT NULL', $result);
 
 		//Test that the string is syntactically correct
 		$query = $this->Dbo->getConnection()->prepare($result);
@@ -902,7 +902,7 @@ SQL;
 			'testdescribes' => $result
 		));
 		$result = $this->Dbo->createSchema($schema);
-		$this->assertContains('`limit_date` timestamp NOT NULL,', $result);
+		$this->assertStringContainsString('`limit_date` timestamp NOT NULL,', $result);
 	}
 
 /**
@@ -1013,8 +1013,8 @@ SQL;
 		));
 
 		$result = $this->Dbo->createSchema($schema);
-		$this->assertContains('`role_id` int(11) NOT NULL,', $result);
-		$this->assertContains('`user_id` int(11) NOT NULL,', $result);
+		$this->assertStringContainsString('`role_id` int(11) NOT NULL,', $result);
+		$this->assertStringContainsString('`user_id` int(11) NOT NULL,', $result);
 	}
 
 /**
@@ -1032,8 +1032,8 @@ SQL;
 			)
 		);
 		$result = $this->Dbo->createSchema($schema, 'no_indexes');
-		$this->assertContains('PRIMARY KEY  (`id`)', $result);
-		$this->assertNotContains('UNIQUE KEY', $result);
+		$this->assertStringContainsString('PRIMARY KEY  (`id`)', $result);
+		$this->assertStringNotContainsString('UNIQUE KEY', $result);
 
 		$schema->tables = array(
 			'primary_index' => array(
@@ -1046,8 +1046,8 @@ SQL;
 			)
 		);
 		$result = $this->Dbo->createSchema($schema, 'primary_index');
-		$this->assertContains('PRIMARY KEY  (`id`)', $result);
-		$this->assertContains('UNIQUE KEY `some_index` (`data`)', $result);
+		$this->assertStringContainsString('PRIMARY KEY  (`id`)', $result);
+		$this->assertStringContainsString('UNIQUE KEY `some_index` (`data`)', $result);
 
 		$schema->tables = array(
 			'primary_flag_has_index' => array(
@@ -1059,8 +1059,8 @@ SQL;
 			)
 		);
 		$result = $this->Dbo->createSchema($schema, 'primary_flag_has_index');
-		$this->assertContains('PRIMARY KEY  (`id`)', $result);
-		$this->assertContains('UNIQUE KEY `some_index` (`data`)', $result);
+		$this->assertStringContainsString('PRIMARY KEY  (`id`)', $result);
+		$this->assertStringContainsString('UNIQUE KEY `some_index` (`data`)', $result);
 	}
 
 /**
@@ -2887,13 +2887,13 @@ SQL;
 	}
 
 /**
- * testDropSchemaNoSchema method
- *
- * @expectedException PHPUnit\Framework\Error\Error
- * @return void
- * @throws PHPUnit\Framework\Error\Error
- */
+	 * testDropSchemaNoSchema method
+	 *
+	 * @return void
+	 * @throws PHPUnit\Framework\Error\Error
+	 */
 	public function testDropSchemaNoSchema() {
+		$this->expectException(\PHPUnit\Framework\Error\Error::class);
 		try {
 			$this->Dbo->dropSchema(null);
 			$this->fail('No exception');
@@ -3236,12 +3236,12 @@ SQL;
 	}
 
 /**
- * testBuildColumnBadType method
- *
- * @expectedException PHPUnit\Framework\Error\Error
- * @return void
- */
+	 * testBuildColumnBadType method
+	 *
+	 * @return void
+	 */
 	public function testBuildColumnBadType() {
+		$this->expectException(\PHPUnit\Framework\Error\Error::class);
 		$data = array(
 			'name' => 'testName',
 			'type' => 'varchar(255)',
@@ -3983,10 +3983,10 @@ SQL;
 	}
 
 /**
- * @expectedException MissingConnectionException
- * @return void
- */
+	 * @return void
+	 */
 	public function testExceptionOnBrokenConnection() {
+		$this->expectException(\MissingConnectionException::class);
 		new Mysql(array(
 			'driver' => 'mysql',
 			'host' => 'imaginary_host',

@@ -305,7 +305,8 @@ class CookieComponentTest extends CakeTestCase {
 			'httpOnly' => false);
 		$result = $this->Controller->response->cookie($this->Cookie->name . '[Testing]');
 
-		$this->assertEquals($future->format('U'), $result['expire'], '', 3);
+		$this->assertEquals($future->format('U'), $result['expire'], '');
+		$this->assertEqualsWithDelta($future->format('U'), $result['expire'], 3, '');
 		unset($result['expire']);
 
 		$this->assertEquals($expected, $result);

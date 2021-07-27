@@ -334,35 +334,35 @@ class CakeEmailTest extends CakeTestCase {
 	}
 
 /**
- * testBuildInvalidData
- *
- * @expectedException SocketException
- * @expectedExceptionMessage The email set for "_to" is empty.
- * @return void
- */
+	 * testBuildInvalidData
+	 *
+	 * @return void
+	 */
 	public function testInvalidEmail() {
+		$this->expectException(\SocketException::class);
+		$this->expectExceptionMessage('The email set for "_to" is empty.');
 		$this->CakeEmail->to('');
 	}
 
 /**
- * testBuildInvalidData
- *
- * @expectedException SocketException
- * @expectedExceptionMessage Invalid email set for "_from". You passed "cake.@"
- * @return void
- */
+	 * testBuildInvalidData
+	 *
+	 * @return void
+	 */
 	public function testInvalidFrom() {
+		$this->expectException(\SocketException::class);
+		$this->expectExceptionMessage('Invalid email set for "_from". You passed "cake.@"');
 		$this->CakeEmail->from('cake.@');
 	}
 
 /**
- * testBuildInvalidData
- *
- * @expectedException SocketException
- * @expectedExceptionMessage Invalid email set for "_to". You passed "1"
- * @return void
- */
+	 * testBuildInvalidData
+	 *
+	 * @return void
+	 */
 	public function testInvalidEmailAdd() {
+		$this->expectException(\SocketException::class);
+		$this->expectExceptionMessage('Invalid email set for "_to". You passed "1"');
 		$this->CakeEmail->addTo('1');
 	}
 
@@ -431,14 +431,13 @@ class CakeEmailTest extends CakeTestCase {
 	}
 
 /**
- * Tests that it is possible to unset the email pattern and make use of filter_var() instead.
- *
- * @return void
- *
- * @expectedException SocketException
- * @expectedExceptionMessage Invalid email set for "_to". You passed "fail.@example.com"
- */
+	 * Tests that it is possible to unset the email pattern and make use of filter_var() instead.
+	 *
+	 * @return void
+	 */
 	public function testUnsetEmailPattern() {
+		$this->expectException(\SocketException::class);
+		$this->expectExceptionMessage('Invalid email set for "_to". You passed "fail.@example.com"');
 		$email = new CakeEmail();
 		$this->assertSame(CakeEmail::EMAIL_PATTERN, $email->emailPattern());
 
@@ -593,12 +592,12 @@ class CakeEmailTest extends CakeTestCase {
 	}
 
 /**
- * testMessageIdInvalid method
- *
- * @return void
- * @expectedException SocketException
- */
+	 * testMessageIdInvalid method
+	 *
+	 * @return void
+	 */
 	public function testMessageIdInvalid() {
+		$this->expectException(\SocketException::class);
 		$this->CakeEmail->messageId('my-email@localhost');
 	}
 
@@ -775,24 +774,24 @@ class CakeEmailTest extends CakeTestCase {
 	}
 
 /**
- * testInvalidHeaders
- *
- * @dataProvider invalidHeaders
- * @expectedException SocketException
- * @return void
- */
+	 * testInvalidHeaders
+	 *
+	 * @dataProvider invalidHeaders
+	 * @return void
+	 */
 	public function testInvalidHeaders($value) {
+		$this->expectException(\SocketException::class);
 		$this->CakeEmail->setHeaders($value);
 	}
 
 /**
- * testInvalidAddHeaders
- *
- * @dataProvider invalidHeaders
- * @expectedException SocketException
- * @return void
- */
+	 * testInvalidAddHeaders
+	 *
+	 * @dataProvider invalidHeaders
+	 * @return void
+	 */
 	public function testInvalidAddHeaders($value) {
+		$this->expectException(\SocketException::class);
 		$this->CakeEmail->addHeaders($value);
 	}
 
@@ -1752,8 +1751,8 @@ class CakeEmailTest extends CakeTestCase {
 		$message = $this->CakeEmail->message();
 		$boundary = $this->CakeEmail->getBoundary();
 		$this->assertFalse(empty($boundary));
-		$this->assertContains('--' . $boundary, $message);
-		$this->assertContains('--' . $boundary . '--', $message);
+		$this->assertStringContainsString('--' . $boundary, $message);
+		$this->assertStringContainsString('--' . $boundary . '--', $message);
 
 		$this->CakeEmail->attachments(array('fake.php' => __FILE__));
 		$this->CakeEmail->send();
@@ -1761,10 +1760,10 @@ class CakeEmailTest extends CakeTestCase {
 		$message = $this->CakeEmail->message();
 		$boundary = $this->CakeEmail->getBoundary();
 		$this->assertFalse(empty($boundary));
-		$this->assertContains('--' . $boundary, $message);
-		$this->assertContains('--' . $boundary . '--', $message);
-		$this->assertContains('--alt-' . $boundary, $message);
-		$this->assertContains('--alt-' . $boundary . '--', $message);
+		$this->assertStringContainsString('--' . $boundary, $message);
+		$this->assertStringContainsString('--' . $boundary . '--', $message);
+		$this->assertStringContainsString('--alt-' . $boundary, $message);
+		$this->assertStringContainsString('--alt-' . $boundary . '--', $message);
 	}
 
 /**
@@ -1848,14 +1847,14 @@ class CakeEmailTest extends CakeTestCase {
 		$this->CakeEmail->send();
 
 		$expected = '<p>This email was sent using the <a href="https://cakephp.org">CakePHP Framework</a></p>';
-		$this->assertContains($expected, $this->CakeEmail->message(CakeEmail::MESSAGE_HTML));
+		$this->assertStringContainsString($expected, $this->CakeEmail->message(CakeEmail::MESSAGE_HTML));
 
 		$expected = 'This email was sent using the CakePHP Framework, https://cakephp.org.';
-		$this->assertContains($expected, $this->CakeEmail->message(CakeEmail::MESSAGE_TEXT));
+		$this->assertStringContainsString($expected, $this->CakeEmail->message(CakeEmail::MESSAGE_TEXT));
 
 		$message = $this->CakeEmail->message();
-		$this->assertContains('Content-Type: text/plain; charset=UTF-8', $message);
-		$this->assertContains('Content-Type: text/html; charset=UTF-8', $message);
+		$this->assertStringContainsString('Content-Type: text/plain; charset=UTF-8', $message);
+		$this->assertStringContainsString('Content-Type: text/html; charset=UTF-8', $message);
 
 		// UTF-8 is 8bit
 		$this->assertTrue($this->_checkContentTransferEncoding($message, '8bit'));
@@ -1863,8 +1862,8 @@ class CakeEmailTest extends CakeTestCase {
 		$this->CakeEmail->charset = 'ISO-2022-JP';
 		$this->CakeEmail->send();
 		$message = $this->CakeEmail->message();
-		$this->assertContains('Content-Type: text/plain; charset=ISO-2022-JP', $message);
-		$this->assertContains('Content-Type: text/html; charset=ISO-2022-JP', $message);
+		$this->assertStringContainsString('Content-Type: text/plain; charset=ISO-2022-JP', $message);
+		$this->assertStringContainsString('Content-Type: text/html; charset=ISO-2022-JP', $message);
 
 		// ISO-2022-JP is 7bit
 		$this->assertTrue($this->_checkContentTransferEncoding($message, '7bit'));
