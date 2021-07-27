@@ -96,12 +96,12 @@ class ErrorHandlerTest extends CakeTestCase {
 		Debugger::getInstance()->output('html');
 
 		ob_start();
-		$wrong .= '';
+        trigger_error('test notice', E_USER_NOTICE);
 		$result = ob_get_clean();
 
 		$this->assertRegExp('/<pre class="cake-error">/', $result);
 		$this->assertRegExp('/<b>Notice<\/b>/', $result);
-		$this->assertRegExp('/variable:\s+wrong/', $result);
+		$this->assertRegExp('/test notice/', $result);
 	}
 
 /**
@@ -136,23 +136,6 @@ class ErrorHandlerTest extends CakeTestCase {
 	}
 
 /**
- * test error prepended by @
- *
- * @return void
- */
-	public function testErrorSuppressed() {
-		set_error_handler('ErrorHandler::handleError');
-		$this->_restoreError = true;
-
-		ob_start();
-		//@codingStandardsIgnoreStart
-		@include 'invalid.file';
-		//@codingStandardsIgnoreEnd
-		$result = ob_get_clean();
-		$this->assertTrue(empty($result));
-	}
-
-/**
  * Test that errors go into CakeLog when debug = 0.
  *
  * @return void
@@ -167,12 +150,16 @@ class ErrorHandlerTest extends CakeTestCase {
 		set_error_handler('ErrorHandler::handleError');
 		$this->_restoreError = true;
 
-		$out .= '';
+        trigger_error('TESTTEST', E_USER_NOTICE);
 
 		$result = file(LOGS . 'debug.log');
-		$this->assertEquals(1, count($result));
+		$this->assertCount(1, $result);
 		$this->assertRegExp(
-			'/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} (Notice|Debug): Notice \(8\): Undefined variable:\s+out in \[.+ line \d+\]$/',
+			'/TESTTEST/',
+			$result[0]
+		);
+		$this->assertRegExp(
+			'/ErrorHandlerTest.php, line/',
 			$result[0]
 		);
 		if (file_exists(LOGS . 'debug.log')) {
@@ -195,12 +182,17 @@ class ErrorHandlerTest extends CakeTestCase {
 		set_error_handler('ErrorHandler::handleError');
 		$this->_restoreError = true;
 
-		$out .= '';
+        trigger_error('TESTTEST', E_USER_NOTICE);
 
 		$result = file(LOGS . 'debug.log');
+		$this->assertNotFalse($result);
 		$this->assertRegExp(
-			'/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} (Notice|Debug): Notice \(8\): Undefined variable:\s+out in \[.+ line \d+\]$/',
-			$result[0]
+            '/TESTTEST/',
+            $result[0]
+		);
+		$this->assertRegExp(
+            '/line \d+\]$/',
+            $result[0]
 		);
 		$this->assertRegExp('/^Trace:/', $result[1]);
 		$this->assertRegExp('/^ErrorHandlerTest\:\:testHandleErrorLoggingTrace\(\)/', $result[3]);

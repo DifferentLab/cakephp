@@ -26,41 +26,48 @@ else
 	COMMAND="$1"
 	shift
 
+  if [ $# -ge 1 ]; then
+    CONTAINER="$1"
+    shift
+  else
+    CONTAINER="php8"
+  fi
+
 	case "${COMMAND}" in
 	"composer")
-		$COMPOSE run cake composer "$@"
+		$COMPOSE run $CONTAINER composer "$@"
 		;;
 	"phpcs")
 		# Code style checker (using .phpcs.xml.dist config)
-		$COMPOSE exec cake vendors/bin/phpcs -p --runtime-set ignore_warnings_on_exit 1 --basepath=/code "$@"
+		$COMPOSE exec $CONTAINER vendors/bin/phpcs -p --runtime-set ignore_warnings_on_exit 1 --basepath=/code "$@"
 		;;
 	"phpcsfixer")
 		# Code fixer (using .php_cs.dist config)
-		$COMPOSE exec cake vendors/bin/php-cs-fixer fix --verbose --show-progress=estimating "$@"
+		$COMPOSE exec $CONTAINER vendors/bin/php-cs-fixer fix --verbose --show-progress=estimating "$@"
 		;;
 	"phpcbf")
 		# Code beautifier & fixer (using .phpcs.xml.dist config)
-		$COMPOSE exec cake vendors/bin/phpcbf -v --extensions=php --basepath=/code "$@"
+		$COMPOSE exec $CONTAINER vendors/bin/phpcbf -v --extensions=php --basepath=/code "$@"
 		;;
 	"phplint")
 		# PHP linter (using .phplint.yml)
-		$COMPOSE exec cake vendors/bin/phplint "$@"
+		$COMPOSE exec $CONTAINER vendors/bin/phplint "$@"
 		;;
 	"phpstan")
 		# PHP Static analysis (using phpstan.neon.dist config)
-		$COMPOSE exec -e PHP_MEMORY_LIMIT=2G -e PHP_OPCACHE_ENABLED=1 cake vendors/bin/phpstan --memory-limit=2G "$@"
+		$COMPOSE exec -e PHP_MEMORY_LIMIT=2G -e PHP_OPCACHE_ENABLED=1 $CONTAINER vendors/bin/phpstan --memory-limit=2G "$@"
 		;;
 	"test")
-		$COMPOSE exec -e PHP_MEMORY_LIMIT=2G -e PHP_OPCACHE_ENABLED=1 cake app/Console/cake test core AllTests --stderr
+		$COMPOSE exec -e PHP_MEMORY_LIMIT=2G -e PHP_OPCACHE_ENABLED=1 $CONTAINER app/Console/cake test core AllUtility --stderr
 		;;
 	"cake")
-		$COMPOSE exec cake app/Console/cake "$@"
+		$COMPOSE exec $CONTAINER app/Console/cake "$@"
 		;;
 	"rector")
-		$COMPOSE exec -e PHP_MEMORY_LIMIT=2G cake vendors/bin/rector process "$@"
+		$COMPOSE exec -e PHP_MEMORY_LIMIT=2G $CONTAINER vendors/bin/rector process "$@"
 		;;
 	*)
-		$COMPOSE ${COMMAND} $@
+		$COMPOSE ${COMMAND} $CONTAINER $@
 		;;
 	esac
 fi

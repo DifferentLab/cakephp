@@ -154,7 +154,7 @@ class DboSource extends DataSource {
 /**
  * A reference to the physical connection of this DataSource
  *
- * @var array
+ * @var PDO
  */
 	protected $_connection = null;
 
@@ -2436,15 +2436,19 @@ class DboSource extends DataSource {
  *
  * @return bool
  */
-	protected function _beginNested() {
-		$query = 'SAVEPOINT LEVEL' . ++$this->_transactionNesting;
-		if ($this->fullDebug) {
-			$this->took = $this->numRows = $this->affected = false;
-			$this->logQuery($query);
-		}
-		$this->_connection->exec($query);
-		return true;
-	}
+    protected function _beginNested() {
+        $query = 'SAVEPOINT LEVEL' . ++$this->_transactionNesting;
+        if ($this->fullDebug) {
+            $this->took = $this->numRows = $this->affected = false;
+            $this->logQuery($query);
+        }
+        // make sure the transaction wasn't autocommitted
+        if($this->_connection->inTransaction()) {
+            $this->_connection->exec($query);
+        }
+
+        return true;
+    }
 
 /**
  * Commit a transaction
@@ -2464,7 +2468,11 @@ class DboSource extends DataSource {
 				$this->logQuery('COMMIT');
 			}
 			$this->_transactionStarted = false;
-			return $this->_connection->commit();
+            // make sure the transaction wasn't autocommitted
+            if($this->_connection->inTransaction()) {
+                return $this->_connection->commit();
+            }
+            return true;
 		}
 
 		if ($this->nestedTransactionSupported()) {
@@ -2486,7 +2494,11 @@ class DboSource extends DataSource {
 			$this->took = $this->numRows = $this->affected = false;
 			$this->logQuery($query);
 		}
-		$this->_connection->exec($query);
+        // make sure the transaction wasn't autocommitted
+        if($this->_connection->inTransaction()) {
+            $this->_connection->exec($query);
+        }
+
 		return true;
 	}
 
@@ -2508,7 +2520,12 @@ class DboSource extends DataSource {
 				$this->logQuery('ROLLBACK');
 			}
 			$this->_transactionStarted = false;
-			return $this->_connection->rollBack();
+            // make sure the transaction wasn't autocommitted
+            if($this->_connection->inTransaction()) {
+                return $this->_connection->rollBack();
+            }
+
+			return true;
 		}
 
 		if ($this->nestedTransactionSupported()) {
@@ -2530,8 +2547,13 @@ class DboSource extends DataSource {
 			$this->took = $this->numRows = $this->affected = false;
 			$this->logQuery($query);
 		}
-		$this->_connection->exec($query);
-		return true;
+
+        // make sure the transaction wasn't autocommitted
+        if($this->_connection->inTransaction()) {
+            $this->_connection->exec($query);
+        }
+
+        return true;
 	}
 
 /**

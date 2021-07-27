@@ -1393,6 +1393,8 @@ class DboSourceTest extends CakeTestCase {
 		$conn->expects($this->once())->method('commit')->will($this->returnValue(true));
 		$conn->expects($this->once())->method('rollback')->will($this->returnValue(true));
 
+		$conn->expects($this->any())->method('inTransaction')->will($this->returnValue(true));
+
 		$db->begin();
 		$log = $db->getLog();
 		$expected = array('query' => 'BEGIN', 'params' => array(), 'affected' => '', 'numRows' => '', 'took' => '');
@@ -1425,7 +1427,7 @@ class DboSourceTest extends CakeTestCase {
 		$db->setConnection($conn);
 		$db->useNestedTransactions = true;
 		$db->nestedSupport = true;
-
+        $conn->expects($this->any())->method('inTransaction')->will($this->returnValue(true));
 		$conn->expects($this->at(0))->method('beginTransaction')->will($this->returnValue(true));
 		$conn->expects($this->at(1))->method('exec')->with($this->equalTo('SAVEPOINT LEVEL1'))->will($this->returnValue(true));
 		$conn->expects($this->at(2))->method('exec')->with($this->equalTo('RELEASE SAVEPOINT LEVEL1'))->will($this->returnValue(true));
@@ -1447,7 +1449,7 @@ class DboSourceTest extends CakeTestCase {
 		$db->setConnection($conn);
 		$db->useNestedTransactions = true;
 		$db->nestedSupport = false;
-
+        $conn->expects($this->any())->method('inTransaction')->will($this->returnValue(true));
 		$conn->expects($this->once())->method('beginTransaction')->will($this->returnValue(true));
 		$conn->expects($this->never())->method('exec');
 		$conn->expects($this->once())->method('commit')->will($this->returnValue(true));

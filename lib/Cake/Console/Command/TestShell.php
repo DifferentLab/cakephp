@@ -257,6 +257,7 @@ class TestShell extends Shell {
  */
 	public function main() {
 		$this->out(__d('cake_console', 'CakePHP Test Shell'));
+		$this->out('PHP: '. phpversion());
 		$this->hr();
 
 		$args = $this->_parseArgs();

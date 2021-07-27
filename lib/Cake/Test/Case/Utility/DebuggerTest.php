@@ -110,33 +110,34 @@ class DebuggerTest extends CakeTestCase {
 
 		$result = Debugger::output(false);
 		$this->assertEquals('', $result);
-		$out .= '';
+		trigger_error('BOEM', E_USER_NOTICE);
 		$result = Debugger::output(true);
 
 		$this->assertEquals('Notice', $result[0]['error']);
-		$this->assertRegExp('/Undefined variable\:\s+out/', $result[0]['description']);
+		$this->assertRegExp('/BOEM/', $result[0]['description']);
 		$this->assertRegExp('/DebuggerTest::testOutput/i', $result[0]['trace']);
 
 		ob_start();
 		Debugger::output('txt');
-		$other .= '';
+        trigger_error('FOO', E_USER_NOTICE);
 		$result = ob_get_clean();
 
-		$this->assertRegExp('/Undefined variable:\s+other/', $result);
-		$this->assertRegExp('/Context:/', $result);
+		$this->assertRegExp('/FOO/', $result);
+		//context is removed in php 8
+//		$this->assertRegExp('/Context:/', $result);
 		$this->assertRegExp('/DebuggerTest::testOutput/i', $result);
 
 		ob_start();
 		Debugger::output('html');
-		$wrong .= '';
+        trigger_error('BAZ', E_USER_NOTICE);
 		$result = ob_get_clean();
 		$this->assertRegExp('/<pre class="cake-error">.+<\/pre>/', $result);
 		$this->assertRegExp('/<b>Notice<\/b>/', $result);
-		$this->assertRegExp('/variable:\s+wrong/', $result);
+		$this->assertRegExp('/BAZ/', $result);
 
 		ob_start();
 		Debugger::output('js');
-		$buzz .= '';
+        trigger_error('BUZZ', E_USER_NOTICE);
 		$result = explode('</a>', ob_get_clean());
 		$this->assertTags($result[0], array(
 			'pre' => array('class' => 'cake-error'),
@@ -149,10 +150,8 @@ class DebuggerTest extends CakeTestCase {
 			'b' => array(), 'Notice', '/b', ' (8)',
 		));
 
-		$this->assertRegExp('/Undefined variable:\s+buzz/', $result[1]);
+		$this->assertRegExp('/BUZZ/', $result[1]);
 		$this->assertRegExp('/<a[^>]+>Code/', $result[1]);
-		$this->assertRegExp('/<a[^>]+>Context/', $result[2]);
-		$this->assertStringContainsString('$wrong = &#039;&#039;', $result[3], 'Context should be HTML escaped.');
 	}
 
 /**
@@ -164,10 +163,13 @@ class DebuggerTest extends CakeTestCase {
 		set_error_handler('Debugger::showError');
 		$this->_restoreError = true;
 
-		ob_start();
-		$a = array();
-		$b = $a['<script>alert(1)</script>'];
+        ob_start();
+        $a = array();
+        $b = $a['<script>alert(1)</script>'];
 		$result = ob_get_clean();
+
+//		echo "\n" . $result . "\n";
+//		die('OK');
 
 		$this->assertStringNotContainsString('<script>alert(1)', $result);
 		$this->assertStringContainsString('&lt;script&gt;alert(1)', $result);
@@ -198,7 +200,7 @@ class DebuggerTest extends CakeTestCase {
 		Debugger::output('xml');
 
 		ob_start();
-		$foo .= '';
+		trigger_error('FOO');
 		$result = ob_get_clean();
 
 		$data = array(
@@ -206,7 +208,7 @@ class DebuggerTest extends CakeTestCase {
 			'code' => array(), '8', '/code',
 			'file' => array(), 'preg:/[^<]+/', '/file',
 			'line' => array(), '' . ((int)__LINE__ - 7), '/line',
-			'preg:/Undefined variable:\s+foo/',
+			'preg:/FOO/',
 			'/error'
 		);
 		$this->assertTags($result, $data, true);
@@ -257,7 +259,7 @@ class DebuggerTest extends CakeTestCase {
 		Debugger::outputAs('xml');
 
 		ob_start();
-		$foo .= '';
+		trigger_error('FOO');
 		$result = ob_get_clean();
 
 		$data = array(
@@ -265,7 +267,7 @@ class DebuggerTest extends CakeTestCase {
 			'<code', '8', '/code',
 			'<file', 'preg:/[^<]+/', '/file',
 			'<line', '' . ((int)__LINE__ - 7), '/line',
-			'preg:/Undefined variable:\s+foo/',
+			'preg:/FOO/',
 			'/error'
 		);
 		$this->assertTags($result, $data, true);
@@ -284,7 +286,7 @@ class DebuggerTest extends CakeTestCase {
 		Debugger::outputAs('callback');
 
 		ob_start();
-		$foo .= '';
+		trigger_error('FOO');
 		$result = ob_get_clean();
 		$this->assertStringContainsString('Notice: I eated an error', $result);
 		$this->assertStringContainsString('DebuggerTest.php', $result);

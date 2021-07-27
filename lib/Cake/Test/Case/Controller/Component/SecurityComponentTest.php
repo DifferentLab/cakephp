@@ -717,7 +717,14 @@ class SecurityComponentTest extends CakeTestCase {
  * @return void
  */
 	public function testValidatePostSimple() {
-		$this->Controller->Security->startup($this->Controller);
+
+        $this->Controller->Security->startup($this->Controller);
+        $result = $this->Controller->params['_Token']['key'];
+        $this->assertNotNull($result);
+        $this->assertTrue($this->Controller->Session->check('_Token'));
+
+
+        $this->Controller->Security->startup($this->Controller);
 
 		$key = $this->Controller->request->params['_Token']['key'];
 		$fields = '5415d31b4483c1e09ddb58d2a91ba9650b12aa83%3A';
@@ -1403,7 +1410,7 @@ class SecurityComponentTest extends CakeTestCase {
 		$this->Security->startup($this->Controller);
 
 		$token = $this->Security->Session->read('_Token');
-		$this->assertEquals(1, count($token['csrfTokens']), 'Missing the csrf token.');
+		$this->assertEquals(1, count($token['csrfTokens'] ?? []), 'Missing the csrf token.');
 		$this->assertEquals(strtotime('+10 minutes'), current($token['csrfTokens']), 'Token expiry does not match');
 		$this->assertEquals(array('key', 'unlockedFields'), array_keys($this->Controller->request->params['_Token']), 'Keys don not match');
 	}
@@ -1422,7 +1429,7 @@ class SecurityComponentTest extends CakeTestCase {
 		$this->Security->startup($this->Controller);
 
 		$token = $this->Security->Session->read('_Token');
-		$this->assertEquals(2, count($token['csrfTokens']), 'Missing the csrf token.');
+		$this->assertEquals(2, count($token['csrfTokens'] ?? []), 'Missing the csrf token.');
 		foreach ($token['csrfTokens'] as $expires) {
 			$this->assertWithinMargin($expires, $csrfExpires, 2, 'Token expiry does not match');
 		}

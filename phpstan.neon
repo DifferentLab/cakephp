@@ -6,7 +6,7 @@ parameters:
     bootstrapFiles:
         - app/webroot/index.php
     level: 0
-    phpVersion: 70400
+    phpVersion: 80000
     paths:
         - app/
         - lib/
