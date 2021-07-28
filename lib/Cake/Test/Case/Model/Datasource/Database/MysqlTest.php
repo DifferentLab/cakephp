@@ -57,7 +57,7 @@ class MysqlTest extends CakeTestCase {
 /**
  * The Dbo instance to be tested
  *
- * @var DboSource
+ * @var Mysql
  */
 	public $Dbo = null;
 
@@ -583,11 +583,11 @@ class MysqlTest extends CakeTestCase {
 		)));
 
 		$result = $this->Dbo->alterSchema($schemaB->compare($schemaA));
-		$this->assertContains("ALTER TABLE $table", $result);
-		$this->assertContains('ADD KEY `name_idx` (`name`),', $result);
-		$this->assertContains('ADD KEY `group_idx` (`group1`),', $result);
-		$this->assertContains('ADD KEY `compound_idx` (`group1`, `group2`),', $result);
-		$this->assertContains('ADD PRIMARY KEY  (`id`);', $result);
+		$this->assertStringContainsString("ALTER TABLE $table", $result);
+		$this->assertStringContainsString('ADD KEY `name_idx` (`name`),', $result);
+		$this->assertStringContainsString('ADD KEY `group_idx` (`group1`),', $result);
+		$this->assertStringContainsString('ADD KEY `compound_idx` (`group1`, `group2`),', $result);
+		$this->assertStringContainsString('ADD PRIMARY KEY  (`id`);', $result);
 
 		//Test that the string is syntactically correct
 		$query = $this->Dbo->getConnection()->prepare($result);
@@ -610,15 +610,15 @@ class MysqlTest extends CakeTestCase {
 		)));
 
 		$result = $this->Dbo->alterSchema($schemaC->compare($schemaB));
-		$this->assertContains("ALTER TABLE $table", $result);
-		$this->assertContains('DROP PRIMARY KEY,', $result);
-		$this->assertContains('DROP KEY `name_idx`,', $result);
-		$this->assertContains('DROP KEY `group_idx`,', $result);
-		$this->assertContains('DROP KEY `compound_idx`,', $result);
-		$this->assertContains('ADD KEY `id_name_idx` (`id`, `name`),', $result);
-		$this->assertContains('ADD UNIQUE KEY `name_idx` (`name`),', $result);
-		$this->assertContains('ADD KEY `group_idx` (`group2`),', $result);
-		$this->assertContains('ADD KEY `compound_idx` (`group2`, `group1`);', $result);
+		$this->assertStringContainsString("ALTER TABLE $table", $result);
+		$this->assertStringContainsString('DROP PRIMARY KEY,', $result);
+		$this->assertStringContainsString('DROP KEY `name_idx`,', $result);
+		$this->assertStringContainsString('DROP KEY `group_idx`,', $result);
+		$this->assertStringContainsString('DROP KEY `compound_idx`,', $result);
+		$this->assertStringContainsString('ADD KEY `id_name_idx` (`id`, `name`),', $result);
+		$this->assertStringContainsString('ADD UNIQUE KEY `name_idx` (`name`),', $result);
+		$this->assertStringContainsString('ADD KEY `group_idx` (`group2`),', $result);
+		$this->assertStringContainsString('ADD KEY `compound_idx` (`group2`, `group1`);', $result);
 
 		$query = $this->Dbo->getConnection()->prepare($result);
 		$this->assertEquals($query->queryString, $result);
@@ -629,11 +629,11 @@ class MysqlTest extends CakeTestCase {
 		// Drop the indexes
 		$result = $this->Dbo->alterSchema($schemaA->compare($schemaC));
 
-		$this->assertContains("ALTER TABLE $table", $result);
-		$this->assertContains('DROP KEY `name_idx`,', $result);
-		$this->assertContains('DROP KEY `group_idx`,', $result);
-		$this->assertContains('DROP KEY `compound_idx`,', $result);
-		$this->assertContains('DROP KEY `id_name_idx`;', $result);
+		$this->assertStringContainsString("ALTER TABLE $table", $result);
+		$this->assertStringContainsString('DROP KEY `name_idx`,', $result);
+		$this->assertStringContainsString('DROP KEY `group_idx`,', $result);
+		$this->assertStringContainsString('DROP KEY `compound_idx`,', $result);
+		$this->assertStringContainsString('DROP KEY `id_name_idx`;', $result);
 
 		$query = $this->Dbo->getConnection()->prepare($result);
 		$this->assertEquals($query->queryString, $result);
@@ -693,10 +693,10 @@ class MysqlTest extends CakeTestCase {
 			)
 		));
 		$result = $this->Dbo->alterSchema($schemaB->compare($schemaA));
-		$this->assertContains('DEFAULT CHARSET=utf8', $result);
-		$this->assertContains('ENGINE=InnoDB', $result);
-		$this->assertContains('COLLATE=utf8_general_ci', $result);
-		$this->assertContains('COMMENT=\'Newly table added comment.\'', $result);
+		$this->assertStringContainsString('DEFAULT CHARSET=utf8', $result);
+		$this->assertStringContainsString('ENGINE=InnoDB', $result);
+		$this->assertStringContainsString('COLLATE=utf8_general_ci', $result);
+		$this->assertStringContainsString('COMMENT=\'Newly table added comment.\'', $result);
 
 		$this->Dbo->rawQuery($result);
 		$result = $this->Dbo->listDetailedSources($this->Dbo->fullTableName('altertest', false, false));
@@ -3241,7 +3241,7 @@ SQL;
 	 * @return void
 	 */
 	public function testBuildColumnBadType() {
-		$this->expectException(\PHPUnit\Framework\Error\Error::class);
+		$this->expectWarning();
 		$data = array(
 			'name' => 'testName',
 			'type' => 'varchar(255)',

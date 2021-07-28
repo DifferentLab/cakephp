@@ -377,7 +377,7 @@ class JsonViewTest extends CakeTestCase {
 			$View->render();
 			restore_error_handler();
 			$this->fail('Failed asserting that exception of type "CakeException" is thrown.');
-		} catch (CakeException $e) {
+		} catch (Throwable $e) {
 			restore_error_handler();
 			$this->assertRegExp('/UTF-8/', $e->getMessage());
 			return;

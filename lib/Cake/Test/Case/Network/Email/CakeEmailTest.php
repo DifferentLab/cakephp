@@ -1751,8 +1751,8 @@ class CakeEmailTest extends CakeTestCase {
 		$message = $this->CakeEmail->message();
 		$boundary = $this->CakeEmail->getBoundary();
 		$this->assertFalse(empty($boundary));
-		$this->assertStringContainsString('--' . $boundary, $message);
-		$this->assertStringContainsString('--' . $boundary . '--', $message);
+		$this->assertContains('--' . $boundary, $message);
+		$this->assertContains('--' . $boundary . '--', $message);
 
 		$this->CakeEmail->attachments(array('fake.php' => __FILE__));
 		$this->CakeEmail->send();
@@ -1760,10 +1760,10 @@ class CakeEmailTest extends CakeTestCase {
 		$message = $this->CakeEmail->message();
 		$boundary = $this->CakeEmail->getBoundary();
 		$this->assertFalse(empty($boundary));
-		$this->assertStringContainsString('--' . $boundary, $message);
-		$this->assertStringContainsString('--' . $boundary . '--', $message);
-		$this->assertStringContainsString('--alt-' . $boundary, $message);
-		$this->assertStringContainsString('--alt-' . $boundary . '--', $message);
+		$this->assertContains('--' . $boundary, $message);
+		$this->assertContains('--' . $boundary . '--', $message);
+		$this->assertContains('--alt-' . $boundary, $message);
+		$this->assertContains('--alt-' . $boundary . '--', $message);
 	}
 
 /**
@@ -1853,8 +1853,8 @@ class CakeEmailTest extends CakeTestCase {
 		$this->assertStringContainsString($expected, $this->CakeEmail->message(CakeEmail::MESSAGE_TEXT));
 
 		$message = $this->CakeEmail->message();
-		$this->assertStringContainsString('Content-Type: text/plain; charset=UTF-8', $message);
-		$this->assertStringContainsString('Content-Type: text/html; charset=UTF-8', $message);
+		$this->assertContains('Content-Type: text/plain; charset=UTF-8', $message);
+		$this->assertContains('Content-Type: text/html; charset=UTF-8', $message);
 
 		// UTF-8 is 8bit
 		$this->assertTrue($this->_checkContentTransferEncoding($message, '8bit'));
@@ -1862,8 +1862,8 @@ class CakeEmailTest extends CakeTestCase {
 		$this->CakeEmail->charset = 'ISO-2022-JP';
 		$this->CakeEmail->send();
 		$message = $this->CakeEmail->message();
-		$this->assertStringContainsString('Content-Type: text/plain; charset=ISO-2022-JP', $message);
-		$this->assertStringContainsString('Content-Type: text/html; charset=ISO-2022-JP', $message);
+		$this->assertContains('Content-Type: text/plain; charset=ISO-2022-JP', $message);
+		$this->assertContains('Content-Type: text/html; charset=ISO-2022-JP', $message);
 
 		// ISO-2022-JP is 7bit
 		$this->assertTrue($this->_checkContentTransferEncoding($message, '7bit'));

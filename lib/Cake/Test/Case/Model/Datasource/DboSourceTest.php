@@ -1427,13 +1427,23 @@ class DboSourceTest extends CakeTestCase {
 		$db->setConnection($conn);
 		$db->useNestedTransactions = true;
 		$db->nestedSupport = true;
+
         $conn->expects($this->any())->method('inTransaction')->will($this->returnValue(true));
-		$conn->expects($this->at(0))->method('beginTransaction')->will($this->returnValue(true));
-		$conn->expects($this->at(1))->method('exec')->with($this->equalTo('SAVEPOINT LEVEL1'))->will($this->returnValue(true));
-		$conn->expects($this->at(2))->method('exec')->with($this->equalTo('RELEASE SAVEPOINT LEVEL1'))->will($this->returnValue(true));
-		$conn->expects($this->at(3))->method('exec')->with($this->equalTo('SAVEPOINT LEVEL1'))->will($this->returnValue(true));
-		$conn->expects($this->at(4))->method('exec')->with($this->equalTo('ROLLBACK TO SAVEPOINT LEVEL1'))->will($this->returnValue(true));
-		$conn->expects($this->at(5))->method('commit')->will($this->returnValue(true));
+
+//        $db->begin();
+//        $db->begin();
+//        $db->commit();
+//        $db->begin();
+//        $db->rollback();
+//        $db->commit();
+
+
+        $conn->expects($this->at(0))->method('beginTransaction')->will($this->returnValue(true));
+		$conn->expects($this->at(2))->method('exec')->with($this->equalTo('SAVEPOINT LEVEL1'))->will($this->returnValue(true));
+		$conn->expects($this->at(4))->method('exec')->with($this->equalTo('RELEASE SAVEPOINT LEVEL1'))->will($this->returnValue(true));
+		$conn->expects($this->at(6))->method('exec')->with($this->equalTo('SAVEPOINT LEVEL1'))->will($this->returnValue(true));
+		$conn->expects($this->at(8))->method('exec')->with($this->equalTo('ROLLBACK TO SAVEPOINT LEVEL1'))->will($this->returnValue(true));
+		$conn->expects($this->at(10))->method('commit')->will($this->returnValue(true));
 
 		$this->_runTransactions($db);
 	}
@@ -1469,6 +1479,7 @@ class DboSourceTest extends CakeTestCase {
 		$db->useNestedTransactions = false;
 		$db->nestedSupport = true;
 
+        $conn->expects($this->any())->method('inTransaction')->will($this->returnValue(true));
 		$conn->expects($this->once())->method('beginTransaction')->will($this->returnValue(true));
 		$conn->expects($this->never())->method('exec');
 		$conn->expects($this->once())->method('commit')->will($this->returnValue(true));

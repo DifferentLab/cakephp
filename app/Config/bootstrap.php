@@ -114,3 +114,39 @@ CakeLog::config('error', array(
 
 require ROOT . DS . 'vendors/autoload.php';
 
+/*spl_autoload_register(function (string $classNameToFind) {
+    static $cakeClassMap = [];
+
+    if (!$cakeClassMap) {
+        $findPhpFilesRecursively = function (string $dir) use (&$cakeClassMap): void {
+            $dirIter = new RecursiveDirectoryIterator($dir);
+            $resursiveIter = new RecursiveIteratorIterator($dirIter);
+            $regexIter = new RegexIterator($resursiveIter, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
+            foreach ($regexIter as $file) {
+                $file = $file[0];
+
+                // Ignore `Vendor` files, they've their own resolution already
+                if (false !== strpos($file, 'Vendor')) {
+                    continue;
+                }
+
+                $className = str_replace('.php', '', basename($file));
+                $cakeClassMap[$className] = $file;
+            }
+        };
+
+        // Cake itself
+        $findPhpFilesRecursively(ROOT . DIRECTORY_SEPARATOR . 'lib');
+        // Project specific files; will overwrite clashes with CakePHP!
+        $findPhpFilesRecursively(ROOT . DIRECTORY_SEPARATOR . APP_DIR);
+    }
+
+    if (isset($cakeClassMap[$classNameToFind])) {
+        require_once $cakeClassMap[$classNameToFind];
+
+        return null;
+    }
+
+    return false;
+});*/
+

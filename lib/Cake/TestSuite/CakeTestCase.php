@@ -28,6 +28,8 @@ App::uses('CakeTestFixture', 'TestSuite/Fixture');
  */
 abstract class CakeTestCase extends PHPUnit\Framework\TestCase {
 
+    public $backupGlobals = true;
+//    protected $backupStaticAttributes = true;
 /**
  * The class responsible for managing the creation, loading and removing of fixtures
  *

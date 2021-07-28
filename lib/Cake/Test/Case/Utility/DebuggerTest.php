@@ -110,7 +110,7 @@ class DebuggerTest extends CakeTestCase {
 
 		$result = Debugger::output(false);
 		$this->assertEquals('', $result);
-		trigger_error('BOEM', E_USER_NOTICE);
+		trigger_error('BOEM');
 		$result = Debugger::output(true);
 
 		$this->assertEquals('Notice', $result[0]['error']);
@@ -119,7 +119,7 @@ class DebuggerTest extends CakeTestCase {
 
 		ob_start();
 		Debugger::output('txt');
-        trigger_error('FOO', E_USER_NOTICE);
+        trigger_error('FOO');
 		$result = ob_get_clean();
 
 		$this->assertRegExp('/FOO/', $result);
@@ -129,7 +129,7 @@ class DebuggerTest extends CakeTestCase {
 
 		ob_start();
 		Debugger::output('html');
-        trigger_error('BAZ', E_USER_NOTICE);
+        trigger_error('BAZ');
 		$result = ob_get_clean();
 		$this->assertRegExp('/<pre class="cake-error">.+<\/pre>/', $result);
 		$this->assertRegExp('/<b>Notice<\/b>/', $result);
@@ -137,7 +137,7 @@ class DebuggerTest extends CakeTestCase {
 
 		ob_start();
 		Debugger::output('js');
-        trigger_error('BUZZ', E_USER_NOTICE);
+        trigger_error('BUZZ');
 		$result = explode('</a>', ob_get_clean());
 		$this->assertTags($result[0], array(
 			'pre' => array('class' => 'cake-error'),
@@ -147,7 +147,7 @@ class DebuggerTest extends CakeTestCase {
 					"\(document\.getElementById\('cakeErr[a-z0-9]+\-trace'\)\.style\.display == 'none'" .
 					" \? '' \: 'none'\);/"
 			),
-			'b' => array(), 'Notice', '/b', ' (8)',
+			'b' => array(), 'Notice', '/b', ' (1024)',
 		));
 
 		$this->assertRegExp('/BUZZ/', $result[1]);
@@ -205,7 +205,7 @@ class DebuggerTest extends CakeTestCase {
 
 		$data = array(
 			'error' => array(),
-			'code' => array(), '8', '/code',
+			'code' => array(), '1024', '/code',
 			'file' => array(), 'preg:/[^<]+/', '/file',
 			'line' => array(), '' . ((int)__LINE__ - 7), '/line',
 			'preg:/FOO/',
@@ -264,7 +264,7 @@ class DebuggerTest extends CakeTestCase {
 
 		$data = array(
 			'<error',
-			'<code', '8', '/code',
+			'<code', '1024', '/code',
 			'<file', 'preg:/[^<]+/', '/file',
 			'<line', '' . ((int)__LINE__ - 7), '/line',
 			'preg:/FOO/',

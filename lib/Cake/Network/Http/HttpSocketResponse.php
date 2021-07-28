@@ -272,6 +272,9 @@ class HttpSocketResponse implements ArrayAccess {
 		$lines = explode("\r\n", $header);
 
 		$header = array();
+		$value = '';
+		$field = null;
+
 		foreach ($lines as $line) {
 			if (strlen($line) === 0) {
 				continue;
@@ -281,7 +284,7 @@ class HttpSocketResponse implements ArrayAccess {
 
 			// Multi-line header
 			if ($first === ' ' || $first === "\t") {
-				$value = preg_replace("/\s+/", ' ', $line);
+				$value .= preg_replace("/\s+/", ' ', $line);
 				$continuation = true;
 			} elseif (strpos($line, ':') !== false) {
 				list($field, $value) = explode(':', $line, 2);
@@ -289,6 +292,7 @@ class HttpSocketResponse implements ArrayAccess {
 			}
 
 			$value = trim($value);
+
 			if (!isset($header[$field]) || $continuation) {
 				$header[$field] = $value;
 			} else {

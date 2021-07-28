@@ -57,7 +57,11 @@ class FileTest extends CakeTestCase {
 
 		$Folder = new Folder();
 		$Folder->delete(TMP . 'tests' . DS . 'permissions');
-	}
+
+        if(file_exists(TMP . 'some_file.txt')) {
+            unlink(TMP . 'some_file.txt');
+        }
+    }
 
 /**
  * testBasic method

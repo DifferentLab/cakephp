@@ -344,7 +344,7 @@ class CakeNumberTest extends CakeTestCase {
 			'places' => 2,
 			'decimal' => '.'
 		));
-		$this->assertEquals('0.2', $result);
+		$this->assertEquals('0.20', $result);
 	}
 
 /**

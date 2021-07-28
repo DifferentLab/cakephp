@@ -58,7 +58,7 @@ else
 		$COMPOSE exec -e PHP_MEMORY_LIMIT=2G -e PHP_OPCACHE_ENABLED=1 $CONTAINER vendors/bin/phpstan --memory-limit=2G "$@"
 		;;
 	"test")
-		$COMPOSE exec -e PHP_MEMORY_LIMIT=2G -e PHP_OPCACHE_ENABLED=1 $CONTAINER app/Console/cake test core AllTests --stderr
+		$COMPOSE exec -e PHP_MEMORY_LIMIT=2G -e PHP_OPCACHE_ENABLED=1 $CONTAINER app/Console/cake test core "$@" --stderr
 		;;
 	"cake")
 		$COMPOSE exec $CONTAINER app/Console/cake "$@"

@@ -2299,7 +2299,7 @@ class ValidationTest extends CakeTestCase {
 	 * @return void
 	 */
 	public function testPassThroughMethodFailure() {
-		$this->expectException(\PHPUnit\Framework\Error\Error::class);
+		$this->expectWarning();
 		Validation::phone('text', null, 'testNl');
 	}
 
@@ -2309,7 +2309,7 @@ class ValidationTest extends CakeTestCase {
 	 * @return void
 	 */
 	public function testPassThroughClassFailure() {
-		$this->expectException(\PHPUnit\Framework\Error\Error::class);
+        $this->expectWarning();
 		Validation::postal('text', null, 'AUTOFAIL');
 	}
 

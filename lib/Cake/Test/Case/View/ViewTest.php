@@ -776,8 +776,8 @@ class ViewTest extends CakeTestCase {
 	 * @return void
 	 */
 	public function testElementInexistent() {
-		$this->expectException(\PHPUnit\Framework\Error\Notice::class);
-		$this->View->element('non_existent_element');
+		$this->expectNotice();
+        $this->View->element('non_existent_element');
 	}
 
 /**
@@ -786,7 +786,7 @@ class ViewTest extends CakeTestCase {
 	 * @return void
 	 */
 	public function testElementInexistent2() {
-		$this->expectException(\PHPUnit\Framework\Error\Notice::class);
+        $this->expectNotice();
 		$this->View->element('TestPlugin.plugin_element', array(), array('plugin' => 'test_plugin'));
 	}
 
@@ -796,7 +796,7 @@ class ViewTest extends CakeTestCase {
 	 * @return void
 	 */
 	public function testElementInexistent3() {
-		$this->expectException(\PHPUnit\Framework\Error\Notice::class);
+        $this->expectNotice();
 		$this->View->element('test_plugin.plugin_element');
 	}
 
@@ -1850,7 +1850,7 @@ TEXT;
 		if (version_compare(PHP_VERSION, '7.4', '>=')) {
 			$this->expectException(Error::class);
 		} else {
-            $this->expectException(PHPUnit\Framework\Error\Error::class);
+            $this->expectError();
 		}
 
 		$this->expectExceptionMessage($message);
