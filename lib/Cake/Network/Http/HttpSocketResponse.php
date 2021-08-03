@@ -172,10 +172,6 @@ class HttpSocketResponse implements ArrayAccess {
 		$decoded = $this->_decodeBody($this->body, $transferEncoding);
 		$this->body = $decoded['body'];
 
-//		if (!empty($decoded['header'])) {
-//			$this->headers = $this->_parseHeader($this->_buildHeader($this->headers) . $this->_buildHeader($decoded['header']));
-//		}
-
 		if (!empty($this->headers)) {
 			$this->cookies = $this->parseCookies($this->headers);
 		}

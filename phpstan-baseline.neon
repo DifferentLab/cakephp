@@ -21,41 +21,6 @@ parameters:
 			path: lib/Cake/Test/Case/Console/Command/Task/ProjectTaskTest.php
 
 		-
-			message: "#^Undefined variable\\: \\$out$#"
-			count: 2
-			path: lib/Cake/Test/Case/Error/ErrorHandlerTest.php
-
-		-
-			message: "#^Undefined variable\\: \\$wrong$#"
-			count: 1
-			path: lib/Cake/Test/Case/Error/ErrorHandlerTest.php
-
-		-
-			message: "#^Undefined variable\\: \\$buzz$#"
-			count: 1
-			path: lib/Cake/Test/Case/Utility/DebuggerTest.php
-
-		-
-			message: "#^Undefined variable\\: \\$foo$#"
-			count: 3
-			path: lib/Cake/Test/Case/Utility/DebuggerTest.php
-
-		-
-			message: "#^Undefined variable\\: \\$other$#"
-			count: 1
-			path: lib/Cake/Test/Case/Utility/DebuggerTest.php
-
-		-
-			message: "#^Undefined variable\\: \\$out$#"
-			count: 1
-			path: lib/Cake/Test/Case/Utility/DebuggerTest.php
-
-		-
-			message: "#^Undefined variable\\: \\$wrong$#"
-			count: 1
-			path: lib/Cake/Test/Case/Utility/DebuggerTest.php
-
-		-
 			message: "#^Call to an undefined method ViewTest\\:\\:assertPathEquals\\(\\)\\.$#"
 			count: 1
 			path: lib/Cake/Test/Case/View/ViewTest.php

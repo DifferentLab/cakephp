@@ -7,7 +7,6 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
     // paths to refactor; solid alternative to CLI arguments
     $parameters = $containerConfigurator->parameters();
-//    $parameters->set(Option::PATHS, [__DIR__ . '/app', __DIR__ . '/lib']);
 
     $parameters->set(Option::BOOTSTRAP_FILES, [
         __DIR__ . '/app/webroot/index.php'
@@ -19,13 +18,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(Option::CLEAR_CACHE, true);
 
     $parameters->set(Option::SKIP, [
-        // single file
         __DIR__ . '/app/tmp/*',
     ]);
 
-    $containerConfigurator->import(\Rector\PHPUnit\Set\PHPUnitSetList::PHPUNIT_80);
-
-
-    $containerConfigurator->import(SetList::PHP_80);
-
+   $containerConfigurator->import(SetList::PHP_80);
 };

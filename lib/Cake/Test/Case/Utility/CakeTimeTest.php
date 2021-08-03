@@ -474,11 +474,7 @@ class CakeTimeTest extends CakeTestCase {
  */
 	public function testNiceShortI18n() {
 		$restore = setlocale(LC_ALL, 0);
-		$localeCouldBeSet = setlocale(LC_ALL, 'es_ES');
-		if(!$localeCouldBeSet) {
-            setlocale(LC_ALL, $restore);
-		    $this->markTestSkipped();
-        }
+		setlocale(LC_ALL, 'es_ES');
 		$time = strtotime('2015-01-07 03:05:00');
 		$this->assertEquals('ene 7th 2015, 03:05', $this->Time->niceShort($time));
 		setlocale(LC_ALL, $restore);

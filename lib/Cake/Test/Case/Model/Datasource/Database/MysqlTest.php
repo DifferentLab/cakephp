@@ -36,7 +36,7 @@ require_once dirname(dirname(dirname(__FILE__))) . DS . 'models.php';
 class MysqlTest extends CakeTestCase {
 
 /**
- * autoFixtures propertyExtractTaskTest::
+ * autoFixtures property
  *
  * @var bool
  */
@@ -3874,9 +3874,6 @@ SQL;
 
 		$result = $this->Dbo->value('1.234', 'float');
 		$this->assertEquals('1.234', $result);
-
-//		$result = $this->Dbo->value(' 1.234 ', 'float');
-//		$this->assertEquals("' 1.234 '", $result);
 
 		$result = $this->Dbo->value('1.234e05', 'float');
 		$this->assertEquals("'1.234e05'", $result);

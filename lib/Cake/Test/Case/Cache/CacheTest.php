@@ -134,7 +134,7 @@ class CacheTest extends CakeTestCase {
 	 * @return void
 	 */
 	public function testInvalidConfig() {
-		$this->expectException(\PHPUnit\Framework\Error\Warning::class);
+		$this->expectWarning();
 		// In debug mode it would auto create the folder.
 		$debug = Configure::read('debug');
 		Configure::write('debug', 0);

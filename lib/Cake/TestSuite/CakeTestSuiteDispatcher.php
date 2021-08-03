@@ -150,36 +150,6 @@ class CakeTestSuiteDispatcher {
  */
 	public function loadTestFramework() {
 	    return true;
-//		if (class_exists('PHPUnit\Framework\TestCase')) {
-//			return true;
-//		}
-//		$phpunitPath = 'phpunit' . DS . 'phpunit';
-//		if (defined('PHP_WINDOWS_VERSION_MAJOR')) {
-//			$composerGlobalDir[] = env('APPDATA') . DS . 'Composer' . DS . 'vendor' . DS;
-//		} else {
-//			$composerGlobalDir[] = env('HOME') . DS . '.composer' . DS . 'vendor' . DS;
-//		}
-//		$vendors = array_merge(App::path('vendors'), $composerGlobalDir);
-//		foreach ($vendors as $vendor) {
-//			$vendor = rtrim($vendor, DS);
-//			if (is_dir($vendor . DS . $phpunitPath)) {
-//				ini_set('include_path', $vendor . DS . $phpunitPath . PATH_SEPARATOR . ini_get('include_path'));
-//				break;
-//			} elseif (is_dir($vendor . DS . 'PHPUnit')) {
-//				ini_set('include_path', $vendor . PATH_SEPARATOR . ini_get('include_path'));
-//				break;
-//			} elseif (is_file($vendor . DS . 'phpunit.phar')) {
-//				$backup = $GLOBALS['_SERVER']['SCRIPT_NAME'];
-//				$GLOBALS['_SERVER']['SCRIPT_NAME'] = '-';
-//				ob_start();
-//				$included = include_once $vendor . DS . 'phpunit.phar';
-//				ob_end_clean();
-//				$GLOBALS['_SERVER']['SCRIPT_NAME'] = $backup;
-//				return $included;
-//			}
-//		}
-//		include 'PHPUnit' . DS . 'Autoload.php';
-//		return class_exists('PHPUnit\Framework\TestCase');
 	}
 
 /**

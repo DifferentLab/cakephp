@@ -2,7 +2,6 @@ version: '3.7'
 
 services:
   php8:
-#    image: registry.shiftbase.io/php/cli:8.0.6-buster-r1
     build:
       context: .
       dockerfile: Dockerfile-php8
@@ -10,16 +9,12 @@ services:
       - /bin/bash
       - -c
       - 'while :; do echo "Napping for an hour" ;sleep  3600 ;done'
-#    entrypoint: ''
     environment:
-      - PHP_MAX_EXECUTION_TIME=0
-      - COMPOSER_MEMORY_LIMIT=-1
       - PHP_MEMORY_LIMIT=2G
     volumes:
       - .:/code
     working_dir: /code
   php7:
-#    image: registry.shiftbase.io/php/cli:7.4.19-buster-r1-dev
     build:
       context: .
       dockerfile: Dockerfile-php7
@@ -27,10 +22,7 @@ services:
       - /bin/bash
       - -c
       - 'while :; do echo "Napping for an hour" ;sleep  3600 ;done'
-#    entrypoint: ''
     environment:
-      - PHP_MAX_EXECUTION_TIME=0
-      - COMPOSER_MEMORY_LIMIT=-1
       - PHP_MEMORY_LIMIT=2G
     volumes:
       - .:/code

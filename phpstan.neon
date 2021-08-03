@@ -3,10 +3,8 @@ includes:
 parameters:
     reportUnmatchedIgnoredErrors: false
     checkMissingIterableValueType: false
-    bootstrapFiles:
-        - app/webroot/index.php
     level: 0
-    phpVersion: 80000
+    phpVersion: 70400
     paths:
         - app/
         - lib/
@@ -17,4 +15,4 @@ parameters:
             - _stop
         lib/Cake/Console/ShellDispatcher:
             - _stop
-    tmpDir: app/tmp/phpstanlib/Cake/Test/Case/Controller/ComponentCollectionTest.php
+    tmpDir: app/tmp/phpstanlib

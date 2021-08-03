@@ -168,9 +168,6 @@ class DebuggerTest extends CakeTestCase {
         $b = $a['<script>alert(1)</script>'];
 		$result = ob_get_clean();
 
-//		echo "\n" . $result . "\n";
-//		die('OK');
-
 		$this->assertStringNotContainsString('<script>alert(1)', $result);
 		$this->assertStringContainsString('&lt;script&gt;alert(1)', $result);
 	}
