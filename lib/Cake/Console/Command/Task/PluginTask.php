@@ -64,7 +64,7 @@ class PluginTask extends AppShell {
 			}
 			$this->_interactive($plugin);
 		} else {
-			return $this->_interactive();
+			$this->_interactive();
 		}
 	}
 

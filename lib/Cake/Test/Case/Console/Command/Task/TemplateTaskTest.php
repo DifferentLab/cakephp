@@ -27,6 +27,7 @@ App::uses('TemplateTask', 'Console/Command/Task');
 /**
  * TemplateTaskTest class
  *
+ * @property object|TemplateTask $Task
  * @package       Cake.Test.Case.Console.Command.Task
  */
 class TemplateTaskTest extends CakeTestCase {
@@ -36,7 +37,7 @@ class TemplateTaskTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$out = $this->getMock('ConsoleOutput', array(), array(), '', false);
 		$in = $this->getMock('ConsoleInput', array(), array(), '', false);
@@ -52,7 +53,7 @@ class TemplateTaskTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		unset($this->Task);
 	}

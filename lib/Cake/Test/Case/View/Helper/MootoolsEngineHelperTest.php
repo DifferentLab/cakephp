@@ -23,6 +23,8 @@ App::uses('MootoolsEngineHelper', 'View/Helper');
 /**
  * MootoolsEngineHelperTest
  *
+ * @property object|View          $View
+ * @property MootoolsEngineHelper $Moo
  * @package       Cake.Test.Case.View.Helper
  */
 class MootoolsEngineHelperTest extends CakeTestCase {
@@ -32,7 +34,7 @@ class MootoolsEngineHelperTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$controller = null;
 		$this->View = $this->getMock('View', array('addScript'), array(&$controller));
@@ -44,7 +46,7 @@ class MootoolsEngineHelperTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		unset($this->Moo);
 	}
@@ -272,12 +274,12 @@ class MootoolsEngineHelperTest extends CakeTestCase {
 	}
 
 /**
- * test drop() method with the required drag option missing
- *
- * @expectedException PHPUnit_Framework_Error_Warning
- * @return void
- */
+	 * test drop() method with the required drag option missing
+	 *
+	 * @return void
+	 */
 	public function testDropWithMissingOption() {
+		$this->expectWarning();
 		$this->Moo->get('#drop-me');
 		$this->Moo->drop(array(
 			'drop' => 'onDrop',

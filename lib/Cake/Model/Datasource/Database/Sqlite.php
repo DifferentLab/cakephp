@@ -24,6 +24,7 @@ App::uses('CakeText', 'Utility');
  *
  * A DboSource adapter for SQLite 3 using PDO
  *
+ * @property PDOStatement $results
  * @package       Cake.Model.Datasource.Database
  */
 class Sqlite extends DboSource {

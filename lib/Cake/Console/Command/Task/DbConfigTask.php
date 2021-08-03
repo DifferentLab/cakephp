@@ -75,7 +75,7 @@ class DbConfigTask extends AppShell {
 	public function execute() {
 		if (empty($this->args)) {
 			$this->_interactive();
-			return $this->_stop();
+			$this->_stop();
 		}
 	}
 
@@ -349,7 +349,7 @@ class DbConfigTask extends AppShell {
 /**
  * Get a user specified Connection name
  *
- * @return void
+ * @return mixed|void
  */
 	public function getConfig() {
 		App::uses('ConnectionManager', 'Model');
@@ -357,7 +357,8 @@ class DbConfigTask extends AppShell {
 
 		$useDbConfig = key($configs);
 		if (!is_array($configs) || empty($configs)) {
-			return $this->execute();
+			$this->execute();
+			return;
 		}
 		$connections = array_keys($configs);
 

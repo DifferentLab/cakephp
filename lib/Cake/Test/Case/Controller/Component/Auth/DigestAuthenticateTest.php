@@ -26,6 +26,10 @@ require_once CAKE . 'Test' . DS . 'Case' . DS . 'Model' . DS . 'models.php';
 /**
  * Test case for DigestAuthentication
  *
+ * @property ComponentCollection|object $Collection
+ * @property array                      $server
+ * @property DigestAuthenticate         $auth
+ * @property CakeResponse|object        $response
  * @package       Cake.Test.Case.Controller.Component.Auth
  */
 class DigestAuthenticateTest extends CakeTestCase {
@@ -42,7 +46,7 @@ class DigestAuthenticateTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->Collection = $this->getMock('ComponentCollection');
 		$this->server = $_SERVER;
@@ -67,7 +71,7 @@ class DigestAuthenticateTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		$_SERVER = $this->server;
 	}
@@ -104,13 +108,13 @@ class DigestAuthenticateTest extends CakeTestCase {
 	}
 
 /**
- * test the authenticate method
- *
- * @expectedException UnauthorizedException
- * @expectedExceptionCode 401
- * @return void
- */
+	 * test the authenticate method
+	 *
+	 * @return void
+	 */
 	public function testAuthenticateWrongUsername() {
+		$this->expectException('UnauthorizedException');
+		$this->expectExceptionCode('401');
 		$request = new CakeRequest('posts/index', false);
 		$request->addParams(array('pass' => array(), 'named' => array()));
 
@@ -181,13 +185,13 @@ DIGEST;
 	}
 
 /**
- * test scope failure.
- *
- * @expectedException UnauthorizedException
- * @expectedExceptionCode 401
- * @return void
- */
+	 * test scope failure.
+	 *
+	 * @return void
+	 */
 	public function testAuthenticateFailReChallenge() {
+		$this->expectException('UnauthorizedException');
+		$this->expectExceptionCode('401');
 		$this->auth->settings['scope'] = array('user' => 'nate');
 		$request = new CakeRequest('posts/index', false);
 		$request->addParams(array('pass' => array(), 'named' => array()));

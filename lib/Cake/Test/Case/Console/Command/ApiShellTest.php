@@ -25,6 +25,7 @@ App::uses('ApiShell', 'Console/Command');
 /**
  * ApiShellTest class
  *
+ * @property ApiShell|object $Shell
  * @package       Cake.Test.Case.Console.Command
  */
 class ApiShellTest extends CakeTestCase {
@@ -34,7 +35,7 @@ class ApiShellTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$out = $this->getMock('ConsoleOutput', array(), array(), '', false);
 		$in = $this->getMock('ConsoleInput', array(), array(), '', false);
@@ -47,10 +48,11 @@ class ApiShellTest extends CakeTestCase {
 	}
 
 /**
- * Test that method names are detected properly including those with no arguments.
- *
- * @return void
- */
+	 * Test that method names are detected properly including those with no arguments.
+	 *
+	 * @return void
+	 * @doesNotPerformAssertions
+	 */
 	public function testMethodNameDetection() {
 		$this->Shell->expects($this->any())->method('in')->will($this->returnValue('q'));
 		$this->Shell->expects($this->at(0))->method('out')->with('Controller');

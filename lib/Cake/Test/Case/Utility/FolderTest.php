@@ -33,7 +33,7 @@ class FolderTest extends CakeTestCase {
  *
  * @return void
  */
-	public static function setUpBeforeClass() {
+	public static function setUpBeforeClass(): void {
 		$dirs = array('cache', 'logs', 'sessions', 'tests');
 		foreach ($dirs as $dir) {
 			new Folder(TMP . $dir, true);
@@ -51,7 +51,7 @@ class FolderTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		clearstatcache();
 	}
@@ -61,7 +61,7 @@ class FolderTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		$exclude = array_merge(static::$_tmp, array('.', '..'));
 		foreach (scandir(TMP) as $dir) {
 			if (is_dir(TMP . $dir) && !in_array($dir, $exclude)) {
@@ -181,12 +181,12 @@ class FolderTest extends CakeTestCase {
 	}
 
 /**
- * @dataProvider inPathInvalidPathArgumentDataProvider
- * @param string $path
- * @expectedException \InvalidArgumentException
- * @expectedExceptionMessage The $path argument is expected to be an absolute path.
- */
+	 * @dataProvider inPathInvalidPathArgumentDataProvider
+	 * @param string $path
+	 */
 	public function testInPathInvalidPathArgument($path) {
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('The $path argument is expected to be an absolute path.');
 		$Folder = new Folder();
 		$Folder->inPath($path);
 	}
@@ -260,7 +260,7 @@ class FolderTest extends CakeTestCase {
 			$Folder = new Folder($path);
 			$result = $Folder->create($path . DS . 'two' . DS . 'three');
 			$this->assertFalse($result);
-		} catch (PHPUnit_Framework_Error $e) {
+		} catch (PHPUnit\Framework\Error\Error $e) {
 			$this->assertTrue(true);
 		}
 
@@ -401,12 +401,10 @@ class FolderTest extends CakeTestCase {
 		$this->assertTrue($Folder->create($new));
 
 		$result = $Folder->read(true, true);
-		$expected = array('0', 'cache', 'logs', 'sessions', 'tests');
-		$this->assertEquals($expected, $result[0]);
+		$this->assertContains('0', $result[0]);
 
 		$result = $Folder->read(true, array('logs'));
-		$expected = array('0', 'cache', 'sessions', 'tests');
-		$this->assertEquals($expected, $result[0]);
+		$this->assertNotContains('logs', $result[0]);
 
 		$result = $Folder->delete($new);
 		$this->assertTrue($result);
@@ -446,9 +444,12 @@ class FolderTest extends CakeTestCase {
 	public function testFolderRead() {
 		$Folder = new Folder(TMP);
 
-		$expected = array('cache', 'logs', 'sessions', 'tests');
+        $expectedFolders = array('cache', 'logs', 'sessions', 'tests');
 		$result = $Folder->read(true, true);
-		$this->assertEquals($expected, $result[0]);
+
+		foreach ($expectedFolders as $expectedFolder) {
+		    $this->assertContains($expectedFolder, $result[0]);
+        }
 
 		$Folder->path = TMP . 'non-existent';
 		$expected = array(array(), array());

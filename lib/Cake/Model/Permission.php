@@ -19,6 +19,8 @@ App::uses('AppModel', 'Model');
 /**
  * Permissions linking AROs with ACOs
  *
+ * @property Aro $Aro
+ * @property Aco $Aco
  * @package       Cake.Model
  */
 class Permission extends AppModel {

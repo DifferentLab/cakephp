@@ -234,6 +234,8 @@ class SqlserverTestResultIterator extends ArrayIterator {
 /**
  * SqlserverTest class
  *
+ * @property DataSource         $Dbo
+ * @property SqlserverTestModel $model
  * @package       Cake.Test.Case.Model.Datasource.Database
  */
 class SqlserverTest extends CakeTestCase {
@@ -264,7 +266,7 @@ class SqlserverTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->Dbo = ConnectionManager::getDataSource('test');
 		if (!($this->Dbo instanceof Sqlserver)) {
@@ -279,7 +281,7 @@ class SqlserverTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		unset($this->Dbo);
 		unset($this->model);

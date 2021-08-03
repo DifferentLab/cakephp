@@ -31,6 +31,10 @@ if (!class_exists('UsersController')) {
 	}
 }
 
+/**
+ * @property BakeShell|object $Shell
+ * @property  Dispatcher $Dispatcher
+ */
 class BakeShellTest extends CakeTestCase {
 
 /**
@@ -45,7 +49,7 @@ class BakeShellTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$out = $this->getMock('ConsoleOutput', array(), array(), '', false);
 		$in = $this->getMock('ConsoleInput', array(), array(), '', false);
@@ -62,7 +66,7 @@ class BakeShellTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		unset($this->Dispatch, $this->Shell);
 	}

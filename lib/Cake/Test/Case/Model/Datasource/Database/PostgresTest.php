@@ -173,6 +173,8 @@ class PostgresClientTestModel extends Model {
 /**
  * PostgresTest class
  *
+ * @property PostgresTestModel $model
+ * @property DataSource $db
  * @package       Cake.Test.Case.Model.Datasource.Database
  */
 class PostgresTest extends CakeTestCase {
@@ -214,7 +216,7 @@ class PostgresTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		Configure::write('Cache.disable', true);
 		$this->Dbo = ConnectionManager::getDataSource('test');
@@ -228,7 +230,7 @@ class PostgresTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		Configure::write('Cache.disable', false);
 		unset($this->Dbo2);
@@ -1141,7 +1143,7 @@ class PostgresTest extends CakeTestCase {
 
 		$result = $db->limit(10, 300000000000000000000000000000);
 		$scientificNotation = sprintf('%.1E', 300000000000000000000000000000);
-		$this->assertNotContains($scientificNotation, $result);
+		$this->assertStringNotContainsString($scientificNotation, $result);
 	}
 
 /**

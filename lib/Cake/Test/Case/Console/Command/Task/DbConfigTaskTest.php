@@ -25,6 +25,7 @@ App::uses('DbConfigTask', 'Console/Command/Task');
 /**
  * DbConfigTest class
  *
+ * @property DbConfigTask|object $Task
  * @package       Cake.Test.Case.Console.Command.Task
  */
 class DbConfigTaskTest extends CakeTestCase {
@@ -34,7 +35,7 @@ class DbConfigTaskTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$out = $this->getMock('ConsoleOutput', array(), array(), '', false);
 		$in = $this->getMock('ConsoleInput', array(), array(), '', false);
@@ -52,7 +53,7 @@ class DbConfigTaskTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		unset($this->Task);
 	}

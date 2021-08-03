@@ -57,19 +57,13 @@ class TestSource extends DataSource {
 /**
  * listSources
  *
- * @return bool
+ * @return null Array of sources available in this datasource.
  */
-	public function listSources() {
+	public function listSources($data = null) {
 		return null;
 	}
 
-/**
- * Returns the schema for the datasource to enable create/update
- *
- * @param Model $Model
- * @return array
- */
-	public function describe(Model $Model) {
+	public function describe($model) {
 		return $this->_schema;
 	}
 
@@ -91,6 +85,8 @@ class TestSource extends DataSource {
 /**
  * DataSourceTest class
  *
+ * @property TestSource   $Source
+ * @property Model $Model
  * @package       Cake.Test.Case.Model.Datasource
  */
 class DataSourceTest extends CakeTestCase {
@@ -107,7 +103,7 @@ class DataSourceTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->Source = $this->getMock(
 			'TestSource',
@@ -132,7 +128,7 @@ class DataSourceTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		unset($this->Model, $this->Source);
 		ConnectionManager::drop($this->sourceName);

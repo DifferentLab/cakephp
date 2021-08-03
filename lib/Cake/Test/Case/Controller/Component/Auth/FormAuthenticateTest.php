@@ -25,6 +25,9 @@ require_once CAKE . 'Test' . DS . 'Case' . DS . 'Model' . DS . 'models.php';
 /**
  * Test case for FormAuthentication
  *
+ * @property ComponentCollection|object $Collection
+ * @property FormAuthenticate           $auth
+ * @property CakeResponse|object        $response
  * @package       Cake.Test.Case.Controller.Component.Auth
  */
 class FormAuthenticateTest extends CakeTestCase {
@@ -41,7 +44,7 @@ class FormAuthenticateTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->Collection = $this->getMock('ComponentCollection');
 		$this->auth = new FormAuthenticate($this->Collection, array(

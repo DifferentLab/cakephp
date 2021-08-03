@@ -27,6 +27,7 @@ App::uses('CakeEvent', 'Event');
 /**
  * ControllerTestDispatcher class
  *
+ * @property CakeResponse $response
  * @package       Cake.TestSuite
  */
 class ControllerTestDispatcher extends Dispatcher {
@@ -69,18 +70,6 @@ class ControllerTestDispatcher extends Dispatcher {
 			}
 		}
 		return $this->testController;
-	}
-
-/**
- * Loads routes and resets if the test case dictates it should
- *
- * @return void
- */
-	protected function _loadRoutes() {
-		parent::_loadRoutes();
-		if (!$this->loadRoutes) {
-			Router::reload();
-		}
 	}
 
 }
@@ -256,7 +245,7 @@ abstract class ControllerTestCase extends CakeTestCase {
 		}
 
 		$_SERVER['REQUEST_URI'] = $url;
-		/** @var CakeRequest|PHPUnit_Framework_MockObject_MockObject $request */
+		/** @var CakeRequest|PHPUnit\Framework\MockObject\MockObject $request */
 		$request = $this->getMock('CakeRequest', array('_readInput'));
 
 		if (is_string($options['data'])) {
@@ -367,12 +356,12 @@ abstract class ControllerTestCase extends CakeTestCase {
 		), (array)$mocks);
 
 		list($plugin, $name) = pluginSplit($controller);
-		/** @var Controller|PHPUnit_Framework_MockObject_MockObject $controllerObj */
+		/** @var Controller|PHPUnit\Framework\MockObject\MockObject $controllerObj */
 		$controllerObj = $this->getMock($name . 'Controller', $mocks['methods'], array(), '', false);
 		$controllerObj->name = $name;
-		/** @var CakeRequest|PHPUnit_Framework_MockObject_MockObject $request */
+		/** @var CakeRequest|PHPUnit\Framework\MockObject\MockObject $request */
 		$request = $this->getMock('CakeRequest');
-		/** @var CakeResponse|PHPUnit_Framework_MockObject_MockObject $response */
+		/** @var CakeResponse|PHPUnit\Framework\MockObject\MockObject $response */
 		$response = $this->getMock($this->_responseClass, array('_sendHeader'));
 		$controllerObj->__construct($request, $response);
 		$controllerObj->Components->setController($controllerObj);
@@ -413,7 +402,7 @@ abstract class ControllerTestCase extends CakeTestCase {
 					'class' => $componentClass
 				));
 			}
-			/** @var Component|PHPUnit_Framework_MockObject_MockObject $componentObj */
+			/** @var Component|PHPUnit\Framework\MockObject\MockObject $componentObj */
 			$componentObj = $this->getMock($componentClass, $methods, array($controllerObj->Components, $config));
 			$controllerObj->Components->set($alias, $componentObj);
 			$controllerObj->Components->enable($alias);
@@ -432,7 +421,7 @@ abstract class ControllerTestCase extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		unset(
 			$this->contents,

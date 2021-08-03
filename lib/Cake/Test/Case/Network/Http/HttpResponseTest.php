@@ -15,14 +15,14 @@
  * @since         CakePHP(tm) v 1.2.0.4206
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-App::uses('HttpResponse', 'Network/Http');
+App::uses('HttpSocketResponse', 'Network/Http');
 
 /**
  * TestHttpResponse class
  *
  * @package       Cake.Test.Case.Network.Http
  */
-class TestHttpResponse extends HttpResponse {
+class TestHttpResponse extends HttpSocketResponse {
 
 /**
  * Convenience method for testing protected method
@@ -80,6 +80,7 @@ class TestHttpResponse extends HttpResponse {
 /**
  * HttpResponseTest class
  *
+ * @property TestHttpResponse $HttpResponse
  * @package       Cake.Test.Case.Network.Http
  */
 class HttpResponseTest extends CakeTestCase {
@@ -89,7 +90,7 @@ class HttpResponseTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->HttpResponse = new TestHttpResponse();
 	}
@@ -359,13 +360,13 @@ class HttpResponseTest extends CakeTestCase {
 	}
 
 /**
- * testInvalidParseResponseData
- *
- * @dataProvider invalidParseResponseDataProvider
- * @expectedException SocketException
- * @return void
- */
+	 * testInvalidParseResponseData
+	 *
+	 * @dataProvider invalidParseResponseDataProvider
+	 * @return void
+	 */
 	public function testInvalidParseResponseData($value) {
+		$this->expectException(\SocketException::class);
 		$this->HttpResponse->parseResponse($value);
 	}
 

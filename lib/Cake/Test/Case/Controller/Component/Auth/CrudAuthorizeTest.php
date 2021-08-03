@@ -25,6 +25,9 @@ App::uses('CakeResponse', 'Network');
 /**
  * CrudAuthorizeTest
  *
+ * @property AclComponent|object        $Acl
+ * @property ComponentCollection|object $Components
+ * @property CrudAuthorize              $auth
  * @package       Cake.Test.Case.Controller.Component.Auth
  */
 class CrudAuthorizeTest extends CakeTestCase {
@@ -34,7 +37,7 @@ class CrudAuthorizeTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		Configure::write('Routing.prefixes', array());
 		Router::reload();
@@ -58,12 +61,12 @@ class CrudAuthorizeTest extends CakeTestCase {
 	}
 
 /**
- * test authorize() without a mapped action, ensure an error is generated.
- *
- * @expectedException PHPUnit_Framework_Error_Warning
- * @return void
- */
+	 * test authorize() without a mapped action, ensure an error is generated.
+	 *
+	 * @return void
+	 */
 	public function testAuthorizeNoMappedAction() {
+		$this->expectException(\PHPUnit\Framework\Error\Warning::class);
 		$request = new CakeRequest('/posts/foobar', false);
 		$request->addParams(array(
 			'controller' => 'posts',

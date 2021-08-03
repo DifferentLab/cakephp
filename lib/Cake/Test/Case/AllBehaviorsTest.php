@@ -23,12 +23,11 @@
  *
  * @package       Cake.Test.Case
  */
-class AllBehaviorsTest extends PHPUnit_Framework_TestSuite {
+class AllBehaviorsTest extends \PHPUnit\Framework\TestSuite {
 
 /**
  * Suite define the tests for this suite
  *
- * @return void
  */
 	public static function suite() {
 		$suite = new CakeTestSuite('Model Behavior and all behaviors');

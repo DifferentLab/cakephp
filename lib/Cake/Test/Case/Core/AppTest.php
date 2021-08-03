@@ -28,7 +28,7 @@ class AppTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		CakePlugin::unload();
 	}
@@ -562,9 +562,9 @@ class AppTest extends CakeTestCase {
 		$this->assertTrue($result);
 		$this->assertTrue(class_exists('TestPluginAppHelper'));
 
-		$result = App::import('Datasource', 'TestPlugin.TestSource');
+		$result = App::import('Datasource', 'TestPlugin.PluginTestSource');
 		$this->assertTrue($result);
-		$this->assertTrue(class_exists('TestSource'));
+		$this->assertTrue(class_exists('PluginTestSource'));
 
 		App::uses('ExampleExample', 'TestPlugin.Vendor/Example');
 		$this->assertTrue(class_exists('ExampleExample'));
@@ -725,7 +725,7 @@ class AppTest extends CakeTestCase {
 		CakePlugin::load(array('TestPlugin', 'TestPluginTwo'));
 
 		ob_start();
-		$result = App::import('Vendor', 'css/TestAsset', array('ext' => 'css'));
+		$result = App::import('Vendor', 'css/test_asset', array('ext' => 'css'));
 		$text = ob_get_clean();
 		$this->assertTrue($result);
 		$this->assertEquals('/* this is the test asset css file */', trim($text));
@@ -742,31 +742,31 @@ class AppTest extends CakeTestCase {
 		$result = App::import('Vendor', 'SomeNameInSubfolder', array('file' => 'somename/some.name.php'));
 		$text = ob_get_clean();
 		$this->assertTrue($result);
-		$this->assertEquals('This is a file with dot in file name', $text);
+		$this->assertEquals("This is a file with dot in file name", trim($text));
 
 		ob_start();
 		$result = App::import('Vendor', 'TestHello', array('file' => 'Test' . DS . 'hello.php'));
 		$text = ob_get_clean();
 		$this->assertTrue($result);
-		$this->assertEquals('This is the hello.php file in Test directory', $text);
+		$this->assertEquals('This is the hello.php file in Test directory', trim($text));
 
 		ob_start();
 		$result = App::import('Vendor', 'MyTest', array('file' => 'Test' . DS . 'MyTest.php'));
 		$text = ob_get_clean();
 		$this->assertTrue($result);
-		$this->assertEquals('This is the MyTest.php file', $text);
+		$this->assertEquals('This is the MyTest.php file', trim($text));
 
 		ob_start();
 		$result = App::import('Vendor', 'Welcome');
 		$text = ob_get_clean();
 		$this->assertTrue($result);
-		$this->assertEquals('This is the welcome.php file in vendors directory', $text);
+		$this->assertEquals('This is the welcome.php file in vendors directory', trim($text));
 
 		ob_start();
 		$result = App::import('Vendor', 'TestPlugin.Welcome');
 		$text = ob_get_clean();
 		$this->assertTrue($result);
-		$this->assertEquals('This is the welcome.php file in test_plugin/vendors directory', $text);
+		$this->assertEquals('This is the welcome.php file in test_plugin/vendors directory', trim($text));
 	}
 
 /**

@@ -48,6 +48,7 @@ class AclNodeTwoTestBase extends AclNode {
 /**
  * AroTwoTest class
  *
+ * @property bool|mixed|PermissionTwoTest|string|null $Permission
  * @package       Cake.Test.Case.Controller.Component.Acl
  */
 class AroTwoTest extends AclNodeTwoTestBase {
@@ -149,6 +150,9 @@ class PermissionTwoTest extends Permission {
 /**
  * DbAclTwoTest class
  *
+ * @property bool|mixed|PermissionTwoTest|string|null $Permission
+ * @property AroTwoTest                               $Aro
+ * @property AcoTwoTest                               $Aco
  * @package       Cake.Test.Case.Controller.Component.Acl
  */
 class DbAclTwoTest extends DbAcl {
@@ -172,6 +176,7 @@ class DbAclTwoTest extends DbAcl {
 /**
  * Test case for AclComponent using the DbAcl implementation.
  *
+ * @property AclComponent $Acl
  * @package       Cake.Test.Case.Controller.Component.Acl
  */
 class DbAclTest extends CakeTestCase {
@@ -188,7 +193,7 @@ class DbAclTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		Configure::write('Acl.classname', 'DbAclTwoTest');
 		Configure::write('Acl.database', 'test');
@@ -201,7 +206,7 @@ class DbAclTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		unset($this->Acl);
 	}
@@ -289,12 +294,12 @@ class DbAclTest extends CakeTestCase {
 	}
 
 /**
- * Test that allow() with an invalid permission name triggers an error.
- *
- * @expectedException CakeException
- * @return void
- */
+	 * Test that allow() with an invalid permission name triggers an error.
+	 *
+	 * @return void
+	 */
 	public function testAllowInvalidPermission() {
+		$this->expectException(\CakeException::class);
 		$this->assertFalse($this->Acl->allow('Micheal', 'tpsReports', 'derp'));
 	}
 

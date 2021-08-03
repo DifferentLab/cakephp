@@ -24,6 +24,8 @@ App::uses('ComponentCollection', 'Controller');
 /**
  * FlashComponentTest class
  *
+ * @property ComponentCollection $Components
+ * @property FlashComponent      $Flash
  * @package		Cake.Test.Case.Controller.Component
  */
 class FlashComponentTest extends CakeTestCase {
@@ -33,7 +35,7 @@ class FlashComponentTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->Components = new ComponentCollection();
 		$this->Flash = new FlashComponent($this->Components);
@@ -44,7 +46,7 @@ class FlashComponentTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		CakeSession::destroy();
 	}
@@ -177,7 +179,9 @@ class FlashComponentTest extends CakeTestCase {
 	public function testSetWithComponentConfiguration() {
 		$this->assertNull(CakeSession::read('Message.flash'));
 
-		$FlashWithSettings = $this->Components->load('Flash', array('element' => 'test'));
+
+        /** @var FlashComponent $FlashWithSettings */
+        $FlashWithSettings = $this->Components->load('Flash', array('element' => 'test'));
 		$FlashWithSettings->set('This is a test message');
 		$expected = array(
 			array(

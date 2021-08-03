@@ -16,6 +16,8 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
+use PHPUnit\Framework\Constraint\IsAnything;
+
 App::uses('ConsoleOutput', 'Console');
 App::uses('ConsoleInput', 'Console');
 App::uses('ShellDispatcher', 'Console');
@@ -53,6 +55,7 @@ if (!$imported) {
 /**
  * ControllerTaskTest class
  *
+ * @property ControllerTask|object $Task
  * @package       Cake.Test.Case.Console.Command.Task
  */
 class ControllerTaskTest extends CakeTestCase {
@@ -69,7 +72,7 @@ class ControllerTaskTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$out = $this->getMock('ConsoleOutput', array(), array(), '', false);
 		$in = $this->getMock('ConsoleInput', array(), array(), '', false);
@@ -101,7 +104,7 @@ class ControllerTaskTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		unset($this->Task);
 		ClassRegistry::flush();
 		App::build();
@@ -307,7 +310,7 @@ class ControllerTaskTest extends CakeTestCase {
 
 		$this->Task->expects($this->at(1))->method('createFile')->with(
 			$path,
-			new PHPUnit_Framework_Constraint_IsAnything()
+			new IsAnything()
 		);
 		$this->Task->expects($this->at(3))->method('createFile')->with(
 			$path,
@@ -571,7 +574,7 @@ class ControllerTaskTest extends CakeTestCase {
 		$this->Task->params = array('public' => true);
 
 		$filename = '/my/path/BakeArticlesController.php';
-		$expected = new PHPUnit_Framework_Constraint_Not($this->stringContains('$scaffold'));
+		$expected = new PHPUnit\Framework\Constraint\LogicalNot($this->stringContains('$scaffold'));
 		$this->Task->expects($this->once())->method('createFile')->with(
 			$filename, $expected
 		);

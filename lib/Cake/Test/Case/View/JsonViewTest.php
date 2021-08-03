@@ -33,7 +33,7 @@ class JsonViewTest extends CakeTestCase {
  *
  * @return void
  **/
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		Configure::write('debug', 0);
 	}
@@ -377,7 +377,7 @@ class JsonViewTest extends CakeTestCase {
 			$View->render();
 			restore_error_handler();
 			$this->fail('Failed asserting that exception of type "CakeException" is thrown.');
-		} catch (CakeException $e) {
+		} catch (Throwable $e) {
 			restore_error_handler();
 			$this->assertRegExp('/UTF-8/', $e->getMessage());
 			return;

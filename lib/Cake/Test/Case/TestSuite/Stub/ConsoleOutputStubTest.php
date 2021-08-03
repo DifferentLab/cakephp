@@ -17,6 +17,10 @@ App::uses("ConsoleOutputStub", "TestSuite/Stub");
 /*
  * ConsoleOutputStub test
  */
+
+/**
+ * @property ConsoleOutputStub $stub
+ */
 class ConsoleOutputStubTest extends CakeTestCase {
 
 /**
@@ -24,7 +28,7 @@ class ConsoleOutputStubTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->stub = new ConsoleOutputStub();

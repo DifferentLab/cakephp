@@ -1,0 +1,18 @@
+includes:
+	- phpstan-baseline.neon
+parameters:
+    reportUnmatchedIgnoredErrors: false
+    checkMissingIterableValueType: false
+    level: 0
+    phpVersion: 70400
+    paths:
+        - app/
+        - lib/
+    excludePaths:
+        - app/tmp
+    earlyTerminatingMethodCalls:
+        lib/Cake/Core/CakeObject:
+            - _stop
+        lib/Cake/Console/ShellDispatcher:
+            - _stop
+    tmpDir: app/tmp/phpstanlib

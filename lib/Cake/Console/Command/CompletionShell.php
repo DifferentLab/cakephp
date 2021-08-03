@@ -145,7 +145,7 @@ class CompletionShell extends AppShell {
  * Emit results as a string, space delimited
  *
  * @param array $options The options to output
- * @return void
+ * @return mixed
  */
 	protected function _output($options = array()) {
 		if ($options) {

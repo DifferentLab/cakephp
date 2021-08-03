@@ -204,7 +204,7 @@ class Debugger {
  * @return bool|null True if error was handled, otherwise null.
  * @deprecated 3.0.0 Will be removed in 3.0. This function is superseded by Debugger::outputError().
  */
-	public static function showError($code, $description, $file = null, $line = null, $context = null) {
+	public static function showError($code, $description, $file = null, $line = null, $context = []) {
 		$self = Debugger::getInstance();
 
 		if (empty($file)) {

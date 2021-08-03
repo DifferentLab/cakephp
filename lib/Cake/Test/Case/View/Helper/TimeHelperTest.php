@@ -48,6 +48,7 @@ class CakeTimeMock {
 /**
  * TimeHelperTest class
  *
+ * @property View $View
  * @package       Cake.Test.Case.View.Helper
  */
 class TimeHelperTest extends CakeTestCase {
@@ -61,7 +62,7 @@ class TimeHelperTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->View = new View(null);
 	}
@@ -71,7 +72,7 @@ class TimeHelperTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		unset($this->View);
 		parent::tearDown();
 	}

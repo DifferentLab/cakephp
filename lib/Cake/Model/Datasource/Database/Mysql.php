@@ -281,7 +281,7 @@ class Mysql extends DboSource {
 		if ($row = $this->_result->fetch(PDO::FETCH_NUM)) {
 			$resultRow = array();
 			foreach ($this->map as $col => $meta) {
-				list($table, $column, $type) = $meta;
+				[$table, $column, $type] = $meta;
 				$resultRow[$table][$column] = $row[$col];
 				if ($type === 'boolean' && $row[$col] !== null) {
 					$resultRow[$table][$column] = $this->boolean($resultRow[$table][$column]);
@@ -781,7 +781,7 @@ class Mysql extends DboSource {
 		$col = str_replace(')', '', $real);
 		$limit = $this->length($real);
 		if (strpos($col, '(') !== false) {
-			list($col, $vals) = explode('(', $col);
+			[$col, $vals] = explode('(', $col);
 		}
 
 		if (in_array($col, array('date', 'time', 'datetime', 'timestamp'))) {

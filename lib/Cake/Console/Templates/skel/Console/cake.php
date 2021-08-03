@@ -45,4 +45,4 @@ if (!include $dispatcher) {
 }
 unset($dispatcher);
 
-return ShellDispatcher::run($argv);
+ShellDispatcher::run($argv);

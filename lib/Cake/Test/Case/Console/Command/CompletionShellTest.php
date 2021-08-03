@@ -42,6 +42,7 @@ class TestCompletionStringOutput extends ConsoleOutput {
 /**
  * CompletionShellTest
  *
+ * @property CompletionShell|object $Shell
  * @package       Cake.Test.Case.Console.Command
  */
 class CompletionShellTest extends CakeTestCase {
@@ -51,7 +52,7 @@ class CompletionShellTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		App::build(array(
 			'Plugin' => array(
@@ -84,7 +85,7 @@ class CompletionShellTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		unset($this->Shell);
 		CakePlugin::unload();

@@ -65,6 +65,7 @@ App::uses('Hash', 'Utility');
  *
  * Would paginate using the `find('popular')` method.
  *
+ * @property Controller $Controller
  * @package       Cake.Controller.Component
  * @link https://book.cakephp.org/2.0/en/core-libraries/components/pagination.html
  */

@@ -23,12 +23,11 @@
  *
  * @package       Cake.Test.Case
  */
-class AllLogTest extends PHPUnit_Framework_TestSuite {
+class AllLogTest extends \PHPUnit\Framework\TestSuite {
 
 /**
  * suite method, defines tests for this suite.
  *
- * @return void
  */
 	public static function suite() {
 		$suite = new CakeTestSuite('All Logging related class tests');

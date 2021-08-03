@@ -34,6 +34,9 @@ App::uses('ClassRegistry', 'Utility');
  *		Users
  *			edit
  * ```
+ * @property Permission $Permission
+ * @property Aro $Aro
+ * @property Aco $Aco
  *
  * @package       Cake.Controller.Component.Acl
  */

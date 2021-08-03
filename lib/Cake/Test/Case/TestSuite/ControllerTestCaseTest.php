@@ -109,6 +109,7 @@ class ControllerTestCaseTestController extends AppController {
 /**
  * ControllerTestCaseTest
  *
+ * @property ControllerTestCase|PHPUnit\Framework\MockObject\MockObject $Case
  * @package       Cake.Test.Case.TestSuite
  */
 class ControllerTestCaseTest extends CakeTestCase {
@@ -125,7 +126,7 @@ class ControllerTestCaseTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		App::build(array(
 			'Plugin' => array(CAKE . 'Test' . DS . 'test_app' . DS . 'Plugin' . DS),
@@ -143,7 +144,7 @@ class ControllerTestCaseTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		CakePlugin::unload();
 		$this->Case->controller = null;
@@ -195,7 +196,7 @@ class ControllerTestCaseTest extends CakeTestCase {
 			)
 		));
 		$this->assertNull($Posts->Post->save(array()));
-		$this->assertInternalType('array', $Posts->Post->find('all'));
+		$this->assertIsArray($Posts->Post->find('all'));
 
 		$Posts = $this->Case->generate('Posts', array(
 			'models' => array('Post'),
@@ -322,7 +323,7 @@ class ControllerTestCaseTest extends CakeTestCase {
 	public function testTestAction() {
 		$this->Case->generate('TestsApps');
 		$this->Case->testAction('/tests_apps/index');
-		$this->assertInternalType('array', $this->Case->controller->viewVars);
+		$this->assertIsArray($this->Case->controller->viewVars);
 
 		$this->Case->testAction('/tests_apps/set_action');
 		$results = $this->Case->controller->viewVars;
@@ -352,7 +353,7 @@ class ControllerTestCaseTest extends CakeTestCase {
 	public function testTestActionArrayUrls() {
 		$this->Case->generate('TestsApps');
 		$this->Case->testAction(array('controller' => 'tests_apps', 'action' => 'index'));
-		$this->assertInternalType('array', $this->Case->controller->viewVars);
+		$this->assertIsArray($this->Case->controller->viewVars);
 	}
 
 /**
@@ -400,12 +401,12 @@ class ControllerTestCaseTest extends CakeTestCase {
 	}
 
 /**
- * Tests not using loaded routes during tests
- *
- * @expectedException MissingActionException
- * @return void
- */
+	 * Tests not using loaded routes during tests
+	 *
+	 * @return void
+	 */
 	public function testSkipRoutes() {
+		$this->expectException(\MissingActionException::class);
 		Router::connect('/:controller/:action/*');
 		include CAKE . 'Test' . DS . 'test_app' . DS . 'Config' . DS . 'routes.php';
 

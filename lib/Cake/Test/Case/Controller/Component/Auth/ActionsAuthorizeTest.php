@@ -25,6 +25,10 @@ App::uses('CakeResponse', 'Network');
 /**
  * ActionsAuthorizeTest
  *
+ * @property Controller|object          $controller
+ * @property AclComponent|object        $Acl
+ * @property ComponentCollection|object $Collection
+ * @property ActionsAuthorize           $auth
  * @package       Cake.Test.Case.Controller.Component.Auth
  */
 class ActionsAuthorizeTest extends CakeTestCase {
@@ -34,7 +38,7 @@ class ActionsAuthorizeTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->controller = $this->getMock('Controller', array(), array(), '', false);
 		$this->Acl = $this->getMock('AclComponent', array(), array(), '', false);

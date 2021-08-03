@@ -166,6 +166,7 @@ class ViewTaskArticlesController extends Controller {
 /**
  * ViewTaskTest class
  *
+ * @property object|ViewTask $Task
  * @package       Cake.Test.Case.Console.Command.Task
  */
 class ViewTaskTest extends CakeTestCase {
@@ -184,7 +185,7 @@ class ViewTaskTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$out = $this->getMock('ConsoleOutput', array(), array(), '', false);
 		$in = $this->getMock('ConsoleInput', array(), array(), '', false);
@@ -208,7 +209,7 @@ class ViewTaskTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		unset($this->Task, $this->Dispatch);
 	}
@@ -310,7 +311,7 @@ class ViewTaskTest extends CakeTestCase {
 		$this->Task->expects($this->at(0))->method('createFile')
 			->with(
 				TMP . 'ViewTaskComments' . DS . 'edit.ctp',
-				new PHPUnit_Framework_Constraint_IsAnything()
+				new PHPUnit\Framework\Constraint\IsAnything()
 			);
 		$this->Task->bake('edit', true);
 	}

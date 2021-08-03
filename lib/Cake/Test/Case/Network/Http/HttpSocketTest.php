@@ -17,7 +17,7 @@
  */
 
 App::uses('HttpSocket', 'Network/Http');
-App::uses('HttpResponse', 'Network/Http');
+App::uses('HttpSocketResponse', 'Network/Http');
 
 /**
  * TestAuthentication class
@@ -188,7 +188,7 @@ class HttpSocketTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->Socket = $this->getMock('TestHttpSocket', array('read', 'write', 'connect'));
 		$this->RequestSocket = $this->getMock('TestHttpSocket', array('read', 'write', 'connect', 'request'));
@@ -199,7 +199,7 @@ class HttpSocketTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		unset($this->Socket, $this->RequestSocket);
 	}
@@ -622,12 +622,12 @@ class HttpSocketTest extends CakeTestCase {
 	}
 
 /**
- * The "*" asterisk character is only allowed for the following methods: OPTIONS.
- *
- * @expectedException SocketException
- * @return void
- */
+	 * The "*" asterisk character is only allowed for the following methods: OPTIONS.
+	 *
+	 * @return void
+	 */
 	public function testRequestNotAllowedUri() {
+		$this->expectException(\SocketException::class);
 		$this->Socket->reset();
 		$request = array('uri' => '*', 'method' => 'GET');
 		$this->Socket->request($request);
@@ -1356,22 +1356,22 @@ class HttpSocketTest extends CakeTestCase {
 	}
 
 /**
- * testBadBuildRequestLine method
- *
- * @expectedException SocketException
- * @return void
- */
+	 * testBadBuildRequestLine method
+	 *
+	 * @return void
+	 */
 	public function testBadBuildRequestLine() {
+		$this->expectException(\SocketException::class);
 		$this->Socket->buildRequestLine('Foo');
 	}
 
 /**
- * testBadBuildRequestLine2 method
- *
- * @expectedException SocketException
- * @return void
- */
+	 * testBadBuildRequestLine2 method
+	 *
+	 * @return void
+	 */
 	public function testBadBuildRequestLine2() {
+		$this->expectException(\SocketException::class);
 		$this->Socket->buildRequestLine("GET * HTTP/1.1\r\n");
 	}
 
@@ -1845,7 +1845,7 @@ class HttpSocketTest extends CakeTestCase {
 		} catch (SocketException $e) {
 			$message = $e->getMessage();
 			$this->skipIf(strpos($message, 'Invalid HTTP') !== false, 'Invalid HTTP Response received, skipping.');
-			$this->assertContains('Failed to enable crypto', $message);
+			$this->assertStringContainsString('Failed to enable crypto', $message);
 		}
 	}
 

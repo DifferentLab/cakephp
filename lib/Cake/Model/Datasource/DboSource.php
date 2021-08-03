@@ -24,6 +24,7 @@ App::uses('View', 'View');
  * DboSource
  *
  * Creates DBO-descendant objects from a given db connection configuration
+ * @property array $columns
  *
  * @package       Cake.Model.Datasource
  */
@@ -153,7 +154,7 @@ class DboSource extends DataSource {
 /**
  * A reference to the physical connection of this DataSource
  *
- * @var array
+ * @var PDO
  */
 	protected $_connection = null;
 
@@ -1419,7 +1420,8 @@ class DboSource extends DataSource {
 			}
 
 			// Merge
-			return $this->_mergeHasMany($resultSet, $assocResultSet, $association, $Model);
+			$this->_mergeHasMany($resultSet, $assocResultSet, $association, $Model);
+			return;
 
 		} elseif ($type === 'hasAndBelongsToMany') {
 			// 'hasAndBelongsToMany' associations.
@@ -2434,15 +2436,22 @@ class DboSource extends DataSource {
  *
  * @return bool
  */
-	protected function _beginNested() {
-		$query = 'SAVEPOINT LEVEL' . ++$this->_transactionNesting;
-		if ($this->fullDebug) {
-			$this->took = $this->numRows = $this->affected = false;
-			$this->logQuery($query);
-		}
-		$this->_connection->exec($query);
-		return true;
-	}
+    protected function _beginNested() {
+        $query = 'SAVEPOINT LEVEL' . ++$this->_transactionNesting;
+
+        // make sure the transaction wasn't autocommitted
+        if(!$this->_connection->inTransaction()) {
+            return true;
+        }
+
+        if ($this->fullDebug) {
+            $this->took = $this->numRows = $this->affected = false;
+            $this->logQuery($query);
+        }
+
+        $this->_connection->exec($query);
+        return true;
+    }
 
 /**
  * Commit a transaction
@@ -2457,12 +2466,19 @@ class DboSource extends DataSource {
 		}
 
 		if ($this->_transactionNesting === 0) {
+            $this->_transactionStarted = false;
+
+            // make sure the transaction wasn't autocommitted
+            if(!$this->_connection->inTransaction()) {
+                return true;
+            }
+
 			if ($this->fullDebug) {
 				$this->took = $this->numRows = $this->affected = false;
 				$this->logQuery('COMMIT');
 			}
-			$this->_transactionStarted = false;
-			return $this->_connection->commit();
+
+            return $this->_connection->commit();
 		}
 
 		if ($this->nestedTransactionSupported()) {
@@ -2479,12 +2495,19 @@ class DboSource extends DataSource {
  * @return bool
  */
 	protected function _commitNested() {
-		$query = 'RELEASE SAVEPOINT LEVEL' . $this->_transactionNesting--;
+        $query = 'RELEASE SAVEPOINT LEVEL' . $this->_transactionNesting--;
+
+        // make sure the transaction wasn't autocommitted
+        if(!$this->_connection->inTransaction()) {
+            return true;
+        }
+
 		if ($this->fullDebug) {
 			$this->took = $this->numRows = $this->affected = false;
 			$this->logQuery($query);
 		}
-		$this->_connection->exec($query);
+
+        $this->_connection->exec($query);
 		return true;
 	}
 
@@ -2501,12 +2524,20 @@ class DboSource extends DataSource {
 		}
 
 		if ($this->_transactionNesting === 0) {
-			if ($this->fullDebug) {
+
+            $this->_transactionStarted = false;
+
+            // make sure the transaction wasn't autocommitted
+            if (!$this->_connection->inTransaction()) {
+                return true;
+            }
+
+            if ($this->fullDebug) {
 				$this->took = $this->numRows = $this->affected = false;
 				$this->logQuery('ROLLBACK');
 			}
-			$this->_transactionStarted = false;
-			return $this->_connection->rollBack();
+
+            return $this->_connection->rollBack();
 		}
 
 		if ($this->nestedTransactionSupported()) {
@@ -2523,13 +2554,20 @@ class DboSource extends DataSource {
  * @return bool
  */
 	protected function _rollbackNested() {
-		$query = 'ROLLBACK TO SAVEPOINT LEVEL' . $this->_transactionNesting--;
+        $query = 'ROLLBACK TO SAVEPOINT LEVEL' . $this->_transactionNesting--;
+
+        // make sure the transaction wasn't autocommitted
+	    if (!$this->_connection->inTransaction()) {
+            return true;
+        }
+
 		if ($this->fullDebug) {
 			$this->took = $this->numRows = $this->affected = false;
 			$this->logQuery($query);
 		}
-		$this->_connection->exec($query);
-		return true;
+
+        $this->_connection->exec($query);
+        return true;
 	}
 
 /**

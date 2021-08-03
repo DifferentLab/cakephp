@@ -25,6 +25,7 @@
  *
  * This cache engine requires at least ext/memcached version 2.0
  *
+ * @property array $_compiledGroupNames
  * @package       Cake.Cache.Engine
  */
 class MemcachedEngine extends CacheEngine {
@@ -171,8 +172,9 @@ class MemcachedEngine extends CacheEngine {
 
 		$this->_Memcached->setOption(Memcached::OPT_SERIALIZER, $this->_serializers[$serializer]);
 
-		// Check for Amazon ElastiCache instance
+		// Check for Amazon ElastiCache instance_compiledGroupNames.
 		if (defined('Memcached::OPT_CLIENT_MODE') && defined('Memcached::DYNAMIC_CLIENT_MODE')) {
+            /** @phpstan-ignore-next-line */
 			$this->_Memcached->setOption(Memcached::OPT_CLIENT_MODE, Memcached::DYNAMIC_CLIENT_MODE);
 		}
 

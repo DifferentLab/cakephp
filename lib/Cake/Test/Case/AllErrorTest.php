@@ -23,12 +23,11 @@
  *
  * @package       Cake.Test.Case
  */
-class AllErrorTest extends PHPUnit_Framework_TestSuite {
+class AllErrorTest extends \PHPUnit\Framework\TestSuite {
 
 /**
  * suite method, defines tests for this suite.
  *
- * @return void
  */
 	public static function suite() {
 		$suite = new CakeTestSuite('All Error handling tests');

@@ -30,7 +30,7 @@ class FileTest extends CakeTestCase {
 /**
  * File property
  *
- * @var mixed
+ * @var File
  */
 	public $File = null;
 
@@ -39,7 +39,7 @@ class FileTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$file = __FILE__;
 		$this->File = new File($file);
@@ -50,14 +50,18 @@ class FileTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		$this->File->close();
 		unset($this->File);
 
 		$Folder = new Folder();
 		$Folder->delete(TMP . 'tests' . DS . 'permissions');
-	}
+
+        if(file_exists(TMP . 'some_file.txt')) {
+            unlink(TMP . 'some_file.txt');
+        }
+    }
 
 /**
  * testBasic method
@@ -588,12 +592,13 @@ class FileTest extends CakeTestCase {
 		$this->assertEquals($expected, $file->mime());
 	}
 
-/**
- * getTmpFile method
- *
- * @param bool $paintSkip
- * @return void
- */
+    /**
+     * getTmpFile method
+     *
+     * @param bool $paintSkip
+     *
+     * @return false|string
+     */
 	protected function _getTmpFile($paintSkip = true) {
 		$tmpFile = TMP . 'tests' . DS . 'cakephp.file.test.tmp';
 		if (is_writable(dirname($tmpFile)) && (!file_exists($tmpFile) || is_writable($tmpFile))) {
@@ -631,7 +636,7 @@ class FileTest extends CakeTestCase {
 		// Double check
 		$expected = 'This is the welcome.tmp file in vendors directory';
 		$contents = $TmpFile->read();
-		$this->assertContains($expected, $contents);
+		$this->assertStringContainsString($expected, $contents);
 
 		$search = array('This is the', 'welcome.php file', 'in tmp directory');
 		$replace = array('This should be a', 'welcome.tmp file', 'in the Lib directory');
@@ -643,7 +648,7 @@ class FileTest extends CakeTestCase {
 		// Double check
 		$expected = 'This should be a welcome.tmp file in vendors directory';
 		$contents = $TmpFile->read();
-		$this->assertContains($expected, $contents);
+		$this->assertStringContainsString($expected, $contents);
 
 		$TmpFile->delete();
 	}

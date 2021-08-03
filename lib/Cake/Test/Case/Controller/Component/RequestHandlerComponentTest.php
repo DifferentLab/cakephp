@@ -83,6 +83,7 @@ class CustomJsonView extends JsonView {
 /**
  * RequestHandlerComponentTest class
  *
+ * @property array $_extensions
  * @package       Cake.Test.Case.Controller.Component
  */
 class RequestHandlerComponentTest extends CakeTestCase {
@@ -106,7 +107,7 @@ class RequestHandlerComponentTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->_init();
 	}
@@ -130,7 +131,7 @@ class RequestHandlerComponentTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		unset($this->RequestHandler, $this->Controller);
 		if (!headers_sent()) {
@@ -935,10 +936,10 @@ class RequestHandlerComponentTest extends CakeTestCase {
 	}
 
 /**
- * @expectedException CakeException
- * @return void
- */
+	 * @return void
+	 */
 	public function testAddInputTypeException() {
+		$this->expectException(\CakeException::class);
 		$this->RequestHandler->addInputType('csv', array('I am not callable'));
 	}
 

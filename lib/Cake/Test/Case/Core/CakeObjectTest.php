@@ -17,7 +17,6 @@
  */
 
 App::uses('CakeObject', 'Core');
-App::uses('Object', 'Core');
 App::uses('Router', 'Routing');
 App::uses('Controller', 'Controller');
 App::uses('Model', 'Model');
@@ -258,7 +257,7 @@ class TestCakeObject extends CakeObject {
  * @return void
  */
 	public function set($properties = array()) {
-		return parent::_set($properties);
+		parent::_set($properties);
 	}
 
 }
@@ -277,6 +276,7 @@ class ObjectTestModel extends CakeTestModel {
 /**
  * CakeObject Test class
  *
+ * @property TestCakeObject $object
  * @package       Cake.Test.Case.Core
  */
 class ObjectTest extends CakeTestCase {
@@ -293,7 +293,7 @@ class ObjectTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->object = new TestCakeObject();
 	}
@@ -303,7 +303,7 @@ class ObjectTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		CakePlugin::unload();
 		unset($this->object);
@@ -698,6 +698,6 @@ class ObjectTest extends CakeTestCase {
 	public function testBackwardCompatibility() {
 		$this->skipIf(version_compare(PHP_VERSION, '7.0.0', '>='));
 
-		$this->assertInstanceOf('Object', new ObjectTestModel);
+		$this->assertInstanceOf('CakeObject', new ObjectTestModel);
 	}
 }

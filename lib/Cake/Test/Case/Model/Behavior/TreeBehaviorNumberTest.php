@@ -26,6 +26,7 @@ require_once dirname(dirname(__FILE__)) . DS . 'models.php';
 /**
  * TreeBehaviorNumberTest class
  *
+ * @property mixed $Tree
  * @package       Cake.Test.Case.Model.Behavior
  */
 class TreeBehaviorNumberTest extends CakeTestCase {

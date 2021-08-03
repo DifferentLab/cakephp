@@ -28,6 +28,9 @@ require_once CAKE . 'Test' . DS . 'Case' . DS . 'Model' . DS . 'models.php';
 /**
  * Test case for BlowfishAuthentication
  *
+ * @property ComponentCollection|object $Collection
+ * @property BlowfishAuthenticate       $auth
+ * @property CakeResponse|object        $response
  * @package	Cake.Test.Case.Controller.Component.Auth
  */
 class BlowfishAuthenticateTest extends CakeTestCase {
@@ -39,7 +42,7 @@ class BlowfishAuthenticateTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->Collection = $this->getMock('ComponentCollection');
 		$this->auth = new BlowfishAuthenticate($this->Collection, array(

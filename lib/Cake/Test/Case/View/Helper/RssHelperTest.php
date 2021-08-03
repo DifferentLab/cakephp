@@ -24,6 +24,8 @@ App::uses('File', 'Utility');
 /**
  * RssHelperTest class
  *
+ * @property View      $View
+ * @property RssHelper $Rss
  * @package       Cake.Test.Case.View.Helper
  */
 class RssHelperTest extends CakeTestCase {
@@ -33,7 +35,7 @@ class RssHelperTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$controller = null;
 		$this->View = new View($controller);
@@ -45,7 +47,7 @@ class RssHelperTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		unset($this->Rss);
 	}

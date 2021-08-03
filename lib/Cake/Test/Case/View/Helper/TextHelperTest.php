@@ -47,6 +47,8 @@ class CakeTextMock {
 /**
  * TextHelperTest class
  *
+ * @property View       $View
+ * @property TextHelper $Text
  * @package       Cake.Test.Case.View.Helper
  */
 class TextHelperTest extends CakeTestCase {
@@ -56,7 +58,7 @@ class TextHelperTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->View = new View(null);
 		$this->Text = new TextHelper($this->View);
@@ -67,7 +69,7 @@ class TextHelperTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		unset($this->View);
 		parent::tearDown();
 	}

@@ -527,8 +527,15 @@ class PaginatorHelper extends AppHelper {
 			return '';
 		}
 
+		$url = $options['url'];
+		$step = $options['step'];
+		$escape = $options['escape'];
+		$model = $options['model'];
+		$tag = $options['tag'];
+		$class = $options['class'];
+		$disabledTag = $options['disabledTag'];
+
 		foreach (array_keys($_defaults) as $key) {
-			${$key} = $options[$key];
 			unset($options[$key]);
 		}
 
@@ -760,7 +767,18 @@ class PaginatorHelper extends AppHelper {
 			return '';
 		}
 
-		extract($options);
+        ['tag' => $tag,
+        'before' => $before,
+        'after' => $after,
+        'modulus' => $modulus,
+        'separator' => $separator,
+        'first' => $first,
+        'last' => $last,
+        'ellipsis' => $ellipsis,
+        'class' => $class,
+        'currentClass' => $currentClass,
+        'currentTag' => $currentTag] = $options;
+
 		unset($options['tag'], $options['before'], $options['after'], $options['model'],
 			$options['modulus'], $options['separator'], $options['first'], $options['last'],
 			$options['ellipsis'], $options['class'], $options['currentClass'], $options['currentTag']
@@ -822,7 +840,7 @@ class PaginatorHelper extends AppHelper {
 			if ($last && $end < $params['pageCount']) {
 				$lastPage = is_int($last) ? $last : 0;
 				$offset = ($params['pageCount'] < $end + $lastPage) ? $params['pageCount'] - $end : $last;
-				if ($offset <= $lastPage && $params['pageCount'] - $end > $lastPage) {
+				if ($last === 'last' ||( $offset <= $lastPage && $params['pageCount'] - $end > $lastPage)) {
 					$out .= $this->last($offset, compact('tag', 'separator', 'ellipsis', 'class'));
 				} else {
 					$out .= $this->last($offset, compact('tag', 'separator', 'class', 'ellipsis') + array('before' => $separator));
@@ -898,7 +916,15 @@ class PaginatorHelper extends AppHelper {
 		if ($params['pageCount'] <= 1) {
 			return '';
 		}
-		extract($options);
+
+		[
+            'tag' => $tag,
+            'after' => $after,
+            'separator' => $separator,
+            'ellipsis' => $ellipsis,
+            'class' => $class,
+        ] = $options;
+
 		unset($options['tag'], $options['after'], $options['model'], $options['separator'], $options['ellipsis'], $options['class']);
 
 		$out = '';
@@ -962,7 +988,14 @@ class PaginatorHelper extends AppHelper {
 			return '';
 		}
 
-		extract($options);
+        [
+            'tag' => $tag,
+            'before' => $before,
+            'separator' => $separator,
+            'ellipsis' => $ellipsis,
+            'class' => $class,
+        ] = $options;
+
 		unset($options['tag'], $options['before'], $options['model'], $options['separator'], $options['ellipsis'], $options['class']);
 
 		$out = '';
@@ -988,26 +1021,27 @@ class PaginatorHelper extends AppHelper {
 		return $out;
 	}
 
-/**
- * Returns the meta-links for a paginated result set.
- *
- * `echo $this->Paginator->meta();`
- *
- * Echos the links directly, will output nothing if there is neither a previous nor next page.
- *
- * `$this->Paginator->meta(array('block' => true));`
- *
- * Will append the output of the meta function to the named block - if true is passed the "meta"
- * block is used.
- *
- * ### Options:
- *
- * - `model` The model to use defaults to PaginatorHelper::defaultModel()
- * - `block` The block name to append the output to, or false/absent to return as a string
- *
- * @param array $options Array of options.
- * @return string|null Meta links.
- */
+    /**
+     * Returns the meta-links for a paginated result set.
+     *
+     * `echo $this->Paginator->meta();`
+     *
+     * Echos the links directly, will output nothing if there is neither a previous nor next page.
+     *
+     * `$this->Paginator->meta(array('block' => true));`
+     *
+     * Will append the output of the meta function to the named block - if true is passed the "meta"
+     * block is used.
+     *
+     * ### Options:
+     *
+     * - `model` The model to use defaults to PaginatorHelper::defaultModel()
+     * - `block` The block name to append the output to, or false/absent to return as a string
+     *
+     * @param array $options Array of options.
+     *
+     * @return string
+     */
 	public function meta($options = array()) {
 		$model = isset($options['model']) ? $options['model'] : null;
 		$params = $this->params($model);

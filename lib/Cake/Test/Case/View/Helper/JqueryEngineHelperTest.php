@@ -23,6 +23,8 @@ App::uses('View', 'View');
 /**
  * JqueryEngineHelperTest
  *
+ * @property object|View        $View
+ * @property JqueryEngineHelper $Jquery
  * @package       Cake.Test.Case.View.Helper
  */
 class JqueryEngineHelperTest extends CakeTestCase {
@@ -32,7 +34,7 @@ class JqueryEngineHelperTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$controller = null;
 		$this->View = $this->getMock('View', array('addScript'), array(&$controller));
@@ -44,7 +46,7 @@ class JqueryEngineHelperTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		unset($this->Jquery);
 	}

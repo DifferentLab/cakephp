@@ -77,7 +77,7 @@ class ShellTestShell extends Shell {
 	//@codingStandardsIgnoreEnd
 
 	public function mergeVars($properties, $class, $normalize = true) {
-		return $this->_mergeVars($properties, $class, $normalize);
+		$this->_mergeVars($properties, $class, $normalize);
 	}
 
 	public function useLogger($enable = true) {
@@ -118,6 +118,7 @@ class TestBananaTask extends Shell {
 /**
  * ShellTest class
  *
+ * @property ShellTestShell $Shell
  * @package       Cake.Test.Case.Console.Command
  */
 class ShellTest extends CakeTestCase {
@@ -137,7 +138,7 @@ class ShellTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		$output = $this->getMock('ConsoleOutput', array(), array(), '', false);
@@ -174,7 +175,7 @@ class ShellTest extends CakeTestCase {
 		$this->Shell->mergeVars(array('tasks'), 'TestMergeShell');
 		$this->Shell->mergeVars(array('uses'), 'TestMergeShell', false);
 
-		$expected = array('DbConfig' => null, 'Fixture' => null, 'DbConfig' => array('one', 'two'));
+		$expected = array('Fixture' => null, 'DbConfig' => array('one', 'two'));
 		$this->assertEquals($expected, $this->Shell->tasks);
 
 		$expected = array('Fixture' => null, 'DbConfig' => array('one', 'two'));
@@ -965,7 +966,7 @@ TEXT;
 		$this->Shell->log_something();
 		$this->assertTrue(file_exists(LOGS . 'error.log'));
 		$contents = file_get_contents(LOGS . 'error.log');
-		$this->assertContains($this->Shell->testMessage, $contents);
+		$this->assertStringContainsString($this->Shell->testMessage, $contents);
 
 		CakeLog::enable('stdout');
 		CakeLog::enable('stderr');
@@ -1012,12 +1013,12 @@ TEXT;
 	}
 
 /**
- * Test getting an invalid helper
- *
- * @expectedException RunTimeException
- * @return void
- */
+	 * Test getting an invalid helper
+	 *
+	 * @return void
+	 */
 	public function testGetInvalidHelper() {
+		$this->expectException(\RunTimeException::class);
 		$this->Shell->helper("tomato");
 	}
 

@@ -2770,6 +2770,7 @@ class Ad extends CakeTestModel {
  * @var array
  */
 	public $belongsTo = array('Campaign');
+
 }
 
 /**

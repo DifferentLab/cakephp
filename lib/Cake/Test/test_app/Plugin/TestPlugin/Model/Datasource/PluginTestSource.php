@@ -2,7 +2,7 @@
 
 App::uses('DataSource', 'Model/Datasource');
 
-class TestSource extends DataSource {
+class PluginTestSource extends DataSource {
 
 	public function describe($model) {
 		return compact('model');

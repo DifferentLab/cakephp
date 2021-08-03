@@ -416,7 +416,8 @@ class ProjectTask extends AppShell {
 				$this->out(__d('cake_console', 'You need to enable %s in %s to use prefix routing.',
 					'Configure::write(\'Routing.prefixes\', array(\'admin\'))',
 					'/app/Config/core.php'));
-				return $this->_stop();
+				$this->_stop();
+                return;
 			}
 			return $admin . '_';
 		}

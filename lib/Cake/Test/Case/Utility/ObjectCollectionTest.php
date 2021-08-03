@@ -21,6 +21,8 @@ App::uses('CakeEvent', 'Event');
 
 /**
  * A generic object class
+ * @property  GenericObjectCollection $_Collection
+ * @property  array $settings
  */
 class GenericObject {
 
@@ -127,6 +129,12 @@ class GenericObjectCollection extends ObjectCollection {
 
 }
 
+/**
+ * @property GenericObjectCollection   $Objects
+ * @property FirstGenericObject|object $FirstGenericObject
+ * @property SecondGenericObject|object $SecondGenericObject
+ * @property ThirdGenericObject|object $ThirdGenericObject
+ */
 class ObjectCollectionTest extends CakeTestCase {
 
 /**
@@ -134,7 +142,7 @@ class ObjectCollectionTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->Objects = new GenericObjectCollection();
 	}
@@ -144,7 +152,7 @@ class ObjectCollectionTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		unset($this->Objects);
 	}
@@ -340,12 +348,12 @@ class ObjectCollectionTest extends CakeTestCase {
 	}
 
 /**
- * test that setting modParams to an index that doesn't exist doesn't cause errors.
- *
- * @expectedException CakeException
- * @return void
- */
+	 * test that setting modParams to an index that doesn't exist doesn't cause errors.
+	 *
+	 * @return void
+	 */
 	public function testTriggerModParamsInvalidIndex() {
+		$this->expectException(\CakeException::class);
 		$this->_makeMockClasses();
 		$this->Objects->setObject('TriggerMockFirst', $this->FirstGenericObject);
 		$this->Objects->setObject('TriggerMockSecond', $this->SecondGenericObject);

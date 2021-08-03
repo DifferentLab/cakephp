@@ -29,7 +29,7 @@ class ConnectionManagerTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		CakePlugin::unload();
 	}
@@ -72,12 +72,12 @@ class ConnectionManagerTest extends CakeTestCase {
 	}
 
 /**
- * testGetDataSourceException() method
- *
- * @return void
- * @expectedException MissingDatasourceConfigException
- */
+	 * testGetDataSourceException() method
+	 *
+	 * @return void
+	 */
 	public function testGetDataSourceException() {
+		$this->expectException('MissingDatasourceConfigException');
 		ConnectionManager::getDataSource('non_existent_source');
 	}
 
@@ -92,10 +92,10 @@ class ConnectionManagerTest extends CakeTestCase {
 		), App::RESET);
 		CakePlugin::load('TestPlugin');
 		$name = 'test_source';
-		$config = array('datasource' => 'TestPlugin.TestSource');
+		$config = array('datasource' => 'TestPlugin.PluginTestSource');
 		$connection = ConnectionManager::create($name, $config);
 
-		$this->assertTrue(class_exists('TestSource'));
+		$this->assertTrue(class_exists('PluginTestSource'));
 		$this->assertEquals($connection->configKeyName, $name);
 		$this->assertEquals($connection->config, $config);
 
@@ -117,7 +117,7 @@ class ConnectionManagerTest extends CakeTestCase {
 
 		$connection = ConnectionManager::create($name, $config);
 
-		$this->assertTrue(class_exists('TestSource'));
+		$this->assertTrue(class_exists('PluginTestSource'));
 		$this->assertTrue(class_exists('TestDriver'));
 		$this->assertEquals($connection->configKeyName, $name);
 		$this->assertEquals($connection->config, $config);
@@ -165,7 +165,7 @@ class ConnectionManagerTest extends CakeTestCase {
 
 		$connection = ConnectionManager::create($name, $config);
 
-		$this->assertTrue(class_exists('TestSource'));
+		$this->assertTrue(class_exists('PluginTestSource'));
 		$this->assertTrue(class_exists('TestLocalDriver'));
 		$this->assertEquals($connection->configKeyName, $name);
 		$this->assertEquals($connection->config, $config);
@@ -181,7 +181,7 @@ class ConnectionManagerTest extends CakeTestCase {
 		ConnectionManager::getDataSource('test');
 		$sources = ConnectionManager::sourceList();
 		$this->assertTrue(count($sources) >= 1);
-		$this->assertTrue(in_array('test', array_keys($sources)));
+		$this->assertTrue(in_array('test', $sources));
 	}
 
 /**
@@ -220,12 +220,12 @@ class ConnectionManagerTest extends CakeTestCase {
 	}
 
 /**
- * testLoadDataSourceException() method
- *
- * @return void
- * @expectedException MissingDatasourceException
- */
+	 * testLoadDataSourceException() method
+	 *
+	 * @return void
+	 */
 	public function testLoadDataSourceException() {
+		$this->expectException('MissingDatasourceException');
 		$connection = array('classname' => 'NonExistentDataSource', 'filename' => 'non_existent');
 		ConnectionManager::loadDataSource($connection);
 	}
@@ -289,13 +289,13 @@ class ConnectionManagerTest extends CakeTestCase {
 		$this->assertEquals($expected, $connections['connection2']);
 		ConnectionManager::drop('connection2');
 
-		ConnectionManager::create('connection3', array('datasource' => 'TestPlugin.TestSource'));
+		ConnectionManager::create('connection3', array('datasource' => 'TestPlugin.PluginTestSource'));
 		$connections = ConnectionManager::enumConnectionObjects();
-		$expected['datasource'] = 'TestPlugin.TestSource';
+		$expected['datasource'] = 'TestPlugin.PluginTestSource';
 		$this->assertEquals($expected, $connections['connection3']);
 		ConnectionManager::drop('connection3');
 
-		ConnectionManager::create('connection4', array('datasource' => 'TestPlugin.TestSource'));
+		ConnectionManager::create('connection4', array('datasource' => 'TestPlugin.PluginTestSource'));
 		$connections = ConnectionManager::enumConnectionObjects();
 		$this->assertEquals($expected, $connections['connection4']);
 		ConnectionManager::drop('connection4');

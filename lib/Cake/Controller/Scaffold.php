@@ -26,6 +26,11 @@
  * and afford the web developer an early look at the data, and the possibility to over-ride
  * scaffolded actions with custom-made ones.
  *
+ * @property string[]          $redirect
+ * @property string|null       $modelClass
+ * @property false|string|null $modelKey
+ * @property Model             $ScaffoldModel
+ * @property mixed             $scaffoldActions
  * @package Cake.Controller
  * @deprecated 3.0.0 Dynamic scaffolding will be removed and replaced in 3.0
  */
@@ -276,7 +281,8 @@ class Scaffold {
 				$this->controller->set($varName, $this->ScaffoldModel->{$assocName}->find('list'));
 			}
 
-			return $this->_scaffoldForm($formAction);
+			$this->_scaffoldForm($formAction);
+			return;
 		} elseif ($this->controller->scaffoldError($action) === false) {
 			return $this->_scaffoldError();
 		}

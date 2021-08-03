@@ -89,6 +89,8 @@ class AppleComponent extends Component {
 /**
  * OrangeComponent class
  *
+ * @property Controller           $Controller
+ * @property BananaComponent      $Banana
  * @package       Cake.Test.Case.Controller
  */
 class OrangeComponent extends Component {
@@ -197,6 +199,7 @@ class SomethingWithEmailComponent extends Component {
 /**
  * ComponentTest class
  *
+ * @property array $_pluginPaths
  * @package       Cake.Test.Case.Controller
  */
 class ComponentTest extends CakeTestCase {
@@ -206,7 +209,7 @@ class ComponentTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->_pluginPaths = App::path('plugins');
 		App::build(array(

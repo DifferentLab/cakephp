@@ -94,6 +94,9 @@ class TestTheme2View extends ThemeView {
 /**
  * ThemeViewTest class
  *
+ * @property Controller            $Controller
+ * @property ThemePosts2Controller $PostsController
+ * @property ThemeView             $ThemeView
  * @package       Cake.Test.Case.View
  */
 class ThemeViewTest extends CakeTestCase {
@@ -103,7 +106,7 @@ class ThemeViewTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$request = new CakeRequest('posts/index');
 		$this->Controller = new Controller($request);
@@ -124,7 +127,7 @@ class ThemeViewTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		unset($this->ThemeView);
 		unset($this->PostsController);
@@ -215,7 +218,7 @@ class ThemeViewTest extends CakeTestCase {
 			$View->getViewFileName('does_not_exist');
 			$this->fail('No exception');
 		} catch (MissingViewException $e) {
-			$this->assertContains('Pages' . DS . 'does_not_exist.ctp', $e->getMessage());
+			$this->assertStringContainsString('Pages' . DS . 'does_not_exist.ctp', $e->getMessage());
 		}
 	}
 
@@ -237,7 +240,7 @@ class ThemeViewTest extends CakeTestCase {
 			$View->getLayoutFileName();
 			$this->fail('No exception');
 		} catch (MissingLayoutException $e) {
-			$this->assertContains('Layouts' . DS . 'whatever.ctp', $e->getMessage());
+			$this->assertStringContainsString('Layouts' . DS . 'whatever.ctp', $e->getMessage());
 		}
 	}
 

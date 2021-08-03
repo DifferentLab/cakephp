@@ -140,6 +140,8 @@ class ExtendTransport {
 /**
  * CakeEmailTest class
  *
+ * @property bool          $_configFileExists
+ * @property TestCakeEmail $CakeEmail
  * @package       Cake.Test.Case.Network.Email
  */
 class CakeEmailTest extends CakeTestCase {
@@ -149,7 +151,7 @@ class CakeEmailTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->_configFileExists = true;
@@ -171,7 +173,7 @@ class CakeEmailTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		App::build();
 
@@ -212,7 +214,7 @@ class CakeEmailTest extends CakeTestCase {
 		$this->assertSame($expected, $this->CakeEmail->from());
 		$this->assertSame($this->CakeEmail, $result);
 
-		$this->setExpectedException('SocketException');
+		$this->expectException('SocketException');
 		$this->CakeEmail->from(array('cake@cakephp.org' => 'CakePHP', 'fail@cakephp.org' => 'From can only be one address'));
 	}
 
@@ -332,35 +334,35 @@ class CakeEmailTest extends CakeTestCase {
 	}
 
 /**
- * testBuildInvalidData
- *
- * @expectedException SocketException
- * @expectedExceptionMessage The email set for "_to" is empty.
- * @return void
- */
+	 * testBuildInvalidData
+	 *
+	 * @return void
+	 */
 	public function testInvalidEmail() {
+		$this->expectException(\SocketException::class);
+		$this->expectExceptionMessage('The email set for "_to" is empty.');
 		$this->CakeEmail->to('');
 	}
 
 /**
- * testBuildInvalidData
- *
- * @expectedException SocketException
- * @expectedExceptionMessage Invalid email set for "_from". You passed "cake.@"
- * @return void
- */
+	 * testBuildInvalidData
+	 *
+	 * @return void
+	 */
 	public function testInvalidFrom() {
+		$this->expectException(\SocketException::class);
+		$this->expectExceptionMessage('Invalid email set for "_from". You passed "cake.@"');
 		$this->CakeEmail->from('cake.@');
 	}
 
 /**
- * testBuildInvalidData
- *
- * @expectedException SocketException
- * @expectedExceptionMessage Invalid email set for "_to". You passed "1"
- * @return void
- */
+	 * testBuildInvalidData
+	 *
+	 * @return void
+	 */
 	public function testInvalidEmailAdd() {
+		$this->expectException(\SocketException::class);
+		$this->expectExceptionMessage('Invalid email set for "_to". You passed "1"');
 		$this->CakeEmail->addTo('1');
 	}
 
@@ -429,14 +431,13 @@ class CakeEmailTest extends CakeTestCase {
 	}
 
 /**
- * Tests that it is possible to unset the email pattern and make use of filter_var() instead.
- *
- * @return void
- *
- * @expectedException SocketException
- * @expectedExceptionMessage Invalid email set for "_to". You passed "fail.@example.com"
- */
+	 * Tests that it is possible to unset the email pattern and make use of filter_var() instead.
+	 *
+	 * @return void
+	 */
 	public function testUnsetEmailPattern() {
+		$this->expectException(\SocketException::class);
+		$this->expectExceptionMessage('Invalid email set for "_to". You passed "fail.@example.com"');
 		$email = new CakeEmail();
 		$this->assertSame(CakeEmail::EMAIL_PATTERN, $email->emailPattern());
 
@@ -591,12 +592,12 @@ class CakeEmailTest extends CakeTestCase {
 	}
 
 /**
- * testMessageIdInvalid method
- *
- * @return void
- * @expectedException SocketException
- */
+	 * testMessageIdInvalid method
+	 *
+	 * @return void
+	 */
 	public function testMessageIdInvalid() {
+		$this->expectException(\SocketException::class);
 		$this->CakeEmail->messageId('my-email@localhost');
 	}
 
@@ -773,24 +774,24 @@ class CakeEmailTest extends CakeTestCase {
 	}
 
 /**
- * testInvalidHeaders
- *
- * @dataProvider invalidHeaders
- * @expectedException SocketException
- * @return void
- */
+	 * testInvalidHeaders
+	 *
+	 * @dataProvider invalidHeaders
+	 * @return void
+	 */
 	public function testInvalidHeaders($value) {
+		$this->expectException(\SocketException::class);
 		$this->CakeEmail->setHeaders($value);
 	}
 
 /**
- * testInvalidAddHeaders
- *
- * @dataProvider invalidHeaders
- * @expectedException SocketException
- * @return void
- */
+	 * testInvalidAddHeaders
+	 *
+	 * @dataProvider invalidHeaders
+	 * @return void
+	 */
 	public function testInvalidAddHeaders($value) {
+		$this->expectException(\SocketException::class);
 		$this->CakeEmail->addHeaders($value);
 	}
 
@@ -880,7 +881,7 @@ class CakeEmailTest extends CakeTestCase {
 		);
 		$this->assertSame($expected, $this->CakeEmail->attachments());
 
-		$this->setExpectedException('SocketException');
+		$this->expectException('SocketException');
 		$this->CakeEmail->attachments(array(array('nofile' => CAKE . 'basics.php', 'mimetype' => 'text/plain')));
 	}
 
@@ -897,7 +898,7 @@ class CakeEmailTest extends CakeTestCase {
 		$result = $this->CakeEmail->transportClass();
 		$this->assertInstanceOf('DebugTransport', $result);
 
-		$this->setExpectedException('SocketException');
+		$this->expectException('SocketException');
 		$this->CakeEmail->transport('Invalid');
 		$this->CakeEmail->transportClass();
 	}
@@ -908,7 +909,7 @@ class CakeEmailTest extends CakeTestCase {
  * @return void
  */
 	public function testExtendTransport() {
-		$this->setExpectedException('SocketException');
+		$this->expectException('SocketException');
 		$this->CakeEmail->transport('Extend');
 		$this->CakeEmail->transportClass();
 	}
@@ -1069,7 +1070,7 @@ class CakeEmailTest extends CakeTestCase {
 		$this->CakeEmail->to('cake@cakephp.org');
 		$this->CakeEmail->subject('My title');
 		$this->CakeEmail->config(array('empty'));
-		$this->setExpectedException('SocketException');
+		$this->expectException('SocketException');
 		$this->CakeEmail->send("Forgot to set From");
 	}
 
@@ -1083,7 +1084,7 @@ class CakeEmailTest extends CakeTestCase {
 		$this->CakeEmail->from('cake@cakephp.org');
 		$this->CakeEmail->subject('My title');
 		$this->CakeEmail->config(array('empty'));
-		$this->setExpectedException('SocketException');
+		$this->expectException('SocketException');
 		$this->CakeEmail->send("Forgot to set To");
 	}
 
@@ -1725,7 +1726,7 @@ class CakeEmailTest extends CakeTestCase {
 		$this->assertContains('Here is your value: 12345', $result['message']);
 		$this->assertContains('This email was sent using the TestPlugin.', $result['message']);
 
-		$this->setExpectedException('MissingViewException');
+		$this->expectException('MissingViewException');
 		$this->CakeEmail->template('test_plugin_tpl', 'plug_default')->send();
 	}
 
@@ -1846,10 +1847,10 @@ class CakeEmailTest extends CakeTestCase {
 		$this->CakeEmail->send();
 
 		$expected = '<p>This email was sent using the <a href="https://cakephp.org">CakePHP Framework</a></p>';
-		$this->assertContains($expected, $this->CakeEmail->message(CakeEmail::MESSAGE_HTML));
+		$this->assertStringContainsString($expected, $this->CakeEmail->message(CakeEmail::MESSAGE_HTML));
 
 		$expected = 'This email was sent using the CakePHP Framework, https://cakephp.org.';
-		$this->assertContains($expected, $this->CakeEmail->message(CakeEmail::MESSAGE_TEXT));
+		$this->assertStringContainsString($expected, $this->CakeEmail->message(CakeEmail::MESSAGE_TEXT));
 
 		$message = $this->CakeEmail->message();
 		$this->assertContains('Content-Type: text/plain; charset=UTF-8', $message);
@@ -1895,7 +1896,7 @@ class CakeEmailTest extends CakeTestCase {
 		$this->CakeEmail->reset();
 
 		$this->assertSame('utf-8', $this->CakeEmail->charset, $this->CakeEmail->charset);
-		$this->assertNull($this->CakeEmail->headerCharset, $this->CakeEmail->headerCharset);
+		$this->assertNull($this->CakeEmail->headerCharset);
 	}
 
 /**
@@ -2096,7 +2097,7 @@ class CakeEmailTest extends CakeTestCase {
 		$result = $this->CakeEmail->emailFormat();
 		$this->assertEquals('html', $result);
 
-		$this->setExpectedException('SocketException');
+		$this->expectException('SocketException');
 		$this->CakeEmail->emailFormat('invalid');
 	}
 

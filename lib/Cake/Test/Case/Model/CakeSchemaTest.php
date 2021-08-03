@@ -431,6 +431,8 @@ class SchemaPrefixAuthUser extends CakeTestModel {
 /**
  * CakeSchemaTest
  *
+ * @property TestAppSchema $Schema
+ * @property DboSource $db
  * @package       Cake.Test.Case.Model
  */
 class CakeSchemaTest extends CakeTestCase {
@@ -452,7 +454,7 @@ class CakeSchemaTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		ConnectionManager::getDataSource('test')->cacheSources = false;
 		$this->Schema = new TestAppSchema();
@@ -463,7 +465,7 @@ class CakeSchemaTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		if (file_exists(TMP . 'tests' . DS . 'schema.php')) {
 			unlink(TMP . 'tests' . DS . 'schema.php');
@@ -787,6 +789,7 @@ class CakeSchemaTest extends CakeTestCase {
 		$this->assertEquals($write, $file);
 
 		require_once TMP . 'tests' . DS . 'schema.php';
+		/** @phpstan-ignore-next-line */
 		$OtherSchema = new MyOtherAppSchema();
 		$this->assertEquals($this->Schema->tables, $OtherSchema->tables);
 	}

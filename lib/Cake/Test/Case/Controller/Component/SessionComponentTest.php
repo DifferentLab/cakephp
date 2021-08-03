@@ -72,6 +72,7 @@ class OrangeSessionTestController extends Controller {
 /**
  * SessionComponentTest class
  *
+ * @property ComponentCollection $ComponentCollection
  * @package       Cake.Test.Case.Controller.Component
  */
 class SessionComponentTest extends CakeTestCase {
@@ -90,7 +91,7 @@ class SessionComponentTest extends CakeTestCase {
  *
  * @return void
  */
-	public static function setupBeforeClass() {
+	public static function setupBeforeClass(): void {
 		static::$_sessionBackup = Configure::read('Session');
 		Configure::write('Session', array(
 			'defaults' => 'php',
@@ -104,7 +105,7 @@ class SessionComponentTest extends CakeTestCase {
  *
  * @return void
  */
-	public static function teardownAfterClass() {
+	public static function teardownAfterClass(): void {
 		Configure::write('Session', static::$_sessionBackup);
 	}
 
@@ -113,7 +114,7 @@ class SessionComponentTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$_SESSION = null;
 		$this->ComponentCollection = new ComponentCollection();
@@ -124,7 +125,7 @@ class SessionComponentTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		CakeSession::destroy();
 	}

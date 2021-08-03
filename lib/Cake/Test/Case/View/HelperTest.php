@@ -192,6 +192,8 @@ class TestHelper extends Helper {
 /**
  * HelperTest class
  *
+ * @property View   $View
+ * @property Helper $Helper
  * @package       Cake.Test.Case.View
  */
 class HelperTest extends CakeTestCase {
@@ -201,7 +203,7 @@ class HelperTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		ClassRegistry::flush();
@@ -225,7 +227,7 @@ class HelperTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		Configure::delete('Asset');
 

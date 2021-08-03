@@ -20,7 +20,7 @@
 App::uses('Shell', 'Console');
 App::uses('CakeTestSuiteDispatcher', 'TestSuite');
 App::uses('CakeTestSuiteCommand', 'TestSuite');
-App::uses('CakeTestLoader', 'TestSuite');
+App::uses('CakeTestList', 'TestSuite');
 
 /**
  * Provides a CakePHP wrapper around PHPUnit.
@@ -257,12 +257,14 @@ class TestShell extends Shell {
  */
 	public function main() {
 		$this->out(__d('cake_console', 'CakePHP Test Shell'));
+		$this->out('PHP: '. phpversion());
 		$this->hr();
 
 		$args = $this->_parseArgs();
 
 		if (empty($args['case'])) {
-			return $this->available();
+			$this->available();
+            return;
 		}
 
 		$this->_run($args, $this->_runnerOptions());
@@ -279,7 +281,7 @@ class TestShell extends Shell {
 		restore_error_handler();
 		restore_error_handler();
 
-		$testCli = new CakeTestSuiteCommand('CakeTestLoader', $runnerArgs);
+		$testCli = new CakeTestSuiteCommand(PHPUnit\Runner\StandardTestSuiteLoader::class, $runnerArgs);
 		$testCli->run($options);
 	}
 
@@ -290,7 +292,7 @@ class TestShell extends Shell {
  */
 	public function available() {
 		$params = $this->_parseArgs();
-		$testCases = CakeTestLoader::generateTestList($params);
+		$testCases = CakeTestList::generateTestList($params);
 		$app = isset($params['app']) ? $params['app'] : null;
 		$plugin = isset($params['plugin']) ? $params['plugin'] : null;
 
@@ -306,7 +308,8 @@ class TestShell extends Shell {
 
 		if (empty($testCases)) {
 			$this->out(__d('cake_console', "No test cases available \n\n"));
-			return $this->out($this->OptionParser->help());
+			$this->out($this->OptionParser->help());
+			return;
 		}
 
 		$this->out($title);

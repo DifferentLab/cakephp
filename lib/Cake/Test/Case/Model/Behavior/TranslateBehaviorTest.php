@@ -21,6 +21,7 @@ require_once dirname(dirname(__FILE__)) . DS . 'models.php';
 /**
  * TranslateBehaviorTest class
  *
+ * @property DboSource $db
  * @package       Cake.Test.Case.Model.Behavior
  */
 class TranslateBehaviorTest extends CakeTestCase {
@@ -1387,12 +1388,12 @@ class TranslateBehaviorTest extends CakeTestCase {
 	}
 
 /**
- * Test that an exception is raised when you try to over-write the name attribute.
- *
- * @expectedException CakeException
- * @return void
- */
+	 * Test that an exception is raised when you try to over-write the name attribute.
+	 *
+	 * @return void
+	 */
 	public function testExceptionOnNameTranslation() {
+		$this->expectException(\CakeException::class);
 		$this->loadFixtures('Translate', 'TranslatedItem');
 		$TestModel = new TranslatedItem();
 		$TestModel->bindTranslation(array('name' => 'name'));

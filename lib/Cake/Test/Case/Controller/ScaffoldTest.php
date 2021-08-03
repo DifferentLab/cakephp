@@ -110,6 +110,7 @@ class ScaffoldMockControllerWithError extends Controller {
 /**
  * TestScaffoldMock class
  *
+ * @property CakeRequest $_params
  * @package       Cake.Test.Case.Controller
  */
 class TestScaffoldMock extends Scaffold {
@@ -161,7 +162,7 @@ class ScaffoldTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		Configure::write('Config.language', 'eng');
 		$request = new CakeRequest(null, false);
@@ -174,7 +175,7 @@ class ScaffoldTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		CakeSession::destroy();
 		unset($this->Controller);

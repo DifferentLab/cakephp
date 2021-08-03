@@ -25,32 +25,7 @@
  *
  * @package Cake.TestSuite
  */
-class CakeTestLoader extends PHPUnit_Runner_StandardTestSuiteLoader {
-
-/**
- * Load a file and find the first test case / suite in that file.
- *
- * @param string $filePath The file path to load
- * @param string $params Additional parameters
- * @return ReflectionClass
- */
-	public function load($filePath, $params = '') {
-		$file = $this->_resolveTestFile($filePath, $params);
-		return parent::load('', $file);
-	}
-
-/**
- * Convert path fragments used by CakePHP's test runner to absolute paths that can be fed to PHPUnit.
- *
- * @param string $filePath The file path to load.
- * @param string $params Additional parameters.
- * @return string Converted path fragments.
- */
-	protected function _resolveTestFile($filePath, $params) {
-		$basePath = $this->_basePath($params) . DS . $filePath;
-		$ending = 'Test.php';
-		return (strpos($basePath, $ending) === (strlen($basePath) - strlen($ending))) ? $basePath : $basePath . $ending;
-	}
+class CakeTestList {
 
 /**
  * Generates the base path to a set of tests based on the parameters.

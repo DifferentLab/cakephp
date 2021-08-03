@@ -63,7 +63,7 @@ class DboTestSource extends DboSource {
 	}
 
 	public function mergeAssociation(&$data, &$merge, $association, $type, $selfJoin = false) {
-		return parent::_mergeAssociation($data, $merge, $association, $type, $selfJoin);
+		parent::_mergeAssociation($data, $merge, $association, $type, $selfJoin);
 	}
 
 	public function setConfig($config = array()) {
@@ -96,7 +96,7 @@ class DboSecondTestSource extends DboSource {
 	}
 
 	public function mergeAssociation(&$data, &$merge, $association, $type, $selfJoin = false) {
-		return parent::_mergeAssociation($data, $merge, $association, $type, $selfJoin);
+		parent::_mergeAssociation($data, $merge, $association, $type, $selfJoin);
 	}
 
 	public function setConfig($config = array()) {
@@ -158,6 +158,9 @@ class DboFourthTestSource extends DboSource {
 /**
  * DboSourceTest class
  *
+ * @property DboTestSource $testDb
+ * @property TestModel     $Model
+ * @property DataSource $db
  * @package       Cake.Test.Case.Model.Datasource
  */
 class DboSourceTest extends CakeTestCase {
@@ -184,7 +187,7 @@ class DboSourceTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->testDb = new DboTestSource();
@@ -200,7 +203,7 @@ class DboSourceTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		unset($this->Model);
 	}
@@ -679,10 +682,10 @@ class DboSourceTest extends CakeTestCase {
 	}
 
 /**
- * @expectedException PDOException
- * @return void
- */
+	 * @return void
+	 */
 	public function testDirectCallThrowsException() {
+		$this->expectException(\PDOException::class);
 		$this->db->query('directCall', array(), $this->Model);
 	}
 
@@ -1390,6 +1393,8 @@ class DboSourceTest extends CakeTestCase {
 		$conn->expects($this->once())->method('commit')->will($this->returnValue(true));
 		$conn->expects($this->once())->method('rollback')->will($this->returnValue(true));
 
+		$conn->expects($this->any())->method('inTransaction')->will($this->returnValue(true));
+
 		$db->begin();
 		$log = $db->getLog();
 		$expected = array('query' => 'BEGIN', 'params' => array(), 'affected' => '', 'numRows' => '', 'took' => '');
@@ -1423,12 +1428,14 @@ class DboSourceTest extends CakeTestCase {
 		$db->useNestedTransactions = true;
 		$db->nestedSupport = true;
 
-		$conn->expects($this->at(0))->method('beginTransaction')->will($this->returnValue(true));
-		$conn->expects($this->at(1))->method('exec')->with($this->equalTo('SAVEPOINT LEVEL1'))->will($this->returnValue(true));
-		$conn->expects($this->at(2))->method('exec')->with($this->equalTo('RELEASE SAVEPOINT LEVEL1'))->will($this->returnValue(true));
-		$conn->expects($this->at(3))->method('exec')->with($this->equalTo('SAVEPOINT LEVEL1'))->will($this->returnValue(true));
-		$conn->expects($this->at(4))->method('exec')->with($this->equalTo('ROLLBACK TO SAVEPOINT LEVEL1'))->will($this->returnValue(true));
-		$conn->expects($this->at(5))->method('commit')->will($this->returnValue(true));
+        $conn->expects($this->any())->method('inTransaction')->will($this->returnValue(true));
+
+        $conn->expects($this->at(0))->method('beginTransaction')->will($this->returnValue(true));
+		$conn->expects($this->at(2))->method('exec')->with($this->equalTo('SAVEPOINT LEVEL1'))->will($this->returnValue(true));
+		$conn->expects($this->at(4))->method('exec')->with($this->equalTo('RELEASE SAVEPOINT LEVEL1'))->will($this->returnValue(true));
+		$conn->expects($this->at(6))->method('exec')->with($this->equalTo('SAVEPOINT LEVEL1'))->will($this->returnValue(true));
+		$conn->expects($this->at(8))->method('exec')->with($this->equalTo('ROLLBACK TO SAVEPOINT LEVEL1'))->will($this->returnValue(true));
+		$conn->expects($this->at(10))->method('commit')->will($this->returnValue(true));
 
 		$this->_runTransactions($db);
 	}
@@ -1444,7 +1451,7 @@ class DboSourceTest extends CakeTestCase {
 		$db->setConnection($conn);
 		$db->useNestedTransactions = true;
 		$db->nestedSupport = false;
-
+        $conn->expects($this->any())->method('inTransaction')->will($this->returnValue(true));
 		$conn->expects($this->once())->method('beginTransaction')->will($this->returnValue(true));
 		$conn->expects($this->never())->method('exec');
 		$conn->expects($this->once())->method('commit')->will($this->returnValue(true));
@@ -1464,6 +1471,7 @@ class DboSourceTest extends CakeTestCase {
 		$db->useNestedTransactions = false;
 		$db->nestedSupport = true;
 
+        $conn->expects($this->any())->method('inTransaction')->will($this->returnValue(true));
 		$conn->expects($this->once())->method('beginTransaction')->will($this->returnValue(true));
 		$conn->expects($this->never())->method('exec');
 		$conn->expects($this->once())->method('commit')->will($this->returnValue(true));
@@ -1783,7 +1791,7 @@ class DboSourceTest extends CakeTestCase {
 
 		$result = $db->limit(10, 300000000000000000000000000000);
 		$scientificNotation = sprintf('%.1E', 300000000000000000000000000000);
-		$this->assertNotContains($scientificNotation, $result);
+		$this->assertStringNotContainsString($scientificNotation, $result);
 	}
 
 /**

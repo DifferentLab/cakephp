@@ -122,7 +122,8 @@ class FixtureTask extends BakeTask {
 				$this->connection = 'default';
 			}
 			if (strtolower($this->args[0]) === 'all') {
-				return $this->all();
+				$this->all();
+				return;
 			}
 			$model = $this->_modelName($this->args[0]);
 			$importOptions = $this->importOptions($model);
@@ -238,7 +239,7 @@ class FixtureTask extends BakeTask {
 				$importBits[] = "'records' => true";
 			}
 			if ($this->connection !== 'default') {
-				$importBits[] .= "'connection' => '{$this->connection}'";
+				$importBits[] = "'connection' => '{$this->connection}'";
 			}
 			if (!empty($importBits)) {
 				$import = sprintf("array(%s)", implode(', ', $importBits));

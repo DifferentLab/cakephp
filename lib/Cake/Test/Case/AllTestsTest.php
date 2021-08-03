@@ -23,15 +23,14 @@
  *
  * @package       Cake.Test.Case
  */
-class AllTests extends PHPUnit_Framework_TestSuite {
+class AllTests extends \PHPUnit\Framework\TestSuite {
 
 /**
  * Suite define the tests for this suite
  *
- * @return void
  */
 	public static function suite() {
-		$suite = new PHPUnit_Framework_TestSuite('All Tests');
+		$suite = new \PHPUnit\Framework\TestSuite('All Tests');
 
 		$path = CORE_TEST_CASES . DS;
 

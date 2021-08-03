@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+  php8:
+    build:
+      context: .
+      dockerfile: Dockerfile-php8
+    command:
+      - /bin/bash
+      - -c
+      - 'while :; do echo "Napping for an hour" ;sleep  3600 ;done'
+    environment:
+      - PHP_MEMORY_LIMIT=2G
+    volumes:
+      - .:/code
+    working_dir: /code
+  php7:
+    build:
+      context: .
+      dockerfile: Dockerfile-php7
+    command:
+      - /bin/bash
+      - -c
+      - 'while :; do echo "Napping for an hour" ;sleep  3600 ;done'
+    environment:
+      - PHP_MEMORY_LIMIT=2G
+    volumes:
+      - .:/code
+    working_dir: /code
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "33080:3306"
+    volumes:
+      - ./test.sql:/docker-entrypoint-initdb.d/test.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+    command:
+      --sql-mode=NO_ENGINE_SUBSTITUTION
+volumes:
+  mysqldata:
+    driver: "local"
