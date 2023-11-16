@@ -4,7 +4,7 @@ parameters:
     reportUnmatchedIgnoredErrors: false
     checkMissingIterableValueType: false
     level: 0
-    phpVersion: 70400
+    phpVersion: 80100
     paths:
         - app/
         - lib/

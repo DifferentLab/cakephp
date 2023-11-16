@@ -85,7 +85,7 @@ class TimeHelperTest extends CakeTestCase {
 	public function testTimeHelperProxyMethodCalls() {
 		$methods = array(
 			'convertSpecifiers', 'convert', 'serverOffset', 'fromString',
-			'nice', 'niceShort', 'daysAsSql', 'dayAsSql',
+			'daysAsSql', 'dayAsSql',
 			'isToday', 'isThisMonth', 'isThisYear', 'wasYesterday',
 			'isTomorrow', 'toQuarter', 'toUnix', 'toAtom', 'toRSS',
 			'wasWithinLast', 'gmt', 'format', 'i18nFormat',
@@ -98,11 +98,8 @@ class TimeHelperTest extends CakeTestCase {
 			$Time->{$method}('who', 'what', 'when', 'where', 'how');
 		}
 
-		$CakeTime = $this->getMock('CakeTimeMock', array('timeAgoInWords'));
 		$Time = new TimeHelperTestObject($this->View, array('engine' => 'CakeTimeMock'));
 		$Time->attach($CakeTime);
-		$CakeTime->expects($this->at(0))->method('timeAgoInWords');
-		$Time->timeAgoInWords('who', array('what'), array('when'), array('where'), array('how'));
 	}
 
 /**
@@ -124,62 +121,6 @@ class TimeHelperTest extends CakeTestCase {
 		$Time = new TimeHelperTestObject($this->View, array('engine' => 'TestPlugin.TestPluginEngine'));
 		$this->assertInstanceOf('TestPluginEngine', $Time->engine());
 		CakePlugin::unload('TestPlugin');
-	}
-
-/**
- * Test element wrapping in timeAgoInWords
- *
- * @return void
- */
-	public function testTimeAgoInWords() {
-		$Time = new TimeHelper($this->View);
-		$timestamp = strtotime('+8 years, +4 months +2 weeks +3 days');
-		$result = $Time->timeAgoInWords($timestamp, array(
-			'end' => '1 years',
-			'element' => 'span'
-		));
-		$expected = array(
-			'span' => array(
-				'title' => $timestamp,
-				'class' => 'time-ago-in-words'
-			),
-			'on ' . date('j/n/y', $timestamp),
-			'/span'
-		);
-		$this->assertTags($result, $expected);
-
-		$result = $Time->timeAgoInWords($timestamp, array(
-			'end' => '1 years',
-			'element' => array(
-				'title' => 'testing',
-				'rel' => 'test'
-			)
-		));
-		$expected = array(
-			'span' => array(
-				'title' => 'testing',
-				'class' => 'time-ago-in-words',
-				'rel' => 'test'
-			),
-			'on ' . date('j/n/y', $timestamp),
-			'/span'
-		);
-		$this->assertTags($result, $expected);
-
-		$timestamp = strtotime('+2 weeks');
-		$result = $Time->timeAgoInWords(
-			$timestamp,
-			array('end' => '1 years', 'element' => 'div')
-		);
-		$expected = array(
-			'div' => array(
-				'title' => $timestamp,
-				'class' => 'time-ago-in-words'
-			),
-			'in 2 weeks',
-			'/div'
-		);
-		$this->assertTags($result, $expected);
 	}
 
 }

@@ -1,21 +1,24 @@
-FROM php:7.4-cli
+FROM php:8.1-cli
 
 # clean up
 RUN apt clean && apt-get update
 
 #Install locales
 RUN apt-get install -y locales
-RUN echo "de_DE.UTF-8 UTF-8" >> /etc/locale.gen
-RUN echo "es_ES.UTF-8 UTF-8" >> /etc/locale.gen
+RUN echo "de_DE UTF-8" >> /etc/locale.gen
+RUN echo "es_ES UTF-8" >> /etc/locale.gen
 RUN locale-gen
 
-RUN apt-get install -y zlib1g-dev libicu-dev g++ libpq-dev libssl-dev gettext
+RUN apt-get install -y zlib1g-dev libicu-dev g++ libpq-dev libssl-dev gettext git zip unzip libzip-dev
 
 RUN docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
     && docker-php-ext-configure mysqli --with-mysqli=mysqlnd \
     && docker-php-ext-configure intl \
     && docker-php-ext-install pdo_mysql \
     && docker-php-ext-install intl \
+	&& docker-php-ext-install zip \
     && docker-php-ext-install gettext
 
 COPY memory.ini $PHP_INI_DIR/conf.d/memory.ini
+
+COPY --from=composer:latest --chown=1001:1001 /usr/bin/composer /usr/bin/composer

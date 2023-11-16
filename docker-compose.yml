@@ -14,10 +14,10 @@ services:
     volumes:
       - .:/code
     working_dir: /code
-  php7:
+  php81:
     build:
       context: .
-      dockerfile: Dockerfile-php7
+      dockerfile: Dockerfile-php81
     command:
       - /bin/bash
       - -c
@@ -28,6 +28,7 @@ services:
       - .:/code
     working_dir: /code
   mysql:
+    platform: linux/amd64
     image: mysql:5.7
     ports:
       - "33080:3306"

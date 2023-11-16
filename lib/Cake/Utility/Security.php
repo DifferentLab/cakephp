@@ -239,51 +239,6 @@ class Security {
 	}
 
 /**
- * Encrypts/Decrypts a text using the given key using rijndael method.
- *
- * Prior to 2.3.1, a fixed initialization vector was used. This was not
- * secure. This method now uses a random iv, and will silently upgrade values when
- * they are re-encrypted.
- *
- * @param string $text Encrypted string to decrypt, normal string to encrypt
- * @param string $key Key to use as the encryption key for encrypted data.
- * @param string $operation Operation to perform, encrypt or decrypt
- * @return string Encrypted/Decrypted string
- */
-	public static function rijndael($text, $key, $operation) {
-		if (empty($key)) {
-			trigger_error(__d('cake_dev', 'You cannot use an empty key for %s', 'Security::rijndael()'), E_USER_WARNING);
-			return '';
-		}
-		if (empty($operation) || !in_array($operation, array('encrypt', 'decrypt'))) {
-			trigger_error(__d('cake_dev', 'You must specify the operation for Security::rijndael(), either encrypt or decrypt'), E_USER_WARNING);
-			return '';
-		}
-		if (strlen($key) < 32) {
-			trigger_error(__d('cake_dev', 'You must use a key larger than 32 bytes for Security::rijndael()'), E_USER_WARNING);
-			return '';
-		}
-		$algorithm = MCRYPT_RIJNDAEL_256;
-		$mode = MCRYPT_MODE_CBC;
-		$ivSize = mcrypt_get_iv_size($algorithm, $mode);
-
-		$cryptKey = substr($key, 0, 32);
-
-		if ($operation === 'encrypt') {
-			$iv = mcrypt_create_iv($ivSize, MCRYPT_RAND);
-			return $iv . '$$' . mcrypt_encrypt($algorithm, $cryptKey, $text, $mode, $iv);
-		}
-		// Backwards compatible decrypt with fixed iv
-		if (substr($text, $ivSize, 2) !== '$$') {
-			$iv = substr($key, strlen($key) - 32, 32);
-			return rtrim(mcrypt_decrypt($algorithm, $cryptKey, $text, $mode, $iv), "\0");
-		}
-		$iv = substr($text, 0, $ivSize);
-		$text = substr($text, $ivSize + 2);
-		return rtrim(mcrypt_decrypt($algorithm, $cryptKey, $text, $mode, $iv), "\0");
-	}
-
-/**
  * Generates a pseudo random salt suitable for use with php's crypt() function.
  * The salt length should not exceed 27. The salt will be composed of
  * [./0-9A-Za-z]{$length}.
@@ -363,11 +318,7 @@ class Security {
 			// So it can be removed safely.
 			$ciphertext = $iv . substr($ciphertext, 0, -$ivSize);
 		} else {
-			$algorithm = MCRYPT_RIJNDAEL_128;
-			$mode = MCRYPT_MODE_CBC;
-			$ivSize = mcrypt_get_iv_size($algorithm, $mode);
-			$iv = mcrypt_create_iv($ivSize, MCRYPT_DEV_URANDOM);
-			$ciphertext = $iv . mcrypt_encrypt($algorithm, $key, $plain, $mode, $iv);
+			throw new Exception('mcrypt is deprecated. Please use OpenSSL.');
 		}
 
 		$hmac = hash_hmac('sha256', $ciphertext, $key);
@@ -428,12 +379,7 @@ class Security {
 			$padding = openssl_encrypt('', $method, $key, true, substr($cipher, -$ivSize));
 			$plain = openssl_decrypt($cipher . $padding, $method, $key, true, $iv);
 		} else {
-			$algorithm = MCRYPT_RIJNDAEL_128;
-			$mode = MCRYPT_MODE_CBC;
-			$ivSize = mcrypt_get_iv_size($algorithm, $mode);
-			$iv = substr($cipher, 0, $ivSize);
-			$cipher = substr($cipher, $ivSize);
-			$plain = mcrypt_decrypt($algorithm, $key, $cipher, $mode, $iv);
+			throw new Exception('mcrypt is deprecated. Please use OpenSSL.');
 		}
 
 		return rtrim($plain, "\0");

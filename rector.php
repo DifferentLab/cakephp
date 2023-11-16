@@ -1,25 +1,34 @@
 <?php
 
-use Rector\Core\Configuration\Option;
+use Rector\Config\RectorConfig;
+use Rector\Php54\Rector\Array_\LongArrayToShortArrayRector;
+use Rector\Php71\Rector\List_\ListToArrayDestructRector;
+use Rector\Php80\Rector\FunctionLike\MixedTypeRector;
+use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    // paths to refactor; solid alternative to CLI arguments
-    $parameters = $containerConfigurator->parameters();
+return static function (RectorConfig $rectorConfig): void {
+	$rectorConfig->bootstrapFiles([
+		__DIR__ . '/app/webroot/index.php'
+	]);
 
-    $parameters->set(Option::BOOTSTRAP_FILES, [
-        __DIR__ . '/app/webroot/index.php'
-    ]);
-    $parameters->set(Option::PHPSTAN_FOR_RECTOR_PATH, getcwd() . '/phpstan.neon');
+	$rectorConfig->phpstanConfig(__DIR__ . '/phpstan.neon');
 
-    $parameters->set(Option::SOURCE, [__DIR__ . '/app/', __DIR__ . '/lib/']);
-    $parameters->set(Option::PATHS, [__DIR__ . '/lib/Cake/Test']);
-    $parameters->set(Option::CLEAR_CACHE, true);
+	$rectorConfig->paths([
+		__DIR__ . '/app',
+		__DIR__ . '/lib',
+	]);
 
-    $parameters->set(Option::SKIP, [
-        __DIR__ . '/app/tmp/*',
-    ]);
+	$rectorConfig->skip([
+		__DIR__ . '/app/tmp',
+		__DIR__ . '/lib/Cake/Test',
+		LongArrayToShortArrayRector::class,
+		MixedTypeRector::class,
+		ListToArrayDestructRector::class
+	]);
 
-   $containerConfigurator->import(SetList::PHP_80);
+	$rectorConfig->sets([
+		SetList::PHP_81,
+		LevelSetList::UP_TO_PHP_81
+	]);
 };

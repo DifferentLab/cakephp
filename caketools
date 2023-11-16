@@ -23,15 +23,15 @@ COMPOSE="docker compose"
 if [ $# -eq 0 ]; then
 	$COMPOSE ps
 else
-	COMMAND="$1"
-	shift
 
   if [ $# -ge 1 ]; then
     CONTAINER="$1"
     shift
   else
-    CONTAINER="php8"
+    CONTAINER="php81"
   fi
+	COMMAND="$1"
+	shift
 
 	case "${COMMAND}" in
 	"composer")

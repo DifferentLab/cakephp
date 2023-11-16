@@ -70,13 +70,7 @@ class TimeHelper extends AppHelper {
  * @return void
  */
 	public function __set($name, $value) {
-		switch ($name) {
-			case 'niceFormat':
-				$this->_engine->{$name} = $value;
-				break;
-			default:
-				$this->{$name} = $value;
-		}
+		$this->{$name} = $value;
 	}
 
 /**
@@ -89,10 +83,6 @@ class TimeHelper extends AppHelper {
 		if (isset($this->{$name})) {
 			return true;
 		}
-		$magicGet = array('niceFormat');
-		if (in_array($name, $magicGet)) {
-			return $this->__get($name) !== null;
-		}
 		return null;
 	}
 
@@ -104,10 +94,6 @@ class TimeHelper extends AppHelper {
  */
 	public function __get($name) {
 		if (isset($this->_engine->{$name})) {
-			return $this->_engine->{$name};
-		}
-		$magicGet = array('niceFormat');
-		if (in_array($name, $magicGet)) {
 			return $this->_engine->{$name};
 		}
 		return null;
@@ -174,33 +160,6 @@ class TimeHelper extends AppHelper {
  */
 	public function fromString($dateString, $timezone = null) {
 		return $this->_engine->fromString($dateString, $timezone);
-	}
-
-/**
- * Returns a nicely formatted date string for given Datetime string.
- *
- * @param int|string|DateTime $dateString UNIX timestamp, strtotime() valid string or DateTime object
- * @param string|DateTimeZone $timezone User's timezone string or DateTimeZone object
- * @param string $format The format to use. If null, `CakeTime::$niceFormat` is used
- * @return string Formatted date string
- * @see CakeTime::nice()
- * @link https://book.cakephp.org/2.0/en/core-libraries/helpers/time.html#formatting
- */
-	public function nice($dateString = null, $timezone = null, $format = null) {
-		return $this->_engine->nice($dateString, $timezone, $format);
-	}
-
-/**
- * Returns a formatted descriptive date string for given datetime string.
- *
- * @param int|string|DateTime $dateString UNIX timestamp, strtotime() valid string or DateTime object.
- * @param string|DateTimeZone $timezone User's timezone string or DateTimeZone object
- * @return string Described, relative date string
- * @see CakeTime::niceShort()
- * @link https://book.cakephp.org/2.0/en/core-libraries/helpers/time.html#formatting
- */
-	public function niceShort($dateString = null, $timezone = null) {
-		return $this->_engine->niceShort($dateString, $timezone);
 	}
 
 /**
@@ -364,54 +323,6 @@ class TimeHelper extends AppHelper {
 	}
 
 /**
- * Formats a date into a phrase expressing the relative time.
- *
- * ## Addition options
- *
- * - `element` - The element to wrap the formatted time in.
- *   Has a few additional options:
- *   - `tag` - The tag to use, defaults to 'span'.
- *   - `class` - The class name to use, defaults to `time-ago-in-words`.
- *   - `title` - Defaults to the $dateTime input.
- *
- * @param int|string|DateTime $dateTime UNIX timestamp, strtotime() valid string or DateTime object
- * @param array $options Default format if timestamp is used in $dateString
- * @return string Relative time string.
- * @see CakeTime::timeAgoInWords()
- * @link https://book.cakephp.org/2.0/en/core-libraries/helpers/time.html#formatting
- */
-	public function timeAgoInWords($dateTime, $options = array()) {
-		$element = null;
-
-		if (!empty($options['element'])) {
-			$element = array(
-				'tag' => 'span',
-				'class' => 'time-ago-in-words',
-				'title' => $dateTime
-			);
-
-			if (is_array($options['element'])) {
-				$element = $options['element'] + $element;
-			} else {
-				$element['tag'] = $options['element'];
-			}
-			unset($options['element']);
-		}
-		$relativeDate = $this->_engine->timeAgoInWords($dateTime, $options);
-
-		if ($element) {
-			$relativeDate = sprintf(
-				'<%s%s>%s</%s>',
-				$element['tag'],
-				$this->_parseAttributes($element, array('tag')),
-				$relativeDate,
-				$element['tag']
-			);
-		}
-		return $relativeDate;
-	}
-
-/**
  * Returns true if specified datetime was within the interval specified, else false.
  *
  * @param string|int $timeInterval the numeric value with space then time type.
@@ -453,48 +364,8 @@ class TimeHelper extends AppHelper {
 		return $this->_engine->gmt($string);
 	}
 
-/**
- * Returns a formatted date string, given either a UNIX timestamp or a valid strtotime() date string.
- * This function also accepts a time string and a format string as first and second parameters.
- * In that case this function behaves as a wrapper for TimeHelper::i18nFormat()
- *
- * ## Examples
- *
- * Create localized & formatted time:
- *
- * ```
- *   $this->Time->format('2012-02-15', '%m-%d-%Y'); // returns 02-15-2012
- *   $this->Time->format('2012-02-15 23:01:01', '%c'); // returns preferred date and time based on configured locale
- *   $this->Time->format('0000-00-00', '%d-%m-%Y', 'N/A'); // return N/A because an invalid date was passed
- *   $this->Time->format('2012-02-15 23:01:01', '%c', 'N/A', 'America/New_York'); // converts passed date to timezone
- * ```
- *
- * @param int|string|DateTime $format date format string (or a UNIX timestamp, strtotime() valid string or DateTime object)
- * @param int|string|DateTime $date UNIX timestamp, strtotime() valid string or DateTime object (or a date format string)
- * @param bool $invalid flag to ignore results of fromString == false
- * @param string|DateTimeZone $timezone User's timezone string or DateTimeZone object
- * @return string Formatted date string
- * @see CakeTime::format()
- * @link https://book.cakephp.org/2.0/en/core-libraries/helpers/time.html#formatting
- */
 	public function format($format, $date = null, $invalid = false, $timezone = null) {
-		return $this->_engine->format($format, $date, $invalid, $timezone);
-	}
-
-/**
- * Returns a formatted date string, given either a UNIX timestamp or a valid strtotime() date string.
- * It takes into account the default date format for the current language if a LC_TIME file is used.
- *
- * @param int|string|DateTime $date UNIX timestamp, strtotime() valid string or DateTime object
- * @param string $format strftime format string.
- * @param bool $invalid flag to ignore results of fromString == false
- * @param string|DateTimeZone $timezone User's timezone string or DateTimeZone object
- * @return string Formatted and translated date string
- * @see CakeTime::i18nFormat()
- * @link https://book.cakephp.org/2.0/en/core-libraries/helpers/time.html#formatting
- */
-	public function i18nFormat($date, $format = null, $invalid = false, $timezone = null) {
-		return $this->_engine->i18nFormat($date, $format, $invalid, $timezone);
+		throw new Exception('No longer supported in PHP 8.1');
 	}
 
 }

@@ -147,7 +147,7 @@ class TemplateTask extends AppShell {
 		if ($templateFile) {
 			extract($this->templateVars);
 			ob_start();
-			ob_implicit_flush(0);
+			ob_implicit_flush(false);
 			include $templateFile;
 			$content = ob_get_clean();
 			return $content;
